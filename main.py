@@ -1,7 +1,6 @@
 import uvicorn
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
-from pydantic import BaseModel
 from sqlalchemy.exc import SQLAlchemyError
 
 from src.app.middlewares.error_handler import (
@@ -10,6 +9,7 @@ from src.app.middlewares.error_handler import (
     unexpected_exception_handler,
     validation_exception_handler,
 )
+from src.app.routes import whatsapp_route
 from src.core.exceptions import BaseCustomeException
 from src.core.utils import get_logger
 
@@ -17,14 +17,11 @@ logger = get_logger(__name__)
 
 app = FastAPI()
 
-
-class Test(BaseModel):
-    name: str
-    umur: int
+app.include_router(whatsapp_route.router)
 
 
-@app.post("/")
-def root(request: Request, payload: Test):
+@app.get("/")
+def root():
     return "Ok"
 
 

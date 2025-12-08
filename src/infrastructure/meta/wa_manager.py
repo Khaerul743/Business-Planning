@@ -30,7 +30,7 @@ class WhatsappManager:
             if mode == "subscribe" and token == self.waba_verify_token:
                 self._logger.info("Webhook verified")
                 # Jika token cocok, kirim kembali challenge
-                return challenge
+                return int(challenge)
             else:
                 raise TokenIsNotVerified()
         raise WhatsappBadRequest()
