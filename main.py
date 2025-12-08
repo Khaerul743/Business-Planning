@@ -10,10 +10,8 @@ from src.app.middlewares.error_handler import (
     unexpected_exception_handler,
     validation_exception_handler,
 )
-from src.core.exceptions import BaseCustomeException, InternalServerError
-from src.core.utils import (  # Asumsi error_response ada di utils
-    get_logger,
-)
+from src.core.exceptions import BaseCustomeException
+from src.core.utils import get_logger
 
 logger = get_logger(__name__)
 
@@ -27,7 +25,7 @@ class Test(BaseModel):
 
 @app.post("/")
 def root(request: Request, payload: Test):
-    raise Exception()
+    return "Ok"
 
 
 # 1. Register Custom Errors
@@ -46,7 +44,7 @@ if __name__ == "__main__":
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=8080,
+        port=8000,
         reload=False,
         log_level="info",
     )
