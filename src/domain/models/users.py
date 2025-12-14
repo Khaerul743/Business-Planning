@@ -1,9 +1,9 @@
 from typing import Literal, Optional
 
-from .base import BaseModelSchema
+from .base import BaseEntity
 
 
-class User(BaseModelSchema):
+class User(BaseEntity):
     avatar: Optional[str] = None
     name: str
     email: str

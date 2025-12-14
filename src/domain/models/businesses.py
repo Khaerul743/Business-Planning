@@ -1,10 +1,10 @@
 from datetime import datetime
 from typing import Optional
 
-from .base import BaseModelSchema
+from .base import BaseEntity
 
 
-class Business(BaseModelSchema):
+class Business(BaseEntity):
     user_id: Optional[int] = None
     name: str
     owner_name: Optional[str] = None
