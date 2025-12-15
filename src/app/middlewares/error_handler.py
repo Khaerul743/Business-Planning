@@ -2,7 +2,6 @@
 
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
-from sqlalchemy.exc import SQLAlchemyError
 
 from src.core.exceptions import BaseCustomeException
 from src.core.utils import error_response, get_logger
@@ -32,16 +31,16 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 
 # --- 2. Handler untuk SQLAlchemyError (Database Error) ---
-async def db_exception_handler(request: Request, exc: SQLAlchemyError):
-    """Menangkap error dari SQLAlchemy (Database)."""
+# async def db_exception_handler(request: Request, exc: SQLAlchemyError):
+#     """Menangkap error dari SQLAlchemy (Database)."""
 
-    logger.error(f"Database error: {str(exc)}", exc_info=True)
+#     logger.error(f"Database error: {str(exc)}", exc_info=True)
 
-    return error_response(
-        http_status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        error_code="DB_INTERNAL_ERROR",
-        message="Internal error while processing database request.",
-    )
+#     return error_response(
+#         http_status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+#         error_code="DB_INTERNAL_ERROR",
+#         message="Internal error while processing database request.",
+#     )
 
 
 # --- 3. Handler untuk BaseCustomeException (Custom Errors) ---
@@ -53,7 +52,7 @@ async def custom_exception_handler(request: Request, exc: BaseCustomeException):
 
     return error_response(
         http_status=exc.status_code,
-        error_code=exc.detail.get("code", "CUSTOM_ERROR"),
+        error_code=exc.detail.get("code", "CUSTOME_ERROR"),
         message=exc.detail.get("message", "A defined custom error occurred."),
         details=exc.detail.get("details")
         if isinstance(exc.detail, dict) and "details" in exc.detail

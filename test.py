@@ -1,16 +1,8 @@
-import asyncio
+from src.core.utils.hash import PasswordHashed
 
-from src.config.supabase import get_supabase, init_supabase
-from src.domain.repositories import UserRepository
+p = PasswordHashed()
 
+password = "123456789"
 
-async def main():
-    await init_supabase()
-    db = get_supabase()
-    user = UserRepository(db)
-
-    result = await user.get_user_by_id(1)
-    print(result)
-
-
-asyncio.run(main())
+result = p.hash_password(password)
+print(result)
