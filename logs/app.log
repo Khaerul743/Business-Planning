@@ -832,3 +832,876 @@ id
 created_at
   Field required [type=missing, input_value={'name': 'str', 'email': ...GgC6GLdhvqi/wLw/YLFUMi'}, input_type=dict]
     For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-12-15 21:26:06,978 | WARNING | src.domain.services.auth_service | khaerulll@gmail.com login failed: Wrong password
+2025-12-15 21:26:06,992 | ERROR | src.app.middlewares.error_handler | Custom Error: INVALID_CREDENTIALS
+2025-12-15 21:27:42,968 | WARNING | src.domain.services.auth_service | khaerulll@gmail.co login failed: User not found
+2025-12-15 21:27:42,972 | ERROR | src.app.middlewares.error_handler | Custom Error: EMAIL_NOT_FOUND
+2025-12-24 21:30:55,782 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-24 21:32:08,922 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-24 21:32:24,369 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-24 21:37:17,362 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-24 21:38:02,334 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 19:23:14,185 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 19:24:04,997 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 19:25:10,912 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 19:33:34,795 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 19:33:45,802 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 19:36:08,071 | WARNING | src.app.middlewares.error_handler | Validation Error: [{'type': 'missing', 'loc': ('query', 'self'), 'msg': 'Field required', 'input': None}]
+2025-12-26 19:37:01,711 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\user_route.py", line 18, in get_me
+    result_data = await controller.get_current_user()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\user_controller.py", line 16, in get_current_user
+    return await self.user_service.get_current_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\user_service.py", line 15, in get_current_user
+    user = await self.user_repo.get_by_context_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 33, in get_by_context_user
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-26 19:46:44,555 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\user_route.py", line 19, in get_me
+    result_data = await controller.get_current_user()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\user_controller.py", line 16, in get_current_user
+    return await self.user_service.get_current_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\user_service.py", line 15, in get_current_user
+    user = await self.user_repo.get_by_context_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 33, in get_by_context_user
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-26 19:46:52,516 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\user_route.py", line 19, in get_me
+    result_data = await controller.get_current_user()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\user_controller.py", line 16, in get_current_user
+    return await self.user_service.get_current_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\user_service.py", line 15, in get_current_user
+    user = await self.user_repo.get_by_context_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 33, in get_by_context_user
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-26 19:48:57,539 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\user_route.py", line 19, in get_me
+    result_data = await controller.get_current_user()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\user_controller.py", line 16, in get_current_user
+    return await self.user_service.get_current_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\user_service.py", line 15, in get_current_user
+    user = await self.user_repo.get_by_context_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 33, in get_by_context_user
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-26 19:54:21,923 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\user_route.py", line 22, in get_me
+    result_data = await controller.get_current_user()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\user_controller.py", line 16, in get_current_user
+    return await self.user_service.get_current_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\user_service.py", line 15, in get_current_user
+    user = await self.user_repo.get_by_context_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 33, in get_by_context_user
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-26 19:54:27,834 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\user_route.py", line 22, in get_me
+    result_data = await controller.get_current_user()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\user_controller.py", line 16, in get_current_user
+    return await self.user_service.get_current_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\user_service.py", line 15, in get_current_user
+    user = await self.user_repo.get_by_context_user()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 33, in get_by_context_user
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-26 20:17:12,162 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 20:17:25,181 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 20:18:33,500 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 20:18:42,768 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 20:18:52,185 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 20:24:12,891 | WARNING | src.domain.services.auth_service | khaer@gmail.com login failed: User not found
+2025-12-26 20:24:13,036 | ERROR | src.app.middlewares.error_handler | Custom Error: EMAIL_NOT_FOUND
+2025-12-26 20:24:35,612 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 20:30:42,323 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'role'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\core\utils\security.py", line 65, in jwt_required
+    current_user_role.set(payload["role"])
+                          ~~~~~~~^^^^^^^^
+KeyError: 'role'
+2025-12-26 20:32:06,389 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'role'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\core\utils\security.py", line 65, in jwt_required
+    current_user_role.set(payload["role"])
+                          ~~~~~~~^^^^^^^^
+KeyError: 'role'
+2025-12-26 20:33:01,537 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'role'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\core\utils\security.py", line 65, in jwt_required
+    current_user_role.set(payload["role"])
+                          ~~~~~~~^^^^^^^^
+KeyError: 'role'
+2025-12-26 20:34:01,865 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'role'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\core\utils\security.py", line 65, in jwt_required
+    current_user_role.set(payload["role"])
+                          ~~~~~~~^^^^^^^^
+KeyError: 'role'
+2025-12-26 20:36:08,218 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'role'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\core\utils\security.py", line 65, in jwt_required
+    current_user_role.set(payload["role"])
+                          ~~~~~~~^^^^^^^^
+KeyError: 'role'
+2025-12-26 20:38:33,444 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-26 20:41:30,274 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-27 10:16:54,267 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-27 10:17:17,829 | ERROR | src.app.middlewares.error_handler | Unexpected error: Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\user_route.py", line 19, in get_me
+    return success_response(result_data.model_dump())
+  File "D:\PROJECT_WA\src\core\utils\response.py", line 52, in success_response
+    return JSONResponse(
+        status_code=status_code,
+        content=payload,
+    )
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\responses.py", line 189, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\responses.py", line 46, in __init__
+    self.body = self.render(content)
+                ~~~~~~~~~~~^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\responses.py", line 192, in render
+    return json.dumps(
+           ~~~~~~~~~~^
+        content,
+        ^^^^^^^^
+    ...<3 lines>...
+        separators=(",", ":"),
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ).encode("utf-8")
+    ^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type datetime is not JSON serializable
+2025-12-27 10:23:46,759 | ERROR | src.app.middlewares.error_handler | Unexpected error: Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\user_route.py", line 19, in get_me
+    return success_response(result_data.model_dump())
+  File "D:\PROJECT_WA\src\core\utils\response.py", line 52, in success_response
+    return JSONResponse(
+        status_code=status_code,
+        content=payload,
+    )
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\responses.py", line 189, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\responses.py", line 46, in __init__
+    self.body = self.render(content)
+                ~~~~~~~~~~~^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\responses.py", line 192, in render
+    return json.dumps(
+           ~~~~~~~~~~^
+        content,
+        ^^^^^^^^
+    ...<3 lines>...
+        separators=(",", ":"),
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ).encode("utf-8")
+    ^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type datetime is not JSON serializable
+2025-12-27 10:23:57,936 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-27 10:24:12,434 | WARNING | src.core.utils.security | Invalid token: Subject must be a string
+2025-12-27 10:24:12,443 | ERROR | src.app.middlewares.error_handler | Custom Error: INVALID_TOKEN
+2025-12-27 10:26:47,495 | WARNING | src.core.utils.security | Invalid token: Subject must be a string
+2025-12-27 10:26:47,574 | ERROR | src.app.middlewares.error_handler | Custom Error: INVALID_TOKEN
+2025-12-27 10:39:29,219 | WARNING | src.core.utils.security | Invalid token: Subject must be a string
+2025-12-27 10:39:29,322 | ERROR | src.app.controllers.auth_controller | 401: {'code': 'INVALID_TOKEN', 'message': 'invalid jwt token'}
+2025-12-27 10:39:29,359 | ERROR | src.app.middlewares.error_handler | Custom Error: INVALID_TOKEN
+2025-12-27 10:41:08,834 | WARNING | src.app.controllers.auth_controller | 401: {'code': 'UNAUTHORIZED', 'message': 'Missing refresh token'}
+2025-12-27 10:41:08,835 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-27 10:41:27,522 | ERROR | src.app.controllers.auth_controller | 'id'
+2025-12-27 10:41:27,526 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'id'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\auth_route.py", line 43, in refresh
+    result = await controller.refresh_token_handler(request, response)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 59, in refresh_token_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 52, in refresh_token_handler
+    res = await self.auth_service.refresh_access_token(request, response)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\auth_service.py", line 141, in refresh_access_token
+    print(f"user id: {payload['id']}")
+                      ~~~~~~~^^^^^^
+KeyError: 'id'
+2025-12-27 10:43:22,166 | ERROR | src.app.controllers.auth_controller | 'id'
+2025-12-27 10:43:23,016 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'id'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\auth_route.py", line 43, in refresh
+    result = await controller.refresh_token_handler(request, response)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 59, in refresh_token_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 52, in refresh_token_handler
+    res = await self.auth_service.refresh_access_token(request, response)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\auth_service.py", line 143, in refresh_access_token
+    user = await self.user_repo.get_user_by_id(payload["id"])
+                                               ~~~~~~~^^^^^^
+KeyError: 'id'
+2025-12-27 10:46:25,762 | ERROR | src.app.middlewares.error_handler | Unexpected error: Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\user_route.py", line 19, in get_me
+    return success_response(result_data.model_dump())
+  File "D:\PROJECT_WA\src\core\utils\response.py", line 52, in success_response
+    return JSONResponse(
+        status_code=status_code,
+        content=payload,
+    )
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\responses.py", line 189, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\responses.py", line 46, in __init__
+    self.body = self.render(content)
+                ~~~~~~~~~~~^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\responses.py", line 192, in render
+    return json.dumps(
+           ~~~~~~~~~~^
+        content,
+        ^^^^^^^^
+    ...<3 lines>...
+        separators=(",", ":"),
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ).encode("utf-8")
+    ^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type datetime is not JSON serializable
+2025-12-27 11:15:45,680 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-27 11:16:17,830 | ERROR | src.app.middlewares.error_handler | Custom Error: FORBIDDEN
+2025-12-27 11:17:12,022 | ERROR | src.app.middlewares.error_handler | Custom Error: FORBIDDEN
+2025-12-27 11:18:31,464 | ERROR | src.app.middlewares.error_handler | Custom Error: FORBIDDEN
+2025-12-27 11:23:34,126 | ERROR | src.app.middlewares.error_handler | Custom Error: FORBIDDEN

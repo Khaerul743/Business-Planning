@@ -1,13 +1,14 @@
+from fastapi import Request, Response
 from supabase import AsyncClient
 
-from src.app.validators.auth_schema import RegisterIn, RegisterOut
+from src.app.validators.auth_schema import LoginIn, RegisterIn, RegisterOut
+from src.core.exceptions import UnauthorizedException
 from src.core.exceptions.auth_exception import (
     EmailAlreadyExistsException,
     EmailNotFoundException,
     InvalidCredentialsException,
     InvalidEmailFormatException,
     PasswordTooWeakException,
-    RemoveTokenError,
     ValidationException,
 )
 from src.domain.services import AuthService
@@ -26,17 +27,41 @@ class AuthController(BaseController):
             return result
 
         except EmailAlreadyExistsException as e:
-            # Email already exists
-            self._logger.debug(f"Email already exists: {type(e).__name__}")
             raise e
         except (
             InvalidEmailFormatException,
             PasswordTooWeakException,
             ValidationException,
         ) as e:
-            # Validation errors
-            self._logger.debug(f"Validation error: {type(e).__name__}")
             raise e
         except Exception as e:
-            self._logger.error(f"Unexpected error while register new user: {str(e)}")
+            raise e
+
+    async def login_handler(self, response: Response, payload: LoginIn):
+        try:
+            result = await self.auth_service.login_handler(response, payload)
+            return result
+        except (EmailNotFoundException, InvalidCredentialsException) as e:
+            # Re-raise custom exceptions
+            raise e
+        except Exception as e:
+            raise e
+
+    async def refresh_token_handler(self, request: Request, response: Response):
+        try:
+            res = await self.auth_service.refresh_access_token(request, response)
+            return res
+        except UnauthorizedException as e:
+            self._logger.warning(str(e))
+            raise e
+        except Exception as e:
+            self._logger.error(str(e))
+            raise e
+
+    async def logout_handler(self, response: Response) -> dict[str, str]:
+        try:
+            return self.auth_service.remove_cookie_tokens(response)
+
+        except Exception as e:
+            self._logger.error(str(e))
             raise e

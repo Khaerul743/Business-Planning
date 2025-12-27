@@ -1,10 +1,17 @@
 from datetime import datetime, timedelta
 from typing import Any, Dict, Optional
+from uuid import uuid4
 
 import jwt
+from fastapi import Request
 
 from src.config import settings
-from src.core.exceptions import JWTInvalidToken, JWTTokenExpired
+from src.core.context.request_context import (
+    current_user_email,
+    current_user_id,
+    current_user_role,
+)
+from src.core.exceptions import JWTInvalidToken, JWTTokenExpired, UnauthorizedException
 from src.core.utils.logger import get_logger
 
 
@@ -26,7 +33,17 @@ class JWTHandler:
         token = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
         return token
 
-    def decode_access_token(self, token: str):
+    def create_refresh_token(self, user_id: str) -> str:
+        payload = {
+            "sub": user_id,
+            "type": "refresh",
+            "jti": uuid4().hex,
+            "exp": datetime.utcnow() + timedelta(days=7),
+        }
+        token = jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+        return token
+
+    def verify_token(self, token: str):
         """
         Decode dan verifikasi JWT token.
         """
@@ -42,3 +59,20 @@ class JWTHandler:
         except jwt.PyJWTError as e:
             self.logger.warning(f"Invalid token: {str(e)}")
             raise JWTInvalidToken()
+
+    async def jwt_required(self, request: Request):
+        token = request.cookies.get("access_token")
+        if not token:
+            raise UnauthorizedException("Missing access token")
+
+        payload = self.verify_token(token)
+        if not payload:
+            raise UnauthorizedException("Invalid token")
+
+        # SET CONTEXTVAR
+        current_user_id.set(payload["id"])
+        current_user_email.set(payload["email"])
+        current_user_role.set(payload["role"])
+
+
+jwtHandler = JWTHandler()

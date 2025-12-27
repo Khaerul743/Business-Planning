@@ -2,7 +2,7 @@ from typing import Optional
 
 from fastapi import status
 
-from src.core.exceptions import BaseCustomeException
+from .base import BaseCustomeException
 
 
 class EmailAlreadyExistsException(BaseCustomeException):
@@ -109,3 +109,25 @@ class NotAuthenticateException(BaseCustomeException):
             detail["value"] = value
 
         super().__init__(status_code=status.HTTP_401_UNAUTHORIZED, detail=detail)
+
+
+class UnauthorizedException(BaseCustomeException):
+    def __init__(self, message: str = "Unauthorized"):
+        super().__init__(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail={
+                "code": "UNAUTHORIZED",
+                "message": message,
+            },
+        )
+
+
+class ForbiddenException(BaseCustomeException):
+    def __init__(self, message: str = "forbidden"):
+        super().__init__(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail={
+                "code": "FORBIDDEN",
+                "message": message,
+            },
+        )

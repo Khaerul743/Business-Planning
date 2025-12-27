@@ -1,3 +1,4 @@
+from .authenticate_user import AuthenticateInput, AuthenticateUser
 from .register_new_user import RegisterNewUser
 from .register_validation_input import (
     RegisterValidation,
@@ -10,4 +11,6 @@ __all__ = [
     "RegisterValidationInput",
     "RegisterValidationOutput",
     "RegisterNewUser",
+    "AuthenticateInput",
+    "AuthenticateUser",
 ]

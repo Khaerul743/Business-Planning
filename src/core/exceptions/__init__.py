@@ -1,3 +1,4 @@
+from .auth_exception import NotAuthenticateException, UnauthorizedException
 from .base import BaseCustomeException
 from .database_exception import SupabaseMissingParameter
 from .internal_exception import InternalServerError
@@ -12,4 +13,6 @@ __all__ = [
     "SupabaseMissingParameter",
     "JWTTokenExpired",
     "JWTInvalidToken",
+    "NotAuthenticateException",
+    "UnauthorizedException",
 ]

@@ -1,3 +1,5 @@
+from typing import Literal
+
 from pydantic import BaseModel, EmailStr
 
 
@@ -12,3 +14,12 @@ class RegisterIn(AuthBase):
 
 class RegisterOut(AuthBase):
     name: str
+
+
+class LoginIn(AuthBase):
+    password: str
+
+
+class LoginOut(AuthBase):
+    name: str
+    role: Literal["admin", "user"] = "user"

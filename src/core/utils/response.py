@@ -1,11 +1,31 @@
+import json
 from typing import Any, Dict, List, Union
 
-from fastapi import status
+from fastapi import Response, status
+from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
 # 1. Tipe Data untuk Payload Error
 # Digunakan untuk validasi error detail
 ErrorDetail = Dict[str, str]
+
+
+def auth_success_response(
+    response: Response,
+    data: Dict[str, Any],
+    message: str = "Login successful",
+) -> Response:
+    payload = {
+        "status": "success",
+        "message": message,
+        "data": data,
+    }
+
+    response.status_code = status.HTTP_200_OK
+    response.headers["content-type"] = "application/json"
+    response.body = json.dumps(payload).encode("utf-8")
+
+    return response
 
 
 # 2. Fungsi untuk Respons Sukses (2xx)
@@ -28,7 +48,7 @@ def success_response(
     payload = {
         "status": "success",
         "message": message,
-        "data": data,
+        "data": jsonable_encoder(data),
     }
     return JSONResponse(
         status_code=status_code,

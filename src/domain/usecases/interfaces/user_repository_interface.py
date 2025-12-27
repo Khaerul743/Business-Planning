@@ -17,6 +17,10 @@ class IUserRepository(ABC):
         pass
 
     @abstractmethod
+    async def get_by_context_user(self) -> User | None:
+        pass
+
+    @abstractmethod
     async def create_user(
         self,
         name: str,

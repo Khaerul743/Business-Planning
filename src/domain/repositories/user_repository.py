@@ -1,6 +1,7 @@
 from postgrest.base_request_builder import SingleAPIResponse
 from supabase import AsyncClient
 
+from src.core.context.request_context import current_user_id
 from src.domain.models import User
 from src.domain.usecases.interfaces import IUserRepository
 
@@ -14,6 +15,20 @@ class UserRepository(IUserRepository):
         return [User.model_validate(row) for row in result.data]
 
     async def get_user_by_id(self, user_id: int) -> User | None:
+        result: SingleAPIResponse | None = (
+            await self.db.table("Users")
+            .select("*")
+            .eq("id", user_id)
+            .maybe_single()
+            .execute()
+        )
+        if result is None:
+            return None
+
+        return User.model_validate(result.data)
+
+    async def get_by_context_user(self) -> User | None:
+        user_id = current_user_id.get()
         result: SingleAPIResponse | None = (
             await self.db.table("Users")
             .select("*")
