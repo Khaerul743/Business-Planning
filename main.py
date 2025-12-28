@@ -7,7 +7,13 @@ from src.app.middlewares.error_handler import (
     unexpected_exception_handler,
     validation_exception_handler,
 )
-from src.app.routes import auth_route, user_route, whatsapp_route
+from src.app.routes import (
+    auth_route,
+    business_knowladge_route,
+    business_route,
+    user_route,
+    whatsapp_route,
+)
 from src.config.supabase import init_supabase
 from src.core.exceptions import BaseCustomeException
 from src.core.utils import get_logger
@@ -19,6 +25,8 @@ app = FastAPI()
 app.include_router(whatsapp_route.router)
 app.include_router(auth_route.router)
 app.include_router(user_route.router)
+app.include_router(business_route.router)
+app.include_router(business_knowladge_route.router)
 
 
 @app.get("/")

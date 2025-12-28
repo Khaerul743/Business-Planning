@@ -1,0 +1,10 @@
+from typing import Literal, Optional
+
+from pydantic import BaseModel
+
+
+class AddBusinessKnowladgeIn(BaseModel):
+    category: str
+    category_description: str
+    content: str
+    format: Literal["text", "json", "markdown"] = "text"
