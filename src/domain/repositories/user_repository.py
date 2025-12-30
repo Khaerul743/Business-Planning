@@ -10,6 +10,24 @@ class UserRepository(IUserRepository):
     def __init__(self, db: AsyncClient):
         self.db = db
 
+    async def get_user_by_business_id(self, business_id: int) -> User | None:
+        user_id = current_user_id.get()
+        result = (
+            await self.db.table("Businesses")
+            .select("Users(*)")
+            .eq("id", business_id)
+            .eq("user_id", user_id)
+            .maybe_single()
+            .execute()
+        )
+
+        if result is None:
+            return None
+
+        print(result.data["Users"])
+
+        return User.model_validate(result.data["Users"])
+
     async def get_all_users(self) -> list[User]:
         result = await self.db.table("Users").select("*").execute()
         return [User.model_validate(row) for row in result.data]

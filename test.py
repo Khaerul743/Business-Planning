@@ -1,8 +1,22 @@
-from src.core.utils.hash import PasswordHashed
+import asyncio
 
-p = PasswordHashed()
+from src.config.supabase import get_supabase, init_supabase
+from src.domain.models.business_knowladges import BusinessKnowladge
 
-password = "123456789"
 
-result = p.hash_password(password)
-print(result)
+async def main():
+    await init_supabase()
+    db = get_supabase()
+
+    result = (
+        await db.table("Businesses")
+        .select("id")
+        .eq("user_id", 4)
+        .maybe_single()
+        .execute()
+    )
+
+    print(result.data["id"])
+
+
+asyncio.run(main())

@@ -12,7 +12,7 @@ router = APIRouter(prefix="/api/business", tags=["business"])
 get_business_controller = controller_factory(BusinessController)
 
 
-@router.get("", status_code=status.HTTP_200_OK)
+@router.get("/me", status_code=status.HTTP_200_OK)
 async def get_current_business(
     _: None = Depends(jwtHandler.jwt_required),
     __: None = Depends(require_roles("admin", "user")),
@@ -37,7 +37,7 @@ async def add_business(
     )
 
 
-@router.put("", status_code=status.HTTP_200_OK)
+@router.put("/me", status_code=status.HTTP_200_OK)
 async def update_business(
     payload: BusinessUpdateIn,
     _: None = Depends(jwtHandler.jwt_required),

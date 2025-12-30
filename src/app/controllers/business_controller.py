@@ -1,7 +1,10 @@
 from supabase import AsyncClient
 
 from src.app.validators.business_schema import AddBusinessIn, BusinessUpdateIn
-from src.core.exceptions.business_exception import BusinessNotFound
+from src.core.exceptions.business_exception import (
+    BusinessIsAlreadyExist,
+    BusinessNotFound,
+)
 from src.domain.services import BusinessService
 
 from .base import BaseController
@@ -27,8 +30,9 @@ class BusinessController(BaseController):
         try:
             result = await self.business_service.add_new_business(payload)
             return result
-        except RuntimeError as e:
-            self._logger.error(str(e))
+
+        except BusinessIsAlreadyExist as e:
+            self._logger.warning(str(e))
             raise e
         except Exception as e:
             self._logger.error(str(e))

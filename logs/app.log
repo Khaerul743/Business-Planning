@@ -1987,3 +1987,1024 @@ Traceback (most recent call last):
     result = await controller.get_current_business_handler()
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'BusinessController' object has no attribute 'get_current_business_handler'. Did you mean: 'add_new_business_handler'?
+2025-12-29 19:38:08,753 | WARNING | src.app.middlewares.error_handler | Validation Error: [{'type': 'missing', 'loc': ('body',), 'msg': 'Field required', 'input': None}]
+2025-12-29 19:38:50,080 | WARNING | src.app.middlewares.error_handler | Validation Error: [{'type': 'missing', 'loc': ('body', 'category_description'), 'msg': 'Field required', 'input': {'category': 'makanan'}}, {'type': 'missing', 'loc': ('body', 'content'), 'msg': 'Field required', 'input': {'category': 'makanan'}}]
+2025-12-29 19:40:14,575 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:40:14,579 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 25, in add_business_knowladge
+    result = await controller.add_business_knowladge_handler(business_id, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 24, in add_business_knowladge_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 18, in add_business_knowladge_handler
+    result = await self.business_knowladge_service.add_business_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id, payload
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 21, in add_business_knowladge
+    business = await self.business_repo.get_business_by_id(business_id)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 17, in get_business_by_id
+    result = await self.db.table("Businesses").select("*").maybe_single().execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:40:57,573 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:40:57,578 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 25, in add_business_knowladge
+    result = await controller.add_business_knowladge_handler(business_id, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 24, in add_business_knowladge_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 18, in add_business_knowladge_handler
+    result = await self.business_knowladge_service.add_business_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id, payload
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 21, in add_business_knowladge
+    business = await self.business_repo.get_business_by_id(business_id)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 17, in get_business_by_id
+    result = await self.db.table("Businesses").select("*").maybe_single().execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:43:01,491 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:43:01,496 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 25, in add_business_knowladge
+    result = await controller.add_business_knowladge_handler(business_id, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 24, in add_business_knowladge_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 18, in add_business_knowladge_handler
+    result = await self.business_knowladge_service.add_business_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id, payload
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 21, in add_business_knowladge
+    business = await self.business_repo.get_business_by_id(business_id)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 17, in get_business_by_id
+    result = await self.db.table("Businesses").select("*").maybe_single().execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:46:40,010 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:46:40,011 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 25, in add_business_knowladge
+    result = await controller.add_business_knowladge_handler(business_id, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 25, in add_business_knowladge_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 18, in add_business_knowladge_handler
+    result = await self.business_knowladge_service.add_business_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id, payload
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 21, in add_business_knowladge
+    business = await self.business_repo.get_business_by_id(business_id)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 17, in get_business_by_id
+    result = await self.db.table("Businesses").select("*").maybe_single().execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:47:58,009 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:47:58,047 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 25, in add_business_knowladge
+    result = await controller.add_business_knowladge_handler(business_id, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 25, in add_business_knowladge_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 18, in add_business_knowladge_handler
+    result = await self.business_knowladge_service.add_business_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id, payload
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 21, in add_business_knowladge
+    business = await self.business_repo.get_business_by_id(business_id)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 18, in get_business_by_id
+    await self.db.table("Businesses")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 115, in execute
+    raise APIError(
+    ...<6 lines>...
+    )
+postgrest.exceptions.APIError: {'message': 'Missing response', 'code': '204', 'hint': 'Please check traceback of the code', 'details': "Postgrest couldn't retrieve response, please check traceback of the code. Please create an issue in `supabase-community/postgrest-py` if needed."}
+2025-12-29 19:49:29,078 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: 'BusinessKnowladgeService' object has no attribute 'logger'
+2025-12-29 19:49:29,081 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'BusinessKnowladgeService' object has no attribute 'logger'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 23, in add_business_knowladge
+    raise BusinessNotFound(f"Business not found with id {business_id}")
+src.core.exceptions.business_exception.BusinessNotFound: 404: {'code': 'BUSINESS_NOT_FOUND', 'message': 'Business not found with id 4'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 25, in add_business_knowladge
+    result = await controller.add_business_knowladge_handler(business_id, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 24, in add_business_knowladge_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 18, in add_business_knowladge_handler
+    result = await self.business_knowladge_service.add_business_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id, payload
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 31, in add_business_knowladge
+    self.logger.warning(str(e))
+    ^^^^^^^^^^^
+AttributeError: 'BusinessKnowladgeService' object has no attribute 'logger'
+2025-12-29 19:50:47,870 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-29 19:51:20,196 | WARNING | src.domain.services.business_knowladge_service | 404: {'code': 'BUSINESS_NOT_FOUND', 'message': 'Business not found with id 4'}
+2025-12-29 19:51:20,203 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: 404: {'code': 'BUSINESS_NOT_FOUND', 'message': 'Business not found with id 4'}
+2025-12-29 19:51:20,205 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_NOT_FOUND
+2025-12-29 19:51:32,580 | ERROR | src.domain.repositories.business_knowladges_repository | Error while add business knowladge: 1 validation error for BusinessKnowladge
+description
+  Field required [type=missing, input_value={'id': 1, 'business_id': ...T12:51:30.889964+00:00'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-12-29 19:51:32,586 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: 1 validation error for BusinessKnowladge
+description
+  Field required [type=missing, input_value={'id': 1, 'business_id': ...T12:51:30.889964+00:00'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-12-29 19:51:32,587 | ERROR | src.app.middlewares.error_handler | Unexpected error: 1 validation error for BusinessKnowladge
+description
+  Field required [type=missing, input_value={'id': 1, 'business_id': ...T12:51:30.889964+00:00'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 25, in add_business_knowladge
+    result = await controller.add_business_knowladge_handler(business_id, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 24, in add_business_knowladge_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 18, in add_business_knowladge_handler
+    result = await self.business_knowladge_service.add_business_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id, payload
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 27, in add_business_knowladge
+    response_data = await self.business_knowladge_repo.add_business_knowladge(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id, payload
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\business_knowladges_repository.py", line 29, in add_business_knowladge
+    raise e
+  File "D:\PROJECT_WA\src\domain\repositories\business_knowladges_repository.py", line 25, in add_business_knowladge
+    return BusinessKnowladge.model_validate(result.data[0])
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\pydantic\main.py", line 716, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for BusinessKnowladge
+description
+  Field required [type=missing, input_value={'id': 1, 'business_id': ...T12:51:30.889964+00:00'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-12-29 21:13:46,833 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-29 21:14:05,733 | WARNING | src.domain.services.business_knowladge_service | Don't have permission business id 5: 401: {'code': 'DONT_HAVE_BUSINESS_PERMISSION', 'message': "You don't have permission for this business"}
+2025-12-29 21:14:05,734 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: 401: {'code': 'DONT_HAVE_BUSINESS_PERMISSION', 'message': "You don't have permission for this business"}
+2025-12-29 21:14:05,735 | ERROR | src.app.middlewares.error_handler | Custom Error: DONT_HAVE_BUSINESS_PERMISSION
+2025-12-29 21:14:54,432 | WARNING | src.domain.services.business_knowladge_service | Don't have permission business id 5: 401: {'code': 'DONT_HAVE_BUSINESS_PERMISSION_ACCESS', 'message': "You don't have permission access for this business"}
+2025-12-29 21:14:54,435 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: 401: {'code': 'DONT_HAVE_BUSINESS_PERMISSION_ACCESS', 'message': "You don't have permission access for this business"}
+2025-12-29 21:14:54,437 | ERROR | src.app.middlewares.error_handler | Custom Error: DONT_HAVE_BUSINESS_PERMISSION_ACCESS
+2025-12-29 21:20:53,225 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: [Errno 11001] getaddrinfo failed
+2025-12-29 21:20:53,230 | ERROR | src.app.middlewares.error_handler | Unexpected error: [Errno 11001] getaddrinfo failed
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 24, in get_all_business_knowladge_by_business_id
+    result = await controller.get_all_business_knowladge_by_business_id_handler(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id
+        ^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 27, in get_all_business_knowladge_by_business_id_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 16, in get_all_business_knowladge_by_business_id_handler
+    business_knowladges = await self.business_knowladge_service.get_all_business_knowladge_by_business_id(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id
+        ^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 29, in get_all_business_knowladge_by_business_id
+    if business is None:
+    
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 16, in get_user_by_business_id
+    await self.db.table("Businesses")
+    ...<4 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 110, in execute
+    r = await AsyncSingleRequestBuilder(self.request).execute()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 74, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 11001] getaddrinfo failed
+2025-12-29 21:21:15,353 | WARNING | src.domain.services.business_knowladge_service | 404: {'code': 'BUSINESS_NOT_FOUND', 'message': 'Business not found with id 5'}
+2025-12-29 21:21:15,356 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: 404: {'code': 'BUSINESS_NOT_FOUND', 'message': 'Business not found with id 5'}
+2025-12-29 21:21:15,357 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_NOT_FOUND
+2025-12-29 21:21:22,653 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: 5 validation errors for User
+id
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+created_at
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+name
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+email
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+password
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-12-29 21:21:22,659 | ERROR | src.app.middlewares.error_handler | Unexpected error: 5 validation errors for User
+id
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+created_at
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+name
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+email
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+password
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 24, in get_all_business_knowladge_by_business_id
+    result = await controller.get_all_business_knowladge_by_business_id_handler(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id
+        ^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 27, in get_all_business_knowladge_by_business_id_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 16, in get_all_business_knowladge_by_business_id_handler
+    business_knowladges = await self.business_knowladge_service.get_all_business_knowladge_by_business_id(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id
+        ^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 35, in get_all_business_knowladge_by_business_id
+    user_permission = await self.user_repo.get_user_by_business_id(business_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 27, in get_user_by_business_id
+    return User.model_validate(result.data)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\pydantic\main.py", line 716, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 5 validation errors for User
+id
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+created_at
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+name
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+email
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+password
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-12-29 21:22:39,544 | ERROR | src.app.controllers.business_knowladge_controller | Unexpected error: 5 validation errors for User
+id
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+created_at
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+name
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+email
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+password
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-12-29 21:22:39,546 | ERROR | src.app.middlewares.error_handler | Unexpected error: 5 validation errors for User
+id
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+created_at
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+name
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+email
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+password
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 24, in get_all_business_knowladge_by_business_id
+    result = await controller.get_all_business_knowladge_by_business_id_handler(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id
+        ^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 27, in get_all_business_knowladge_by_business_id_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 16, in get_all_business_knowladge_by_business_id_handler
+    business_knowladges = await self.business_knowladge_service.get_all_business_knowladge_by_business_id(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_id
+        ^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 35, in get_all_business_knowladge_by_business_id
+    user_permission = await self.user_repo.get_user_by_business_id(business_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 29, in get_user_by_business_id
+    return User.model_validate(result.data)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\pydantic\main.py", line 716, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 5 validation errors for User
+id
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+created_at
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+name
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+email
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+password
+  Field required [type=missing, input_value={'Users': {'id': 4, 'name...02:15:04.473084+00:00'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-12-30 09:57:04,857 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-30 19:39:11,641 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-30 19:47:09,414 | ERROR | src.app.controllers.business_controller | 'BusinessService' object has no attribute 'logger'
+2025-12-30 19:47:09,423 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'BusinessService' object has no attribute 'logger'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\src\domain\services\business_service.py", line 40, in add_new_business
+    raise BusinessIsAlreadyExist(
+        "Cannot add new business, because business is already exist"
+    )
+src.core.exceptions.business_exception.BusinessIsAlreadyExist: 400: {'code': 'BUSINESS_IS_ALREAY_EXIST', 'message': 'Cannot add new business, because business is already exist'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_route.py", line 32, in add_business
+    result = await controller.add_new_business_handler(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\business_controller.py", line 35, in add_new_business_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\business_controller.py", line 28, in add_new_business_handler
+    result = await self.business_service.add_new_business(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\business_service.py", line 61, in add_new_business
+    self.logger.warning(str(e))
+    ^^^^^^^^^^^
+AttributeError: 'BusinessService' object has no attribute 'logger'
+2025-12-30 19:48:10,626 | WARNING | src.domain.services.business_service | 400: {'code': 'BUSINESS_IS_ALREAY_EXIST', 'message': 'Cannot add new business, because business is already exist'}
+2025-12-30 19:48:10,629 | ERROR | src.app.controllers.business_controller | 400: {'code': 'BUSINESS_IS_ALREAY_EXIST', 'message': 'Cannot add new business, because business is already exist'}
+2025-12-30 19:48:10,644 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_IS_ALREAY_EXIST
+2025-12-30 19:50:48,304 | ERROR | src.app.controllers.business_controller | 400: {'code': 'BUSINESS_IS_ALREAY_EXIST', 'message': 'Cannot add new business, because business is already exist'}
+2025-12-30 19:50:48,310 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_IS_ALREAY_EXIST
+2025-12-30 19:52:53,312 | WARNING | src.app.controllers.business_controller | 400: {'code': 'BUSINESS_IS_ALREAY_EXIST', 'message': 'Cannot add new business, because business is already exist'}
+2025-12-30 19:52:53,314 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_IS_ALREAY_EXIST
+2025-12-30 21:22:54,514 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2025-12-30 21:24:39,415 | ERROR | src.domain.repositories.business_knowladges_repository | Error while update business knowladge: list index out of range
+2025-12-30 21:24:39,421 | ERROR | src.app.middlewares.error_handler | Unexpected error: list index out of range
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 53, in update_business_knowladge
+    result = await controller.update_business_knowladge_handler(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_knowladge_id, payload
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 46, in update_business_knowladge_handler
+    result = await self.business_knowladge_service.update_business_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_knowladge_id, payload
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 86, in update_business_knowladge
+    await self.business_knowladge_repo.update_business_knowladge_by_id(
+        business_knowladge_id, payload
+    )
+  File "D:\PROJECT_WA\src\domain\repositories\business_knowladges_repository.py", line 72, in update_business_knowladge_by_id
+    raise e
+  File "D:\PROJECT_WA\src\domain\repositories\business_knowladges_repository.py", line 69, in update_business_knowladge_by_id
+    return BusinessKnowladge.model_validate(result.data[0])
+                                            ~~~~~~~~~~~^^^
+IndexError: list index out of range
+2025-12-30 21:27:21,104 | ERROR | src.domain.repositories.business_knowladges_repository | Error while update business knowladge: list index out of range
+2025-12-30 21:27:21,107 | ERROR | src.app.middlewares.error_handler | Unexpected error: list index out of range
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\business_knowladge_route.py", line 53, in update_business_knowladge
+    result = await controller.update_business_knowladge_handler(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_knowladge_id, payload
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\app\controllers\business_knowladge_controller.py", line 46, in update_business_knowladge_handler
+    result = await self.business_knowladge_service.update_business_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        business_knowladge_id, payload
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\business_knowladge_service.py", line 86, in update_business_knowladge
+    await self.business_knowladge_repo.update_business_knowladge_by_id(
+        business_knowladge_id, payload
+    )
+  File "D:\PROJECT_WA\src\domain\repositories\business_knowladges_repository.py", line 73, in update_business_knowladge_by_id
+    raise e
+  File "D:\PROJECT_WA\src\domain\repositories\business_knowladges_repository.py", line 70, in update_business_knowladge_by_id
+    return BusinessKnowladge.model_validate(result.data[0])
+                                            ~~~~~~~~~~~^^^
+IndexError: list index out of range
+2025-12-30 21:29:37,931 | ERROR | src.domain.repositories.business_knowladges_repository | 404: {'code': 'BUSINESS_KNOWLADGE_NOT_FOUND', 'message': 'Business knowladge not found'}
+2025-12-30 21:29:38,122 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_KNOWLADGE_NOT_FOUND

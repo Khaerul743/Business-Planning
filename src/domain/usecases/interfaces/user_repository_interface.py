@@ -17,6 +17,10 @@ class IUserRepository(ABC):
         pass
 
     @abstractmethod
+    async def get_user_by_business_id(self, business_id: int) -> User | None:
+        pass
+
+    @abstractmethod
     async def get_by_context_user(self) -> User | None:
         pass
 

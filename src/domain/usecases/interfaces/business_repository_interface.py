@@ -16,7 +16,13 @@ class IBusinessRepository(ABC):
         pass
 
     @abstractmethod
-    async def update_business(
+    async def update_business_by_id(
+        self, business_id: int, business_data: BusinessUpdateIn
+    ) -> Business:
+        pass
+
+    @abstractmethod
+    async def update_business_by_user_id(
         self, user_id: int, business_data: BusinessUpdateIn
     ) -> Business:
         pass
