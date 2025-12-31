@@ -27,3 +27,9 @@ class IBusinessKnowladgeRepository(ABC):
         business_knowladge_data: UpdateBusinessKnowladgeIn,
     ) -> BusinessKnowladge:
         pass
+
+    @abstractmethod
+    async def delete_business_knowladge_by_id(
+        self, business_id: int, business_knowladge_id: int
+    ) -> BusinessKnowladge:
+        pass

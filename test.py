@@ -9,14 +9,14 @@ async def main():
     db = get_supabase()
 
     result = (
-        await db.table("Businesses")
-        .select("id")
-        .eq("user_id", 4)
-        .maybe_single()
+        await db.table("Business_knowladges")
+        .delete()
+        .eq("id", 3)
+        .eq("business_id", 3)
         .execute()
     )
-
-    print(result.data["id"])
+    print(result)
+    print(result.count)
 
 
 asyncio.run(main())

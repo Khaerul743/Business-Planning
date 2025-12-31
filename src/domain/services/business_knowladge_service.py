@@ -88,3 +88,18 @@ class BusinessKnowladgeService(BaseService):
             )
         )
         return response_data
+
+    async def delete_business_knowladge(self, business_knowladge_id: int):
+        user_id = current_user_id.get()
+        if user_id is None:
+            raise UnauthorizedException()
+
+        business_id = await self._get_business_id(user_id)
+        if business_id is None:
+            raise BusinessNotFound()
+
+        result = await self.business_knowladge_repo.delete_business_knowladge_by_id(
+            business_id, business_knowladge_id
+        )
+
+        return result

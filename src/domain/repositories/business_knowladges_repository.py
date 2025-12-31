@@ -73,3 +73,23 @@ class BusinessKnowladgeRepository(IBusinessKnowladgeRepository):
         except BusinessKnowladgeNotFound as e:
             self._logger.warning(f"{str(e)}")
             raise e
+
+    async def delete_business_knowladge_by_id(
+        self, business_id: int, business_knowladge_id: int
+    ):
+        try:
+            result = (
+                await self.db.table("Business_knowladges")
+                .delete()
+                .eq("id", business_knowladge_id)
+                .eq("business_id", business_id)
+                .execute()
+            )
+
+            if result.count is None:
+                raise BusinessKnowladgeNotFound()
+
+            return BusinessKnowladge.model_validate(result.data[0])
+        except BusinessKnowladgeNotFound as e:
+            self._logger.warning(f"{str(e)}")
+            raise e
