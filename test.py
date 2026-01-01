@@ -1,22 +1,17 @@
-import asyncio
+from src.app.validators.agent_schema import WhatsappAgentConfig
+from src.infrastructure.ai.agent.manager import WhatsappAgentManager
 
-from src.config.supabase import get_supabase, init_supabase
-from src.domain.models.business_knowladges import BusinessKnowladge
+manager = WhatsappAgentManager()
 
+agent_conf = WhatsappAgentConfig(
+    chromadb_path="chromadb",
+    collection_name="my_collection",
+    llm_provider="openai",
+    llm_model="gpt-3.5-turbo",
+    tone="casual",
+    base_prompt="",
+)
 
-async def main():
-    await init_supabase()
-    db = get_supabase()
+agent = manager.get_or_create(1, agent_conf)
 
-    result = (
-        await db.table("Business_knowladges")
-        .delete()
-        .eq("id", 3)
-        .eq("business_id", 3)
-        .execute()
-    )
-    print(result)
-    print(result.count)
-
-
-asyncio.run(main())
+print(agent.get_llm_model())

@@ -8,6 +8,7 @@ from src.app.middlewares.error_handler import (
     validation_exception_handler,
 )
 from src.app.routes import (
+    agent_route,
     auth_route,
     business_knowladge_route,
     business_route,
@@ -27,6 +28,7 @@ app.include_router(auth_route.router)
 app.include_router(user_route.router)
 app.include_router(business_route.router)
 app.include_router(business_knowladge_route.router)
+app.include_router(agent_route.router)
 
 
 @app.get("/")

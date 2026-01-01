@@ -5,6 +5,8 @@ Base use case class that all use cases should inherit from.
 from abc import ABC, abstractmethod
 from typing import Generic, TypeVar
 
+from src.core.utils.logger import get_logger
+
 from .use_case_result import UseCaseResult
 
 InputType = TypeVar("InputType")
@@ -18,6 +20,9 @@ class BaseUseCase(ABC, Generic[InputType, OutputType]):
     A use case represents a single business operation and encapsulates
     the business logic required to perform that operation.
     """
+
+    def __init__(self):
+        self.logger = get_logger(__name__)
 
     @abstractmethod
     async def execute(self, input_data: InputType) -> UseCaseResult[OutputType]:

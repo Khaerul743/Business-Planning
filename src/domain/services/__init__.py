@@ -1,3 +1,4 @@
+from .agent_service import AgentService
 from .auth_service import AuthService
 from .business_knowladge_service import BusinessKnowladgeService
 from .business_service import BusinessService
@@ -10,4 +11,5 @@ __all__ = [
     "UserService",
     "BusinessService",
     "BusinessKnowladgeService",
+    "AgentService",
 ]

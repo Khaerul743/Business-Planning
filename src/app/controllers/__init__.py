@@ -1,3 +1,4 @@
+from .agent_controller import AgentController
 from .auth_controller import AuthController
 from .base import BaseController
 from .business_controller import BusinessController
@@ -12,4 +13,5 @@ __all__ = [
     "UserController",
     "BusinessController",
     "BusinessKnowladgeController",
+    "AgentController",
 ]

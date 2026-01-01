@@ -3008,3 +3008,7 @@ Traceback (most recent call last):
 IndexError: list index out of range
 2025-12-30 21:29:37,931 | ERROR | src.domain.repositories.business_knowladges_repository | 404: {'code': 'BUSINESS_KNOWLADGE_NOT_FOUND', 'message': 'Business knowladge not found'}
 2025-12-30 21:29:38,122 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_KNOWLADGE_NOT_FOUND
+2025-12-31 20:41:40,907 | INFO | src.infrastructure.ai.agent.base.base_node | Initialized LLM provider: openai (gpt-3.5-turbo)
+2026-01-01 11:46:34,808 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-01 11:46:49,058 | WARNING | src.app.middlewares.error_handler | Validation Error: [{'type': 'missing', 'loc': ('body',), 'msg': 'Field required', 'input': None}]
+2026-01-01 11:47:48,163 | WARNING | src.app.middlewares.error_handler | Validation Error: [{'type': 'missing', 'loc': ('body', 'llm_provider'), 'msg': 'Field required', 'input': {'name': 'AI'}}, {'type': 'missing', 'loc': ('body', 'llm_model'), 'msg': 'Field required', 'input': {'name': 'AI'}}, {'type': 'missing', 'loc': ('body', 'fallback_to_human'), 'msg': 'Field required', 'input': {'name': 'AI'}}]

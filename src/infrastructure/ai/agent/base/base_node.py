@@ -21,7 +21,7 @@ from langchain_openai import ChatOpenAI
 from pydantic import BaseModel
 
 from src.core.utils.logger import get_logger
-from src.infrastructure.ai.agent.components import LongTermMemory
+from src.infrastructure.ai.agent.components.memory import LongTermMemory
 
 from .base_model import BaseAgentStateModel
 
