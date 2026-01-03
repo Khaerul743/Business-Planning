@@ -30,7 +30,7 @@ def auth_success_response(
 
 # 2. Fungsi untuk Respons Sukses (2xx)
 def success_response(
-    data: Union[Dict[str, Any], List[Dict[str, Any]]],
+    data: Union[Dict[str, Any], List[Any]],
     message: str = "Operation successful.",
     status_code: int = status.HTTP_200_OK,
 ) -> JSONResponse:

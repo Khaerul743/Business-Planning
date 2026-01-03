@@ -9,7 +9,7 @@ class Document_knowladge(BaseEntity):
     title: str
     description: str
     file_path: str
-    file_format: Literal["text", "json", "markdown"]
+    file_format: Literal["pdf", "docs", "txt"]
     file_size: int
     status: Literal["uploaded", "processed", "failed"] = "processed"
     updated_at: datetime

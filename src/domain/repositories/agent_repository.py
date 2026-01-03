@@ -9,6 +9,19 @@ class AgentRepository(IAgentRepository):
     def __init__(self, db: AsyncClient):
         self.db = db
 
+    async def get_agent_id_by_user_id(self, user_id: int) -> int | None:
+        result = (
+            await self.db.table("Businesses")
+            .select("Agents(id)")
+            .eq("user_id", user_id)
+            .maybe_single()
+            .execute()
+        )
+        if result is None:
+            return None
+
+        return result.data["Agents"][0]["id"]
+
     async def create_agent_by_business_id(
         self, business_id: int, agent_data: CreateAgentIn
     ) -> Agents:

@@ -85,8 +85,7 @@ class BusinessKnowladgeRepository(IBusinessKnowladgeRepository):
                 .eq("business_id", business_id)
                 .execute()
             )
-
-            if result.count is None:
+            if len(result.data) == 0:
                 raise BusinessKnowladgeNotFound()
 
             return BusinessKnowladge.model_validate(result.data[0])

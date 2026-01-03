@@ -54,3 +54,16 @@ async def update_business_knowladge(
         business_knowladge_id, payload
     )
     return success_response(result, "update business knowladge is successfully")
+
+
+@router.delete("/me/{business_knowladge_id}", status_code=status.HTTP_200_OK)
+async def delete_business_knowladge(
+    business_knowladge_id: int,
+    _: None = Depends(jwtHandler.jwt_required),
+    __: None = Depends(require_roles("admin", "user")),
+    controller: BusinessKnowladgeController = Depends(
+        get_business_knowladge_controller
+    ),
+):
+    result = await controller.delete_business_knowladge_handler(business_knowladge_id)
+    return success_response(result, "delete business knowladge is successfully")

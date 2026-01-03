@@ -147,26 +147,28 @@ class RAGSystem:
                 "Failed to load documents from directory"
             ) from e
 
-    def list_documents(self) -> List[str]:
+    def list_documents(self) -> List[int]:
         """
         Ambil daftar doc_id unik yang ada di collection
         """
         try:
             # ambil semua data dari collection
             all_data = self.collection().get(include=["metadatas"])
-
             # extract doc_id dari metadata
             doc_ids = {
-                meta["doc_id"] for meta in all_data["metadatas"] if "doc_id" in meta
+                meta["document_id"]
+                for meta in all_data["metadatas"]
+                if "document_id" in meta
             }
 
             return list(doc_ids)
         except Exception as e:
+            raise e
             # logger.error(f"Error listing documents: {e}")
-            raise ListDocumentsException("Failed to list documents") from e
+            # raise ListDocumentsException("Failed to list documents") from e
 
     def add_documents(
-        self, documents: List[Document], doc_id: str, chunk: bool = True
+        self, documents: List[Document], doc_id: int, chunk: bool = True
     ) -> List[str]:
         """
         Tambahkan dokumen ke ChromaDB.
@@ -195,7 +197,7 @@ class RAGSystem:
                 ids=chunk_ids,
                 documents=texts,
                 embeddings=embeddings,
-                metadatas=[{**doc.metadata, "doc_id": doc_id} for doc in splits],
+                metadatas=[{**doc.metadata, "document_id": doc_id} for doc in splits],
             )
             # logger.info(f"Add document is successfully: document ID {doc_id}")
             return chunk_ids
@@ -234,31 +236,31 @@ class RAGSystem:
                 "Failed to add document to collection"
             ) from e
 
-    def delete_document(self, doc_id: str):
+    def delete_document(self, doc_id: int):
         """
         Hapus semua chunk berdasarkan doc_id induk
         """
         try:
-            self.collection().delete(where={"doc_id": doc_id})
+            self.collection().delete(where={"document_id": doc_id})
             # logger.info(f"Semua chunk dokumen dengan id {doc_id} berhasil dihapus")
-            return {"result": f"Delete document is successfully: document ID {doc_id}"}
+            return
         except Exception as e:
             # logger.error(f"Error deleting document {doc_id}: {e}")
             raise DeleteDocumentException("Failed to delete document") from e
 
-    def get_retriever(self):
-        try:
-            from langchain.vectorstores import Chroma
+    # def get_retriever(self):
+    #     try:
+    #         from langchain.vectorstores import Chroma
 
-            vectorstore = Chroma(
-                client=self.client,
-                collection_name=self.collection().name,
-                embedding_function=self.embedding,
-            )
-            return vectorstore.as_retriever()
-        except Exception as e:
-            # logger.error(f"Error getting retriever: {e}")
-            raise RetrieverException("Failed to get retriever") from e
+    #         vectorstore = Chroma(
+    #             client=self.client,
+    #             collection_name=self.collection().name,
+    #             embedding_function=self.embedding,
+    #         )
+    #         return vectorstore.as_retriever()
+    #     except Exception as e:
+    #         # logger.error(f"Error getting retriever: {e}")
+    #         raise RetrieverException("Failed to get retriever") from e
 
     # def ask(self, query: str):
     #     try:
@@ -312,10 +314,4 @@ class RAGSystem:
             ) from e
 
 
-# if __name__ == "__main__":
-#     rag = RAGSystem("data", "my_collections")
-
-# docs = rag.load_single_document("documents", "kontol.pdf", "pdf")
-# print(docs)
-# rag.add_documents(docs, "2")
-# print(rag.ask("neraca"))
+rag_system = RAGSystem("./chromadb")

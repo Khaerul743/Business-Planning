@@ -2,6 +2,7 @@ from .agent_service import AgentService
 from .auth_service import AuthService
 from .business_knowladge_service import BusinessKnowladgeService
 from .business_service import BusinessService
+from .document_knowladge_service import DocumentKnowladgeService
 from .user_service import UserService
 from .whatsapp_service import WhatsappService
 
@@ -12,4 +13,5 @@ __all__ = [
     "BusinessService",
     "BusinessKnowladgeService",
     "AgentService",
+    "DocumentKnowladgeService",
 ]

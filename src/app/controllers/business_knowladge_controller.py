@@ -53,3 +53,12 @@ class BusinessKnowladgeController(BaseController):
         except BusinessNotFound as e:
             self._logger.warning(str(e))
             raise e
+
+    async def delete_business_knowladge_handler(self, business_knowladge_id: int):
+        try:
+            result = await self.business_knowladge_service.delete_business_knowladge(
+                business_knowladge_id
+            )
+            return result.model_dump()
+        except Exception as e:
+            raise e

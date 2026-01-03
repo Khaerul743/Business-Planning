@@ -3012,3 +3012,659 @@ IndexError: list index out of range
 2026-01-01 11:46:34,808 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
 2026-01-01 11:46:49,058 | WARNING | src.app.middlewares.error_handler | Validation Error: [{'type': 'missing', 'loc': ('body',), 'msg': 'Field required', 'input': None}]
 2026-01-01 11:47:48,163 | WARNING | src.app.middlewares.error_handler | Validation Error: [{'type': 'missing', 'loc': ('body', 'llm_provider'), 'msg': 'Field required', 'input': {'name': 'AI'}}, {'type': 'missing', 'loc': ('body', 'llm_model'), 'msg': 'Field required', 'input': {'name': 'AI'}}, {'type': 'missing', 'loc': ('body', 'fallback_to_human'), 'msg': 'Field required', 'input': {'name': 'AI'}}]
+2026-01-02 20:27:34,659 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-02 20:30:47,164 | ERROR | src.app.middlewares.error_handler | Custom Error: AGENT_NOT_FOUND
+2026-01-02 20:33:40,631 | ERROR | src.app.middlewares.error_handler | Custom Error: AGENT_NOT_FOUND
+2026-01-02 20:40:53,318 | ERROR | src.app.middlewares.error_handler | Custom Error: AGENT_NOT_FOUND
+2026-01-02 20:42:55,067 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-02 20:43:23,440 | ERROR | src.app.controllers.auth_controller | 
+2026-01-02 20:43:23,441 | ERROR | src.app.middlewares.error_handler | Unexpected error: 
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\auth_route.py", line 43, in refresh
+    result = await controller.refresh_token_handler(request, response)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 59, in refresh_token_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 52, in refresh_token_handler
+    res = await self.auth_service.refresh_access_token(request, response)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\auth_service.py", line 142, in refresh_access_token
+    user = await self.user_repo.get_user_by_id(payload["sub"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 37, in get_user_by_id
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 110, in execute
+    r = await AsyncSingleRequestBuilder(self.request).execute()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 74, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+2026-01-02 20:43:51,642 | ERROR | src.app.controllers.auth_controller | 
+2026-01-02 20:43:51,644 | ERROR | src.app.middlewares.error_handler | Unexpected error: 
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\auth_route.py", line 43, in refresh
+    result = await controller.refresh_token_handler(request, response)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 59, in refresh_token_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 52, in refresh_token_handler
+    res = await self.auth_service.refresh_access_token(request, response)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\auth_service.py", line 142, in refresh_access_token
+    user = await self.user_repo.get_user_by_id(payload["sub"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 37, in get_user_by_id
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 110, in execute
+    r = await AsyncSingleRequestBuilder(self.request).execute()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 74, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+2026-01-02 20:44:47,271 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 20:44:47,281 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Saya cinta matematika (1).pdf (type: pdf)
+2026-01-02 20:50:51,349 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 20:50:51,357 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Saya cinta matematika (1).pdf (type: pdf)
+2026-01-02 20:57:52,709 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 20:57:52,717 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-02 20:57:53,008 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'RagProcessUseCase' object has no attribute 'logger'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\src\domain\usecases\agent\rag_process.py", line 36, in execute
+    response = await self.document_knowladge_repo.insert_document_knowladge(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        input_data.agent_id, input_data.document_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\document_knowladge_repository.py", line 17, in insert_document_knowladge
+    result = await self.db.table("Document_knowladge").insert(payload).execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 53, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': "Could not find the table 'public.Document_knowladge' in the schema cache", 'code': 'PGRST205', 'hint': "Perhaps you meant the table 'public.Document_knowladges'", 'details': None}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\document_knowladge_route.py", line 24, in get_all_business_knowladge_by_business_id
+    result = await controller.add_document_to_agent_handler(file, file_description)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 26, in add_document_to_agent_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 17, in add_document_to_agent_handler
+    result = await self.document_knowladge_service.add_document_to_agent(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        file, file_description
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\document_knowladge_service.py", line 68, in add_document_to_agent
+    rag_result = await self.rag_process_usecase.execute(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        RagProcessUsecaseInput(agent_id, document_data)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\usecases\agent\rag_process.py", line 57, in execute
+    self.logger.error(f"Unexpected error while rag process: {str(e)}", e)
+    ^^^^^^^^^^^
+AttributeError: 'RagProcessUseCase' object has no attribute 'logger'
+2026-01-02 20:59:20,840 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 20:59:20,846 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-02 20:59:21,076 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': "Could not find the table 'public.Document_knowladge' in the schema cache", 'code': 'PGRST205', 'hint': "Perhaps you meant the table 'public.Document_knowladges'", 'details': None}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\document_knowladge_route.py", line 24, in get_all_business_knowladge_by_business_id
+    result = await controller.add_document_to_agent_handler(file, file_description)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 26, in add_document_to_agent_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 17, in add_document_to_agent_handler
+    result = await self.document_knowladge_service.add_document_to_agent(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        file, file_description
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\document_knowladge_service.py", line 73, in add_document_to_agent
+    self.raise_error_usecase(rag_result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\agent\rag_process.py", line 36, in execute
+    response = await self.document_knowladge_repo.insert_document_knowladge(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        input_data.agent_id, input_data.document_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\document_knowladge_repository.py", line 17, in insert_document_knowladge
+    result = await self.db.table("Document_knowladge").insert(payload).execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 53, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': "Could not find the table 'public.Document_knowladge' in the schema cache", 'code': 'PGRST205', 'hint': "Perhaps you meant the table 'public.Document_knowladges'", 'details': None}
+2026-01-02 21:00:24,806 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-02 21:00:38,848 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 21:00:38,868 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-02 21:00:39,158 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': 'invalid input value for enum format: "pdf"', 'code': '22P02', 'hint': None, 'details': None}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\document_knowladge_route.py", line 24, in get_all_business_knowladge_by_business_id
+    result = await controller.add_document_to_agent_handler(file, file_description)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 26, in add_document_to_agent_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 17, in add_document_to_agent_handler
+    result = await self.document_knowladge_service.add_document_to_agent(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        file, file_description
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\document_knowladge_service.py", line 73, in add_document_to_agent
+    self.raise_error_usecase(rag_result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\agent\rag_process.py", line 36, in execute
+    response = await self.document_knowladge_repo.insert_document_knowladge(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        input_data.agent_id, input_data.document_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\document_knowladge_repository.py", line 17, in insert_document_knowladge
+    result = await self.db.table("Document_knowladges").insert(payload).execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 53, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': 'invalid input value for enum format: "pdf"', 'code': '22P02', 'hint': None, 'details': None}
+2026-01-02 21:04:52,236 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 21:04:52,243 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-02 21:04:52,491 | ERROR | src.app.middlewares.error_handler | Unexpected error: 1 validation error for Document_knowladge
+file_format
+  Input should be 'text', 'json' or 'markdown' [type=literal_error, input_value='pdf', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/literal_error
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\document_knowladge_route.py", line 24, in get_all_business_knowladge_by_business_id
+    result = await controller.add_document_to_agent_handler(file, file_description)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 26, in add_document_to_agent_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 17, in add_document_to_agent_handler
+    result = await self.document_knowladge_service.add_document_to_agent(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        file, file_description
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\document_knowladge_service.py", line 73, in add_document_to_agent
+    self.raise_error_usecase(rag_result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\agent\rag_process.py", line 36, in execute
+    response = await self.document_knowladge_repo.insert_document_knowladge(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        input_data.agent_id, input_data.document_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\document_knowladge_repository.py", line 19, in insert_document_knowladge
+    return Document_knowladge.model_validate(result.data[0])
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\pydantic\main.py", line 716, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Document_knowladge
+file_format
+  Input should be 'text', 'json' or 'markdown' [type=literal_error, input_value='pdf', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/literal_error
+2026-01-02 21:06:18,790 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 21:06:18,797 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-02 21:06:18,991 | ERROR | src.infrastructure.vectorstore.chroma_db | Error loading document 'Khaerul_lutfi.pdf': Expected directory, got file: 'documents/user_4/agent_3\Khaerul_lutfi.pdf'
+2026-01-02 21:06:18,992 | ERROR | src.app.middlewares.error_handler | Custom Error: UNKNOWN
+2026-01-02 21:28:32,688 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-02 21:28:52,242 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 21:28:52,286 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-02 21:28:53,035 | ERROR | src.infrastructure.vectorstore.chroma_db | Error loading document 'Khaerul_lutfi.pdf': `pypdf` package not found, please install it with `pip install pypdf`
+2026-01-02 21:28:53,036 | ERROR | src.app.middlewares.error_handler | Custom Error: UNKNOWN
+2026-01-02 21:30:37,607 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 21:30:37,627 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-02 21:30:49,973 | INFO | src.infrastructure.vectorstore.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2026-01-02 21:34:50,838 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 21:34:50,937 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-02 21:34:53,213 | INFO | src.infrastructure.vectorstore.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2026-01-02 21:35:44,514 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-02 21:35:44,522 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-02 21:35:46,228 | INFO | src.infrastructure.vectorstore.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2026-01-03 11:42:18,468 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-03 11:42:18,480 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\Khaerul_lutfi.pdf (type: pdf)
+2026-01-03 11:42:21,767 | INFO | src.infrastructure.vectorstore.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2026-01-03 12:30:36,854 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-03 12:34:46,163 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-03 12:34:46,198 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\matematika.pdf (type: pdf)
+2026-01-03 12:34:52,076 | INFO | src.infrastructure.vectorstore.chroma_db | Successfully loaded document: matematika.pdf
+2026-01-03 17:19:27,983 | INFO | src.core.utils.save_file | Deleted file: documents/user_4/agent_3\Khaerul_lutfi.pdf
+2026-01-03 17:31:02,761 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-03 17:31:26,190 | ERROR | src.app.middlewares.error_handler | Custom Error: DOCUMENT_KNOWLADGE_NOT_FOUND
+2026-01-03 17:31:50,801 | INFO | src.core.utils.save_file | Created directory: documents/user_4/agent_3
+2026-01-03 17:31:50,897 | INFO | src.core.utils.save_file | Saved file: documents/user_4/agent_3\matematika.pdf (type: pdf)
+2026-01-03 17:31:55,234 | INFO | src.infrastructure.vectorstore.chroma_db | Successfully loaded document: matematika.pdf
+2026-01-03 17:32:37,981 | INFO | src.core.utils.save_file | Deleted file: documents/user_4/agent_3\matematika.pdf
+2026-01-03 17:34:39,038 | ERROR | src.app.middlewares.error_handler | Unexpected error: list index out of range
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\document_knowladge_route.py", line 53, in delete_document_knowladge
+    result = await controller.delete_document_knowladge_handler(document_knowladge_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 39, in delete_document_knowladge_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 34, in delete_document_knowladge_handler
+    result = await self.document_knowladge_service.delete_document_knowladge(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        document_knowladge_id
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\services\document_knowladge_service.py", line 128, in delete_document_knowladge
+    self.raise_error_usecase(usecase_result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\agent\delete_document_knowladges_usecase.py", line 41, in execute
+    document_knowladge = await (
+                         ^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\document_knowladge_repository.py", line 25, in delete_document_knowladge_by_id_n_agent_id
+    return Document_knowladge.model_validate(result.data[0])
+                                             ~~~~~~~~~~~^^^
+IndexError: list index out of range
+2026-01-03 17:36:21,265 | ERROR | src.app.middlewares.error_handler | Custom Error: DOCUMENT_KNOWLADGE_NOT_FOUND
+2026-01-03 17:47:22,833 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-03 17:47:40,225 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-03 17:48:18,390 | WARNING | src.domain.repositories.business_knowladges_repository | 404: {'code': 'BUSINESS_KNOWLADGE_NOT_FOUND', 'message': 'Business knowladge not found'}
+2026-01-03 17:48:18,391 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_KNOWLADGE_NOT_FOUND
+2026-01-03 17:48:44,502 | WARNING | src.domain.repositories.business_knowladges_repository | 404: {'code': 'BUSINESS_KNOWLADGE_NOT_FOUND', 'message': 'Business knowladge not found'}
+2026-01-03 17:48:44,510 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_KNOWLADGE_NOT_FOUND
+2026-01-03 17:53:06,444 | WARNING | src.domain.repositories.business_knowladges_repository | 404: {'code': 'BUSINESS_KNOWLADGE_NOT_FOUND', 'message': 'Business knowladge not found'}
+2026-01-03 17:53:06,452 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_KNOWLADGE_NOT_FOUND
