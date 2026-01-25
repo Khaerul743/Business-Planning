@@ -3668,3 +3668,1510 @@ IndexError: list index out of range
 2026-01-03 17:48:44,510 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_KNOWLADGE_NOT_FOUND
 2026-01-03 17:53:06,444 | WARNING | src.domain.repositories.business_knowladges_repository | 404: {'code': 'BUSINESS_KNOWLADGE_NOT_FOUND', 'message': 'Business knowladge not found'}
 2026-01-03 17:53:06,452 | ERROR | src.app.middlewares.error_handler | Custom Error: BUSINESS_KNOWLADGE_NOT_FOUND
+2026-01-04 20:28:08,810 | WARNING | src.app.controllers.auth_controller | 401: {'code': 'UNAUTHORIZED', 'message': 'Missing refresh token'}
+2026-01-04 20:28:09,028 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-04 20:28:18,765 | WARNING | src.app.controllers.auth_controller | 401: {'code': 'UNAUTHORIZED', 'message': 'Missing refresh token'}
+2026-01-04 20:28:18,770 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-04 20:28:55,140 | WARNING | src.app.middlewares.error_handler | Validation Error: [{'type': 'missing', 'loc': ('body', 'tone'), 'msg': 'Field required', 'input': {'name': 'AI', 'llm_provider': 'openai', 'llm_model': 'gpt-3.5-turbo', 'fallback_to_human': 'khaerul@gmail.com'}}]
+2026-01-04 20:29:13,100 | WARNING | src.app.middlewares.error_handler | Validation Error: [{'type': 'literal_error', 'loc': ('body', 'tone'), 'msg': "Input should be 'friendly', 'formal', 'casual' or 'profesional'", 'input': 'peler', 'ctx': {'expected': "'friendly', 'formal', 'casual' or 'profesional'"}}]
+2026-01-04 20:29:26,358 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': "Could not find the 'base_prompt' column of 'Agents' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\agent_route.py", line 22, in get_all_business_knowladge_by_business_id
+    result = await controller.create_new_agent_handler(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 19, in create_new_agent_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 15, in create_new_agent_handler
+    result = await self.agent_service.create_new_agent(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\agent_service.py", line 51, in create_new_agent
+    self.raise_error_usecase(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\agent\create_agent.py", line 42, in execute
+    agent_entity = await self.agent_repo.create_agent_by_business_id(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        input_data.business_id, input_data.agent_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\agent_repository.py", line 31, in create_agent_by_business_id
+    result = await self.db.table("Agents").insert(payload).execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 53, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': "Could not find the 'base_prompt' column of 'Agents' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2026-01-04 20:32:32,385 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': "Could not find the 'base_prompt' column of 'Agents' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\agent_route.py", line 22, in get_all_business_knowladge_by_business_id
+    result = await controller.create_new_agent_handler(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 19, in create_new_agent_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 15, in create_new_agent_handler
+    result = await self.agent_service.create_new_agent(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\agent_service.py", line 51, in create_new_agent
+    self.raise_error_usecase(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\agent\create_agent.py", line 42, in execute
+    agent_entity = await self.agent_repo.create_agent_by_business_id(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        input_data.business_id, input_data.agent_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\agent_repository.py", line 31, in create_agent_by_business_id
+    result = await self.db.table("Agents").insert(payload).execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 53, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': "Could not find the 'base_prompt' column of 'Agents' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2026-01-04 20:43:56,338 | ERROR | src.app.middlewares.error_handler | Unexpected error: {'message': "Could not find the 'llm_model' column of 'Agents' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\agent_route.py", line 22, in get_all_business_knowladge_by_business_id
+    result = await controller.create_new_agent_handler(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 19, in create_new_agent_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 15, in create_new_agent_handler
+    result = await self.agent_service.create_new_agent(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\agent_service.py", line 51, in create_new_agent
+    self.raise_error_usecase(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\agent\create_agent.py", line 42, in execute
+    agent_entity = await self.agent_repo.create_agent_by_business_id(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\agent_repository.py", line 31, in create_agent_by_business_id
+    result = await self.db.table("Agents").insert(payload).execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 53, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': "Could not find the 'llm_model' column of 'Agents' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2026-01-04 20:45:29,013 | ERROR | src.app.middlewares.error_handler | Unexpected error: 2 validation errors for Agents
+llm_provider
+  Field required [type=missing, input_value={'id': 5, 'business_id': ...T13:45:24.948179+00:00'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+llm_model
+  Field required [type=missing, input_value={'id': 5, 'business_id': ...T13:45:24.948179+00:00'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\agent_route.py", line 22, in get_all_business_knowladge_by_business_id
+    result = await controller.create_new_agent_handler(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 19, in create_new_agent_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 15, in create_new_agent_handler
+    result = await self.agent_service.create_new_agent(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\agent_service.py", line 51, in create_new_agent
+    self.raise_error_usecase(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\agent\create_agent.py", line 42, in execute
+    agent_entity = await self.agent_repo.create_agent_by_business_id(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\agent_repository.py", line 33, in create_agent_by_business_id
+    return Agents.model_validate(result.data[0])
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\pydantic\main.py", line 716, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Agents
+llm_provider
+  Field required [type=missing, input_value={'id': 5, 'business_id': ...T13:45:24.948179+00:00'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+llm_model
+  Field required [type=missing, input_value={'id': 5, 'business_id': ...T13:45:24.948179+00:00'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2026-01-04 20:47:07,195 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'Agents' object has no attribute 'llm_provider'
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\agent_route.py", line 22, in get_all_business_knowladge_by_business_id
+    result = await controller.create_new_agent_handler(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 19, in create_new_agent_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\agent_controller.py", line 15, in create_new_agent_handler
+    result = await self.agent_service.create_new_agent(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\agent_service.py", line 51, in create_new_agent
+    self.raise_error_usecase(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\agent\create_agent.py", line 55, in execute
+    llm_provider=agent_entity.llm_provider,
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\pydantic\main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Agents' object has no attribute 'llm_provider'
+2026-01-05 12:00:33,309 | ERROR | src.app.controllers.whatsapp_controller | Unexpected error while send message: 0
+2026-01-05 12:00:33,315 | ERROR | src.app.middlewares.error_handler | Unexpected error: 0
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\whatsapp_route.py", line 35, in receive_webhook
+    await controller.send_message(payload)
+  File "D:\PROJECT_WA\src\app\controllers\whatsapp_controller.py", line 23, in send_message
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\whatsapp_controller.py", line 18, in send_message
+    await self.whatsapp_service.send_text_message(payload)
+  File "D:\PROJECT_WA\src\domain\services\whatsapp_service.py", line 109, in send_text_message
+    agent_id = await self.agent_repo.get_agent_by_phone_number_id(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        filtered_payload.phone_number_id
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\agent_repository.py", line 23, in get_agent_by_phone_number_id
+    return Agents.model_validate(result.data[0])
+                                 ~~~~~~~~~~~^^^
+KeyError: 0
+2026-01-05 12:01:47,620 | ERROR | src.app.controllers.whatsapp_controller | Unexpected error while send message: Object of type Agents is not JSON serializable
+2026-01-05 12:01:47,628 | ERROR | src.app.middlewares.error_handler | Unexpected error: Object of type Agents is not JSON serializable
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\whatsapp_route.py", line 35, in receive_webhook
+    await controller.send_message(payload)
+  File "D:\PROJECT_WA\src\app\controllers\whatsapp_controller.py", line 23, in send_message
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\whatsapp_controller.py", line 18, in send_message
+    await self.whatsapp_service.send_text_message(payload)
+  File "D:\PROJECT_WA\src\domain\services\whatsapp_service.py", line 133, in send_text_message
+    self.raise_error_usecase(message_processing_result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\whatsapp\message_processing.py", line 46, in execute
+    customer = await self.customer_repo.get_or_insert_custormer(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        input_data.agent_id, input_data.customer_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\customer_repository.py", line 26, in get_or_insert_custormer
+    result = await self.db.table("Customers").insert(payload).execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 47, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1527, in request
+    request = self.build_request(
+        method=method,
+    ...<9 lines>...
+        extensions=extensions,
+    )
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 378, in build_request
+    return Request(
+        method,
+    ...<8 lines>...
+        extensions=extensions,
+    )
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_models.py", line 408, in __init__
+    headers, stream = encode_request(
+                      ~~~~~~~~~~~~~~^
+        content=content,
+        ^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        ),
+        ^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_content.py", line 216, in encode_request
+    return encode_json(json)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_content.py", line 177, in encode_json
+    body = json_dumps(
+           ~~~~~~~~~~^
+        json, ensure_ascii=False, separators=(",", ":"), allow_nan=False
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).encode("utf-8")
+    ^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type Agents is not JSON serializable
+2026-01-05 12:06:48,292 | ERROR | src.app.controllers.whatsapp_controller | Unexpected error while send message: Object of type Agents is not JSON serializable
+2026-01-05 12:06:48,293 | ERROR | src.app.middlewares.error_handler | Unexpected error: Object of type Agents is not JSON serializable
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\whatsapp_route.py", line 35, in receive_webhook
+    await controller.send_message(payload)
+  File "D:\PROJECT_WA\src\app\controllers\whatsapp_controller.py", line 23, in send_message
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\whatsapp_controller.py", line 18, in send_message
+    await self.whatsapp_service.send_text_message(payload)
+  File "D:\PROJECT_WA\src\domain\services\whatsapp_service.py", line 133, in send_text_message
+    self.raise_error_usecase(message_processing_result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\whatsapp\message_processing.py", line 46, in execute
+    customer = await self.customer_repo.get_or_insert_custormer(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        input_data.agent_id, input_data.customer_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\customer_repository.py", line 26, in get_or_insert_custormer
+    result = await self.db.table("Customers").insert(payload).execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 47, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1527, in request
+    request = self.build_request(
+        method=method,
+    ...<9 lines>...
+        extensions=extensions,
+    )
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 378, in build_request
+    return Request(
+        method,
+    ...<8 lines>...
+        extensions=extensions,
+    )
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_models.py", line 408, in __init__
+    headers, stream = encode_request(
+                      ~~~~~~~~~~~~~~^
+        content=content,
+        ^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        ),
+        ^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_content.py", line 216, in encode_request
+    return encode_json(json)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_content.py", line 177, in encode_json
+    body = json_dumps(
+           ~~~~~~~~~~^
+        json, ensure_ascii=False, separators=(",", ":"), allow_nan=False
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).encode("utf-8")
+    ^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type Agents is not JSON serializable
+2026-01-05 12:10:05,104 | ERROR | src.app.controllers.whatsapp_controller | Unexpected error while send message: 0
+2026-01-05 12:10:05,106 | ERROR | src.app.middlewares.error_handler | Unexpected error: 0
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\whatsapp_route.py", line 35, in receive_webhook
+    await controller.send_message(payload)
+  File "D:\PROJECT_WA\src\app\controllers\whatsapp_controller.py", line 23, in send_message
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\whatsapp_controller.py", line 18, in send_message
+    await self.whatsapp_service.send_text_message(payload)
+  File "D:\PROJECT_WA\src\domain\services\whatsapp_service.py", line 133, in send_text_message
+    self.raise_error_usecase(message_processing_result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\whatsapp\message_processing.py", line 51, in execute
+    agent_conf = await self.agent_conf_repo.get_agent_conf_by_agent_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        input_data.agent_id
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\src\domain\repositories\agent_configuration_repository.py", line 26, in get_agent_conf_by_agent_id
+    return Agent_configuration.model_validate(result.data[0])
+                                              ~~~~~~~~~~~^^^
+KeyError: 0
+2026-01-05 12:11:45,782 | INFO | src.infrastructure.ai.agent.base.base_node | Initialized LLM provider: openai (gpt-3.5-turbo)
+2026-01-05 12:59:02,889 | INFO | src.domain.services.whatsapp_service | agent is not active
+2026-01-05 12:59:02,896 | ERROR | src.domain.services.whatsapp_service | No active exception to reraise
+2026-01-05 13:08:15,544 | WARNING | src.domain.services.whatsapp_service | agent is not active
+2026-01-05 13:12:07,340 | WARNING | src.domain.services.whatsapp_service | The user is disable this customer: customer phone number 6281234567890
+2026-01-05 20:46:29,200 | WARNING | src.domain.services.whatsapp_service | The user is disable this customer: customer phone number 6281234567890
+2026-01-05 20:47:11,539 | INFO | src.infrastructure.ai.agent.base.base_node | Initialized LLM provider: openai (gpt-3.5-turbo)
+2026-01-05 20:47:14,700 | ERROR | src.domain.services.whatsapp_service | 2 validation errors for Conversations
+customer_id
+  Input should be a valid string [type=string_type, input_value=3, input_type=int]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+last_message
+  Field required [type=missing, input_value={'id': 1, 'customer_id': ...T13:47:10.262017+00:00'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2026-01-05 20:51:34,116 | INFO | src.infrastructure.ai.agent.base.base_node | Initialized LLM provider: openai (gpt-3.5-turbo)
+2026-01-05 20:51:38,048 | ERROR | src.domain.services.whatsapp_service | 1 validation error for Messages
+raw_webhook
+  Input should be a valid string [type=string_type, input_value={'entry': [{'id': 'WHATSA...tsapp_business_account'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+2026-01-05 20:53:47,282 | INFO | src.infrastructure.ai.agent.base.base_node | Initialized LLM provider: openai (gpt-3.5-turbo)
+2026-01-09 19:34:09,359 | ERROR | src.app.middlewares.error_handler | Unexpected error: 0
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\document_knowladge_route.py", line 22, in get_all_document_knowladges
+    result = await controller.get_all_document_knowladges_handler()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 18, in get_all_document_knowladges_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\document_knowladge_controller.py", line 15, in get_all_document_knowladges_handler
+    result = await self.document_knowladge_service.get_all_document_knowladges()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\document_knowladge_service.py", line 54, in get_all_document_knowladges
+    agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\agent_repository.py", line 36, in get_agent_id_by_user_id
+    return result.data["Agents"][0]["id"]
+           ~~~~~~~~~~~~~~~~~~~~~^^^
+KeyError: 0
+2026-01-24 20:55:25,035 | WARNING | src.domain.services.auth_service | khaerul@gmail.com login failed: Unexpected error while authenticate the user: [Errno 11001] getaddrinfo failed
+2026-01-24 20:55:25,051 | ERROR | src.app.middlewares.error_handler | Unexpected error: [Errno 11001] getaddrinfo failed
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\auth_route.py", line 32, in login
+    result = await controller.login_handler(response, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 48, in login_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 42, in login_handler
+    result = await self.auth_service.login_handler(response, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\auth_service.py", line 92, in login_handler
+    self.raise_error_usecase(auth_user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\auth\authenticate_user.py", line 46, in execute
+    get_user = await self.user_repository.get_user_by_email(input_data.email)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 64, in get_user_by_email
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 110, in execute
+    r = await AsyncSingleRequestBuilder(self.request).execute()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 74, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 11001] getaddrinfo failed
+2026-01-24 20:55:42,116 | WARNING | src.domain.services.auth_service | khaerul@gmail.com login failed: Unexpected error while authenticate the user: [Errno 11001] getaddrinfo failed
+2026-01-24 20:55:42,117 | ERROR | src.app.middlewares.error_handler | Unexpected error: [Errno 11001] getaddrinfo failed
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\auth_route.py", line 32, in login
+    result = await controller.login_handler(response, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 48, in login_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 42, in login_handler
+    result = await self.auth_service.login_handler(response, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\auth_service.py", line 92, in login_handler
+    self.raise_error_usecase(auth_user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\base.py", line 12, in raise_error_usecase
+    raise exception
+  File "D:\PROJECT_WA\src\domain\usecases\auth\authenticate_user.py", line 46, in execute
+    get_user = await self.user_repository.get_user_by_email(input_data.email)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 64, in get_user_by_email
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 110, in execute
+    r = await AsyncSingleRequestBuilder(self.request).execute()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 74, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 11001] getaddrinfo failed
+2026-01-24 21:48:49,891 | INFO | src.infrastructure.ai.agent.base.base_node | Initialized LLM provider: openai (gpt-3.5-turbo)
+2026-01-24 22:00:00,620 | INFO | src.infrastructure.ai.agent.base.base_node | Initialized LLM provider: openai (gpt-3.5-turbo)
+2026-01-25 14:55:02,330 | ERROR | src.domain.repositories.business_repository | Error while get business by user id: [Errno 11001] getaddrinfo failed
+2026-01-25 14:55:02,349 | ERROR | src.app.middlewares.error_handler | Unexpected error: [Errno 11001] getaddrinfo failed
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\conversation_route.py", line 20, in get_all_conversations
+    result = await controller.get_all_conversation_handler()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\conversation_controller.py", line 13, in get_all_conversation_handler
+    conversations = await self.conversation_service.get_all_conversation()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\conversation_service.py", line 33, in get_all_conversation
+    business_id = await self._get_business_id(user_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\conversation_service.py", line 25, in _get_business_id
+    business_id = await self.business_repo.get_business_id_by_user_id(user_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 48, in get_business_id_by_user_id
+    raise e
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 35, in get_business_id_by_user_id
+    await self.db.table("Businesses")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 110, in execute
+    r = await AsyncSingleRequestBuilder(self.request).execute()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 74, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 11001] getaddrinfo failed
+2026-01-25 14:55:12,856 | ERROR | src.domain.repositories.business_repository | Error while get business by user id: [Errno 11001] getaddrinfo failed
+2026-01-25 14:55:12,857 | ERROR | src.app.middlewares.error_handler | Unexpected error: [Errno 11001] getaddrinfo failed
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\conversation_route.py", line 20, in get_all_conversations
+    result = await controller.get_all_conversation_handler()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\conversation_controller.py", line 13, in get_all_conversation_handler
+    conversations = await self.conversation_service.get_all_conversation()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\conversation_service.py", line 33, in get_all_conversation
+    business_id = await self._get_business_id(user_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\conversation_service.py", line 25, in _get_business_id
+    business_id = await self.business_repo.get_business_id_by_user_id(user_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 48, in get_business_id_by_user_id
+    raise e
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 35, in get_business_id_by_user_id
+    await self.db.table("Businesses")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 110, in execute
+    r = await AsyncSingleRequestBuilder(self.request).execute()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 74, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 11001] getaddrinfo failed
+2026-01-25 14:55:16,771 | ERROR | src.domain.repositories.business_repository | Error while get business by user id: [Errno 11001] getaddrinfo failed
+2026-01-25 14:55:16,822 | ERROR | src.app.middlewares.error_handler | Unexpected error: [Errno 11001] getaddrinfo failed
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\conversation_route.py", line 20, in get_all_conversations
+    result = await controller.get_all_conversation_handler()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\conversation_controller.py", line 13, in get_all_conversation_handler
+    conversations = await self.conversation_service.get_all_conversation()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\conversation_service.py", line 33, in get_all_conversation
+    business_id = await self._get_business_id(user_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\conversation_service.py", line 25, in _get_business_id
+    business_id = await self.business_repo.get_business_id_by_user_id(user_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 48, in get_business_id_by_user_id
+    raise e
+  File "D:\PROJECT_WA\src\domain\repositories\business_repository.py", line 35, in get_business_id_by_user_id
+    await self.db.table("Businesses")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 110, in execute
+    r = await AsyncSingleRequestBuilder(self.request).execute()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 74, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 11001] getaddrinfo failed
+2026-01-25 15:14:55,503 | ERROR | src.app.middlewares.error_handler | Custom Error: UNAUTHORIZED
+2026-01-25 15:15:28,677 | ERROR | src.app.controllers.auth_controller | 
+2026-01-25 15:15:28,965 | ERROR | src.app.middlewares.error_handler | Unexpected error: 
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 430, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\fastapi\routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\routes\auth_route.py", line 43, in refresh
+    result = await controller.refresh_token_handler(request, response)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 59, in refresh_token_handler
+    raise e
+  File "D:\PROJECT_WA\src\app\controllers\auth_controller.py", line 52, in refresh_token_handler
+    res = await self.auth_service.refresh_access_token(request, response)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\services\auth_service.py", line 142, in refresh_access_token
+    user = await self.user_repo.get_user_by_id(payload["sub"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\src\domain\repositories\user_repository.py", line 37, in get_user_by_id
+    await self.db.table("Users")
+    ...<3 lines>...
+    .execute()
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 110, in execute
+    r = await AsyncSingleRequestBuilder(self.request).execute()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\postgrest\_async\request_builder.py", line 74, in execute
+    r = await self.request.send()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\PROJECT_WA\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError

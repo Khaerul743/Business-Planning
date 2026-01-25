@@ -8,5 +8,5 @@ class Messages(BaseEntity):
     conversation_id: Optional[int] = None
     message_type: Literal["text", "image", "audio", "file"] = "text"
     content: str
-    raw_webhook: str
+    raw_webhook: dict
     sender_type: Literal["ai", "customer", "human_admin"]

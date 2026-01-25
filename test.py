@@ -17,27 +17,37 @@
 # print(agent.get_llm_model())
 
 
-# import asyncio
+import asyncio
 
-# from src.config.supabase import get_supabase, init_supabase
-
-
-# async def main():
-#     await init_supabase()
-#     db = get_supabase()
-
-#     result = (
-#         await db.table("Document_knowladges")
-#         .select("*")
-#         .eq("agent_id", 3)
-#         .eq("id", 8)
-#         .maybe_single()
-#         .execute()
-#     )
-#     print(result)
+from src.app.validators.message_schema import InsertNewMessage
+from src.config.supabase import get_supabase, init_supabase
 
 
-# asyncio.run(main())
+async def main():
+    await init_supabase()
+    db = get_supabase()
+
+    result = (
+        await db.table("Conversations")
+        .select("*, Customers(name)")
+        .eq("business_id", 3)
+        .execute()
+    )
+
+    if len(result.data) == 0:
+        return None
+
+    list_conversations = []
+
+    for i in result.data:
+        i["username"] = i["Customers"]["name"]
+        del i["Customers"]
+        list_conversations.append(i)
+
+    print(list_conversations)
+
+
+asyncio.run(main())
 
 
 # from src.infrastructure.vectorstore.chroma_db import rag_system
@@ -47,7 +57,3 @@
 # document_list = rag_system.list_documents()
 
 # print(document_list)
-
-from src.core.utils.save_file import save_file_handler
-
-save_file_handler.delete_file("documents/user_4/agent_3", "Khaerul_lutfi.pdf")

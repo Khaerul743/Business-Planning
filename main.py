@@ -12,6 +12,7 @@ from src.app.routes import (
     auth_route,
     business_knowladge_route,
     business_route,
+    conversation_route,
     document_knowladge_route,
     user_route,
     whatsapp_route,
@@ -31,6 +32,7 @@ app.include_router(business_route.router)
 app.include_router(business_knowladge_route.router)
 app.include_router(agent_route.router)
 app.include_router(document_knowladge_route.router)
+app.include_router(conversation_route.router)
 
 
 @app.get("/")

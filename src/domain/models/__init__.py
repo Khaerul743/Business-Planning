@@ -1,4 +1,5 @@
 from .agent_analytics import AgentAnalytics
+from .agent_configurations import Agent_configuration
 from .agents import Agents
 from .business_knowladges import BusinessKnowladge
 from .businesses import Business
@@ -18,4 +19,5 @@ __all__ = [
     "Customers",
     "Conversations",
     "Messages",
+    "Agent_configuration",
 ]

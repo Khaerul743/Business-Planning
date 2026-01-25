@@ -36,27 +36,30 @@ class WhatsappManager:
         raise WhatsappBadRequest()
 
     def send_text_message(self, to_number: str, text_message: str):
-        """
-        Fungsi untuk mengirim pesan keluar menggunakan Token Akses Permanen (Token BE).
-        """
-        headers = {
-            "Authorization": f"Bearer {self.waba_access_token}",
-            "Content-Type": "application/json",
-        }
+        return {"to_number": to_number, "text_message": text_message}
 
-        data = {
-            "messaging_product": "whatsapp",
-            "to": to_number,
-            "type": "text",
-            "text": {"body": text_message},
-        }
+    # def send_text_message(self, to_number: str, text_message: str):
+    #     """
+    #     Fungsi untuk mengirim pesan keluar menggunakan Token Akses Permanen (Token BE).
+    #     """
+    #     headers = {
+    #         "Authorization": f"Bearer {self.waba_access_token}",
+    #         "Content-Type": "application/json",
+    #     }
 
-        try:
-            response = requests.post(self.url_messages, headers=headers, json=data)
-            response.raise_for_status()  # Akan melempar HTTPError jika status code 4xx/5xx
-            self._logger.info(
-                f"Send text message is successfully to number {to_number}"
-            )
-            return response.json()
-        except requests.exceptions.HTTPError as err:
-            self._logger.warning(f"Failed to send text message: {err}")
+    #     data = {
+    #         "messaging_product": "whatsapp",
+    #         "to": to_number,
+    #         "type": "text",
+    #         "text": {"body": text_message},
+    #     }
+
+    #     try:
+    #         response = requests.post(self.url_messages, headers=headers, json=data)
+    #         response.raise_for_status()  # Akan melempar HTTPError jika status code 4xx/5xx
+    #         self._logger.info(
+    #             f"Send text message is successfully to number {to_number}"
+    #         )
+    #         return response.json()
+    #     except requests.exceptions.HTTPError as err:
+    #         self._logger.warning(f"Failed to send text message: {err}")

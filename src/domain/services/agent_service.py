@@ -4,7 +4,11 @@ from src.app.validators.agent_schema import CreateAgentIn
 from src.core.context.request_context import current_user_id
 from src.core.exceptions.auth_exception import UnauthorizedException
 from src.core.exceptions.business_exception import BusinessNotFound
-from src.domain.repositories import AgentRepository, BusinessRepository
+from src.domain.repositories import (
+    AgentConfigurationRepository,
+    AgentRepository,
+    BusinessRepository,
+)
 from src.domain.usecases.agent import CreateAgentUseCase, CreateAgentUseCaseInput
 from src.infrastructure.ai.agent.manager import whatsapp_agent_manager
 
@@ -17,6 +21,7 @@ class AgentService(BaseService):
 
         # repositories
         self.agent_repo = AgentRepository(self.db)
+        self.agent_conf_repo = AgentConfigurationRepository(db)
         self.business_repo = BusinessRepository(self.db)
 
         # dependencies
@@ -24,7 +29,7 @@ class AgentService(BaseService):
 
         # Use case
         self.create_agent_usecase = CreateAgentUseCase(
-            self.agent_repo, self.whatsapp_agent_manager
+            self.agent_repo, self.agent_conf_repo, self.whatsapp_agent_manager
         )
 
         super().__init__(__name__)

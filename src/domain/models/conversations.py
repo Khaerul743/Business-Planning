@@ -5,6 +5,6 @@ from .base import BaseEntity
 
 
 class Conversations(BaseEntity):
-    customer_id: Optional[str] = None
+    customer_id: Optional[int] = None
     status: Literal["active", "inactive"] = "active"
-    last_message: datetime
+    last_message_at: datetime
