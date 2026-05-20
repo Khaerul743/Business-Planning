@@ -14,7 +14,8 @@ class IConversationRepository(ABC):
 
     @abstractmethod
     async def insert_new_conversation(
-        self, customer_id: UUID, status: Literal["active", "inactive"] = "active"
+        self,
+        customer_id: UUID,
     ) -> Conversations:
         pass
 
@@ -24,7 +25,6 @@ class IConversationRepository(ABC):
         business_id: UUID | None,
         agent_id: UUID,
         customer_id: UUID,
-        status: Literal["active", "inactive"] = "active",
     ) -> Conversations:
         pass
 

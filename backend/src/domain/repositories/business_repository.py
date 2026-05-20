@@ -29,19 +29,19 @@ class BusinessRepository(IBusinessRepository):
 
         return Business.model_validate(result.data)
 
-    async def get_business_id_by_user_id(self, user_id: UUID) -> UUID | None:
+    async def get_business_id_n_agent_id_by_user_id(
+        self, user_id: UUID
+    ) -> tuple[UUID | None, UUID | None]:
         try:
             result = (
                 await self.db.table("Businesses")
-                .select("id")
+                .select("id, (Agents(id))")
                 .eq("user_id", user_id)
                 .maybe_single()
                 .execute()
             )
-            if result is None:
-                return None
 
-            return result.data["id"]
+            return result.data["id"], result.data["Agents"][0]["id"]
 
         except Exception as e:
             self._logger.error(f"Error while get business by user id: {str(e)}")

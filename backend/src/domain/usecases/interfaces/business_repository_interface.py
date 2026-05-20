@@ -11,7 +11,9 @@ class IBusinessRepository(ABC):
         pass
 
     @abstractmethod
-    async def get_business_id_by_user_id(self, user_id: UUID) -> UUID | None:
+    async def get_business_id_n_agent_id_by_user_id(
+        self, user_id: UUID
+    ) -> tuple[UUID | None, UUID | None]:
         pass
 
     @abstractmethod

@@ -253,6 +253,7 @@ class WhatsappAgentNode(BaseNode):
                     ],
                 )
             )
+
             list_tool_result.append(
                 ToolMessage(content=state.rag_query_result, tool_call_id=id_tool_1)
             )

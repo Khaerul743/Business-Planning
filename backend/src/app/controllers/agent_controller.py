@@ -77,8 +77,8 @@ class AgentController(BaseController):
         return {"response": result.response, "detail": result.detail_agent_output}
 
     async def insight_handler(self):
-        result = await self.agent_service.triger_insight_generator()
-        return result.model_dump()
+        await self.agent_service.triger_insight_generator()
+        return {"status": "receive"}
 
     async def triger_gap_knowladge_handler(self):
         result = await self.agent_service.triger_knowladge_gap()

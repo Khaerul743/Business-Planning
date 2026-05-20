@@ -6,19 +6,19 @@ from src.infrastructure.ai.agent.wa_agent.schema import (
     DocumentRagDetail,
 )
 
-business_inf = BusinessDetailInformation(
-    business_name="Rusdi store",
-    business_desc="Merupakan salah satu online store paling laris di ngawi selatan",
-    business_location="Ngawi selatan, kec. Rongawi, kab. Rongawi Kuno",
-)
+# business_inf = BusinessDetailInformation(
+#     business_name="Rusdi store",
+#     business_desc="Merupakan salah satu online store paling laris di ngawi selatan",
+#     business_location="Ngawi selatan, kec. Rongawi, kab. Rongawi Kuno",
+# )
 
-bk = {
-    "owner": {"description": "untuk mengetahui nama owner", "content": "rusdi"},
-    "product": {
-        "description": "product yang tersedia di rusdi barber",
-        "content": "- Gatsby pomade by amba\n- shampo muani maknyus\n- Minyak rambut khas bumi ayu",
-    },
-}
+# bk = {
+#     "owner": {"description": "untuk mengetahui nama owner", "content": "rusdi"},
+#     "product": {
+#         "description": "product yang tersedia di rusdi barber",
+#         "content": "- Gatsby pomade by amba\n- shampo muani maknyus\n- Minyak rambut khas bumi ayu",
+#     },
+# }
 
 
 class WhatsappAgentManager:

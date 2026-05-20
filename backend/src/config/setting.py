@@ -14,6 +14,10 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
+    # Redis
+    REDIS_HOST: str
+    REDIS_PORT: int
+
     # Optional WABA / extra envs (present in your .env but not required)
     WABA_VERIFY_TOKEN: str
     WABA_ACCESS_TOKEN: str

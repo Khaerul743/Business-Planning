@@ -1,3 +1,4 @@
+from uuid import uuid4
 from supabase import AsyncClient
 
 from src.app.validators.agent_schema import CreateAgentIn, UpdateAgentIn
@@ -38,7 +39,6 @@ from src.domain.usecases.analytic import (
     GetTokenUsageTrendUseCase,
 )
 from src.domain.usecases.insight import (
-    GenerateInsightInput,
     GenerateInsight,
     GenerateGapKnowladgeInput,
     GenerateGapKnowladge,
@@ -47,11 +47,16 @@ from src.infrastructure.ai.agent.manager import whatsapp_agent_manager
 from src.infrastructure.ai.agent.wa_agent import WhatsappAgentState
 
 from .base import BaseService
+from src.infrastructure.queue.redis import redis_client
+from src.infrastructure.queue import RedisQueue
 
 
 class AgentService(BaseService):
     def __init__(self, db: AsyncClient):
         self.db = db
+
+        # Queue
+        self.redis_queue = RedisQueue(redis_client, "generator_queue")
 
         # repositories
         self.agent_repo = AgentRepository(self.db)
@@ -133,7 +138,9 @@ class AgentService(BaseService):
             if user_id is None:
                 raise UnauthorizedException()
 
-            business_id = await self.business_repo.get_business_id_by_user_id(user_id)
+            business_id, _ = (
+                await self.business_repo.get_business_id_n_agent_id_by_user_id(user_id)
+            )
             if business_id is None:
                 raise BusinessNotFound()
 
@@ -279,7 +286,9 @@ class AgentService(BaseService):
         if user_id is None:
             raise UnauthorizedException()
 
-        business_id = await self.business_repo.get_business_id_by_user_id(user_id)
+        business_id, _ = await self.business_repo.get_business_id_n_agent_id_by_user_id(
+            user_id
+        )
         if business_id is None:
             raise BusinessNotFound()
 
@@ -379,36 +388,47 @@ class AgentService(BaseService):
         if user_id is None:
             raise UnauthorizedException()
 
-        business_id = await self.business_repo.get_business_id_by_user_id(user_id)
+        business_id, agent_id = (
+            await self.business_repo.get_business_id_n_agent_id_by_user_id(user_id)
+        )
         if business_id is None:
             raise BusinessNotFound()
 
-        agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
             raise AgentNotFound()
 
-        usecase_result = await self.generate_insight_usecase.execute(
-            GenerateInsightInput(business_id=business_id, agent_id=agent_id)
-        )
-        if not usecase_result.is_success():
-            self.raise_error_usecase(usecase_result)
+        queue_id = uuid4()
+        payload_queue = {
+            "queue_id": str(queue_id),
+            "type": "generate_insight",
+            "retry": 0,
+            "job_payload": {"business_id": str(business_id), "agent_id": str(agent_id)},
+        }
+        self.redis_queue.enqueue(payload_queue)
 
-        result_data = usecase_result.get_data()
-        if not result_data:
-            raise RuntimeError("Generate insight usecase did not returned the data")
+        # usecase_result = await self.generate_insight_usecase.execute(
+        #     GenerateInsightInput(business_id=business_id, agent_id=agent_id)
+        # )
+        # if not usecase_result.is_success():
+        #     self.raise_error_usecase(usecase_result)
 
-        return result_data.insight
+        # result_data = usecase_result.get_data()
+        # if not result_data:
+        #     raise RuntimeError("Generate insight usecase did not returned the data")
+
+        return
 
     async def triger_knowladge_gap(self):
         user_id = current_user_id.get()
         if user_id is None:
             raise UnauthorizedException()
 
-        business_id = await self.business_repo.get_business_id_by_user_id(user_id)
+        business_id, agent_id = (
+            await self.business_repo.get_business_id_n_agent_id_by_user_id(user_id)
+        )
         if business_id is None:
             raise BusinessNotFound()
 
-        agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
             raise AgentNotFound()
 
@@ -432,7 +452,9 @@ class AgentService(BaseService):
         if user_id is None:
             raise UnauthorizedException()
 
-        business_id = await self.business_repo.get_business_id_by_user_id(user_id)
+        business_id, _ = await self.business_repo.get_business_id_n_agent_id_by_user_id(
+            user_id
+        )
         if business_id is None:
             raise BusinessNotFound()
 

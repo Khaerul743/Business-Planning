@@ -30,9 +30,8 @@ class ConversationRepository(IConversationRepository):
     async def insert_new_conversation(
         self,
         customer_id: UUID,
-        status: Literal["active"] | Literal["inactive"] = "active",
     ) -> Conversations:
-        payload = {"customer_id": str(customer_id), "status": status}
+        payload = {"customer_id": str(customer_id)}
         result = await self.db.table("Conversations").insert(payload).execute()
 
         return Conversations.model_validate(result.data[0])
@@ -42,7 +41,6 @@ class ConversationRepository(IConversationRepository):
         business_id: UUID | None,
         agent_id: UUID,
         customer_id: UUID,
-        status: Literal["active"] | Literal["inactive"] = "active",
     ) -> Conversations:
         result = await (
             self.db.table("Conversations")
@@ -58,7 +56,6 @@ class ConversationRepository(IConversationRepository):
                 "business_id": str(business_id),
                 "agent_id": str(agent_id),
                 "customer_id": str(customer_id),
-                "status": status,
             }
             result = await self.db.table("Conversations").insert(payload).execute()
 

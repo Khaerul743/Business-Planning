@@ -17,33 +17,32 @@
 # print(agent.get_llm_model())
 
 
-# import asyncio
-# from datetime import datetime
-# from uuid import UUID
+import asyncio
+from datetime import datetime
+from uuid import UUID
 
 # from src.app.validators.message_schema import InsertNewMessage
-# from src.config.supabase import get_supabase, init_supabase
+from src.config.supabase import get_supabase, init_supabase
+
 # from src.domain.models import Human_Fallback
 
 
-# async def main():
-#     await init_supabase()
-#     db = get_supabase()
+async def main():
+    await init_supabase()
+    db = get_supabase()
 
-#     result = await db.rpc(
-#         "get_random_gap_knowladge",
-#         {
-#             "params": {
-#                 "p_limit_num": 5,
-#                 "p_agent_id": "a04b8eb2-3b32-44e2-9a6a-bbca2c23ab58",
-#             }
-#         },
-#     ).execute()
+    result = (
+        await db.table("Users")
+        .select("subscription_type")
+        .eq("id", "95050121-195f-4783-98f7-9e24b94f7cd3")
+        .single()
+        .execute()
+    )
 
-#     print(result)
+    print(result.data)
 
 
-# asyncio.run(main())
+asyncio.run(main())
 
 
 # from src.infrastructure.vectorstore.chroma_db import rag_system
@@ -97,31 +96,63 @@
 #         break
 
 #     print(agent.get_response());
-from src.infrastructure.ai.agent.agent_analysis_gap import (
-    AgentAnalysisGapState,
-    AgentAnalysisGap,
-)
+# from src.infrastructure.ai.agent.agent_analysis_gap import (
+#     AgentAnalysisGapState,
+#     AgentAnalysisGap,
+# )
 
-business_desc = "Ayam Bakar Naufal adalah usaha kuliner rumahan yang menyajikan berbagai menu ayam bakar dengan bumbu khas nusantara. Selain ayam bakar, tersedia juga beberapa pilihan lauk pendamping seperti ayam goreng, ikan bakar, dan aneka sambal. "
-raw_data = [
-    {
-        "ai_response": "Saya belum menemukan informasi tentang promo yang tersedia di Ayam Bakar Naufal. Kamu bisa cek langsung ke tempat atau tanya di media sosial mereka untuk info lebih lanjut!",
-        "user_message": "apakah ada promo?",
-        "category": "promo",
-        "is_business_related": True,
-        "knowledge_gap_detected": True,
-    }
-]
+# business_desc = "Ayam Bakar Naufal adalah usaha kuliner rumahan yang menyajikan berbagai menu ayam bakar dengan bumbu khas nusantara. Selain ayam bakar, tersedia juga beberapa pilihan lauk pendamping seperti ayam goreng, ikan bakar, dan aneka sambal. "
+# raw_data = [
+#     {
+#         "ai_response": "Saya belum menemukan informasi tentang promo yang tersedia di Ayam Bakar Naufal. Kamu bisa cek langsung ke tempat atau tanya di media sosial mereka untuk info lebih lanjut!",
+#         "user_message": "apakah ada promo?",
+#         "category": "promo",
+#         "is_business_related": True,
+#         "knowledge_gap_detected": True,
+#     }
+# ]
 
-agent = AgentAnalysisGap()
-result = agent.execute(
-    AgentAnalysisGapState(
-        messages=[],
-        user_message="",
-        business_description=business_desc,
-        raw_data=raw_data,
-    ),
-    "default",
-)
+# agent = AgentAnalysisGap()
+# result = agent.execute(
+#     AgentAnalysisGapState(
+#         messages=[],
+#         user_message="",
+#         business_description=business_desc,
+#         raw_data=raw_data,
+#     ),
+#     "default",
+# )
 
-print(result)
+# print(result)
+# from redis import Redis
+# from src.infrastructure.queue import RedisQueue
+
+# redis = Redis(host="localhost", port=6379)
+
+# queue = RedisQueue(redis, "test_qeueu")
+
+# queue.enqueue(
+#     {
+#         "queue_id": "121233",
+#         "type": "test_job",
+#         "retry": 0,
+#         "job_payload": {
+#             "user_message": "rusdi",
+#             "phone_number_id": "123",
+#             "customer_data": {"wa_id": "02899239"},
+#         },
+#     }
+# )
+
+# queue.enqueue(
+#     {
+#         "queue_id": "121233",
+#         "type": "test_job",
+#         "retry": 0,
+#         "job_payload": {
+#             "user_message": "imut",
+#             "phone_number_id": "123",
+#             "customer_data": {"wa_id": "02899239"},
+#         },
+#     }
+# )

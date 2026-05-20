@@ -33,3 +33,7 @@ class IUserRepository(ABC):
         hashed_password: str,
     ) -> User | None:
         pass
+
+    @abstractmethod
+    async def get_subsciption_type(self, user_id: UUID) -> str:
+        pass

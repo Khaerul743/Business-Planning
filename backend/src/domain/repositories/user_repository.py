@@ -91,3 +91,13 @@ class UserRepository(IUserRepository):
             return None
 
         return User.model_validate(result.data[0])
+
+    async def get_subsciption_type(self, user_id: UUID) -> str:
+        result = (
+            await self.db.table("Users")
+            .select("subscription_type")
+            .eq("id", user_id)
+            .single()
+            .execute()
+        )
+        return result.data["subscription_type"]
