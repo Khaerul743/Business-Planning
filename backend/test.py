@@ -32,10 +32,10 @@ async def main():
     db = get_supabase()
 
     result = (
-        await db.table("Users")
-        .select("subscription_type")
-        .eq("id", "95050121-195f-4783-98f7-9e24b94f7cd3")
-        .single()
+        await db.table("Businesses")
+        .select("id, Agents(id)")
+        .eq("user_id", "95050121-195f-4783-98f7-9e24b94f7cd3")
+        .maybe_single()
         .execute()
     )
 

@@ -8,6 +8,6 @@ class User(BaseEntity):
     name: str
     email: str
     password: str
-    subscription_type: str
+    subscription_type: str = ""
     role: Literal["admin", "user"] = "user"
     status: Literal["active", "inactive"] = "active"

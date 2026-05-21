@@ -2,7 +2,7 @@ from uuid import uuid4
 from supabase import AsyncClient
 
 from src.app.validators.agent_schema import CreateAgentIn, UpdateAgentIn
-from src.core.context.request_context import current_user_id
+from src.core.context.request_context import current_user_id, current_user_email
 from src.core.exceptions.agent_exception import AgentNotFound, InsightNotFound
 from src.core.exceptions.auth_exception import UnauthorizedException
 from src.core.exceptions.business_exception import BusinessNotFound
@@ -116,10 +116,16 @@ class AgentService(BaseService):
 
     async def get_agent(self) -> dict:
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+
+        self.logger.info(f"User {user_email}: Getting agent")
         if user_id is None:
+            self.logger.warning("Unauthorized Exception")
             raise UnauthorizedException()
+
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
 
         result = await self.get_agent_usecase.execute(GetAgentInput(agent_id=agent_id))
@@ -130,30 +136,40 @@ class AgentService(BaseService):
         if result_data is None:
             raise RuntimeError("Get agent usecase did not returned the data")
 
+        self.logger.info(f"User {user_email}: Getting agent is successfully")
         return result_data.result_data
 
     async def create_new_agent(self, payload: CreateAgentIn):
         try:
             user_id = current_user_id.get()
+            user_email = current_user_email.get()
+
+            self.logger.info(f"User {user_email}: create new agent")
             if user_id is None:
+                self.logger.warning(f"User {user_email}: Unauthorized Exception")
                 raise UnauthorizedException()
 
             business_id, _ = (
                 await self.business_repo.get_business_id_n_agent_id_by_user_id(user_id)
             )
             if business_id is None:
+                self.logger.warning(f"User {user_email}: Business not found")
                 raise BusinessNotFound()
 
             result = await self.create_agent_usecase.execute(
                 CreateAgentUseCaseInput(business_id=business_id, agent_data=payload)
             )
             if not result.is_success():
+                self.logger.error(
+                    f"User {user_email}: Create new agent usecase is error"
+                )
                 self.raise_error_usecase(result)
 
             result_data = result.get_data()
             if result_data is None:
                 raise RuntimeError("Create agent usecase did not returned the data")
 
+            self.logger.info(f"User {user_email}: Create new agent is successfully")
             return result_data.agent_data
 
         except UnauthorizedException as e:
@@ -170,7 +186,11 @@ class AgentService(BaseService):
 
     async def get_agent_analytic(self):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+
+        self.logger.info(f"User {user_email}: get agent analytic")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized Exception")
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
@@ -181,27 +201,36 @@ class AgentService(BaseService):
             GetAgentAnalyticsInput(agent_id=agent_id)
         )
         if not result.is_success():
+            self.logger.error(f"User {user_email}: Get agent analytic usecase is error")
             self.raise_error_usecase(result)
 
         result_data = result.get_data()
         if result_data is None:
             raise RuntimeError("Get analytic usecase did not returned the data")
 
+        self.logger.info(f"User {user_email}: get agent analytic is successfully")
         return result_data
 
     async def get_token_usage_trend(self):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: get token usage trend")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized Exception")
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
 
         result = await self.get_token_usage_trend_usecase.execute(
             GetTokenUsageTrendInput(agent_id=agent_id)
         )
         if not result.is_success():
+            self.logger.error(
+                f"User {user_email}: Get token usage trend usecase is error"
+            )
             self.raise_error_usecase(result)
 
         result_data = result.get_data()
@@ -209,22 +238,27 @@ class AgentService(BaseService):
             raise RuntimeError(
                 "Get token usage trend usecase did not returned the data"
             )
-
+        self.logger.info(f"User {user_email}: get token usage trend is successfully")
         return result_data
 
     async def get_message_usage_trend(self):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: get message usage trend")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized Exception")
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
 
         result = await self.get_message_usage_trend_usecase.execute(
             GetMessageUsageTrendInput(agent_id=agent_id)
         )
         if not result.is_success():
+            self.logger.error(f"User {user_email}: Get message trend usecase is error")
             self.raise_error_usecase(result)
 
         result_data = result.get_data()
@@ -232,22 +266,29 @@ class AgentService(BaseService):
             raise RuntimeError(
                 "Get message usage trend usecase did not returned the data"
             )
-
+        self.logger.info(f"User {user_email}: get message usage trend is successfully")
         return result_data
 
     async def get_human_vs_ai_message_trend(self, period: str = "weekly"):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: get human vs ai message trend")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized Exception")
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: agent not found")
             raise AgentNotFound()
 
         result = await self.get_human_vs_ai_message_trend_usecase.execute(
             GetHumanVsAiMessageTrendInput(agent_id=agent_id, period=period)
         )
         if not result.is_success():
+            self.logger.error(
+                f"User {user_email}: Get human vs ai message trend usecase is error"
+            )
             self.raise_error_usecase(result)
 
         result_data = result.get_data()
@@ -255,22 +296,31 @@ class AgentService(BaseService):
             raise RuntimeError(
                 "Get human vs ai message trend usecase did not returned the data"
             )
-
+        self.logger.info(
+            f"User {user_email}: get human vs ai message trend is successfully"
+        )
         return result_data
 
     async def get_category_percentages(self, period: str = "alltime"):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: get category percentages")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized exception")
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
 
         result = await self.get_category_percentages_usecase.execute(
             GetCategoryPercentagesInput(agent_id=agent_id, period=period)
         )
         if not result.is_success():
+            self.logger.error(
+                f"User {user_email}: get category percentages usecase is error"
+            )
             self.raise_error_usecase(result)
 
         result_data = result.get_data()
@@ -278,63 +328,86 @@ class AgentService(BaseService):
             raise RuntimeError(
                 "Get category percentages usecase did not returned the data"
             )
+        self.logger.info(f"User {user_email}: get category percentages is successfully")
 
         return result_data
 
     async def get_insight(self):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: get insight")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized exception")
             raise UnauthorizedException()
 
         business_id, _ = await self.business_repo.get_business_id_n_agent_id_by_user_id(
             user_id
         )
         if business_id is None:
+            self.logger.warning(f"User {user_email}: business not found")
             raise BusinessNotFound()
 
         insight = await self.insight_repo.get_current_insight(business_id)
         if insight is None:
+            self.logger.warning(f"User {user_email}: Insight not found")
             raise InsightNotFound()
+
+        self.logger.info(f"User {user_email}: get insight is sucessfully")
 
         return insight
 
     async def get_status_agent(self):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: get status agent")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized exception")
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: agent not found")
             raise AgentNotFound()
 
         status = await self.agent_repo.get_status_agent(agent_id)
         if status is None:
             raise AgentNotFound()
+        self.logger.info(f"User {user_email}: get status agent is successfully")
         return status
 
     async def update_status_agent(self, status: bool):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: update status agent")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized exception")
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
 
         updated_agent = await self.agent_repo.update_status_agent(agent_id, status)
         if updated_agent is None:
-            raise AgentNotFound()
+            self.logger.warning(f"User {user_email}: Agent not found")
 
+            raise AgentNotFound()
+        self.logger.info(f"User {user_email}: update status agent is successfully")
         return updated_agent
 
     async def update_agent(self, payload: UpdateAgentIn):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: update agent")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized exception")
             raise UnauthorizedException()
 
         agent = await self.agent_repo.get_agent_by_user_id(user_id)
 
         if agent is None:
+            self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
 
         result = await self.update_agent_usecase.execute(
@@ -346,22 +419,26 @@ class AgentService(BaseService):
         )
 
         if not result.is_success():
+            self.logger.error(f"User {user_email}: update agent usecase is error")
             self.raise_error_usecase(result)
 
         result_data = result.get_data()
 
         if result_data is None:
             raise RuntimeError("Update agent usecase did not returned the data")
-
+        self.logger.info(f"User {user_email}: Update agent is successfully")
         return result_data.result_data
 
     async def invoke_agent(self, text_message: str):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized exception")
             raise UnauthorizedException()
 
         agent = await self.agent_repo.get_agent_by_user_id(user_id)
         if agent is None:
+            self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
 
         result = await self.invoke_agent_usecase.execute(
@@ -375,12 +452,14 @@ class AgentService(BaseService):
         )
 
         if not result.is_success():
+            self.logger.error(f"User {user_email}: invoke agent usecase is error")
             self.raise_error_usecase(result)
 
         result_data = result.get_data()
         if result_data is None:
             raise RuntimeError("Invoke agent usecase did not returned the data")
 
+        self.logger.info(f"User {user_email}: invoke agent is successfully")
         return result_data
 
     async def triger_insight_generator(self):
@@ -449,7 +528,10 @@ class AgentService(BaseService):
 
     async def get_knowladge_gap(self):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: get knowladge gap")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized exception")
             raise UnauthorizedException()
 
         business_id, _ = await self.business_repo.get_business_id_n_agent_id_by_user_id(
@@ -459,4 +541,5 @@ class AgentService(BaseService):
             raise BusinessNotFound()
 
         knowladge_gap = await self.insight_repo.get_current_gap(business_id)
+        self.logger.info(f"User {user_email}: get knowladge gap is successfully")
         return knowladge_gap

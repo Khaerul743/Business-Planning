@@ -26,9 +26,9 @@ class BusinessKnowladgeRepository(IBusinessKnowladgeRepository):
                 .eq("business_id", business_id)
                 .execute()
             )
+            print(result)
             if result is None:
                 return None
-
             data = result.data
 
             list_data = []
@@ -72,7 +72,9 @@ class BusinessKnowladgeRepository(IBusinessKnowladgeRepository):
                 raise BusinessKnowladgeNotFound()
             return BusinessKnowladge.model_validate(result.data[0])
         except BusinessKnowladgeNotFound as e:
-            self._logger.warning(f"{str(e)}")
+            self._logger.warning(
+                f"Error while update business knowladge by id: {str(e)}"
+            )
             raise e
 
     async def delete_business_knowladge_by_id(
@@ -91,5 +93,7 @@ class BusinessKnowladgeRepository(IBusinessKnowladgeRepository):
 
             return BusinessKnowladge.model_validate(result.data[0])
         except BusinessKnowladgeNotFound as e:
-            self._logger.warning(f"{str(e)}")
+            self._logger.warning(
+                f"Error while delete business knowladge by id: {str(e)}"
+            )
             raise e

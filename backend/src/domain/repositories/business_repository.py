@@ -17,17 +17,19 @@ class BusinessRepository(IBusinessRepository):
         self._logger = get_logger(__name__)
 
     async def get_business_by_id(self, business_id: UUID) -> Business | None:
-        result = (
-            await self.db.table("Businesses")
-            .select("*")
-            .eq("id", business_id)
-            .maybe_single()
-            .execute()
-        )
-        if result is None:
-            return None
-
-        return Business.model_validate(result.data)
+        try:
+            result = (
+                await self.db.table("Businesses")
+                .select("*")
+                .eq("id", business_id)
+                .maybe_single()
+                .execute()
+            )
+            if result is None:
+                return None
+            return Business.model_validate(result.data)
+        except Exception as e:
+            self._logger.error(f"Error while get business by id: {str(e)}")
 
     async def get_business_id_n_agent_id_by_user_id(
         self, user_id: UUID
@@ -35,12 +37,11 @@ class BusinessRepository(IBusinessRepository):
         try:
             result = (
                 await self.db.table("Businesses")
-                .select("id, (Agents(id))")
+                .select("id, Agents(id)")
                 .eq("user_id", user_id)
                 .maybe_single()
                 .execute()
             )
-
             return result.data["id"], result.data["Agents"][0]["id"]
 
         except Exception as e:
@@ -48,58 +49,72 @@ class BusinessRepository(IBusinessRepository):
             raise e
 
     async def get_business_by_contextvar(self):
-        user_id = current_user_id.get()
-        result: SingleAPIResponse | None = (
-            await self.db.table("Businesses")
-            .select("*")
-            .eq("user_id", user_id)
-            .maybe_single()
-            .execute()
-        )
-        if result is None:
-            return None
-
-        return Business.model_validate(result.data)
+        try:
+            user_id = current_user_id.get()
+            result: SingleAPIResponse | None = (
+                await self.db.table("Businesses")
+                .select("*")
+                .eq("user_id", user_id)
+                .maybe_single()
+                .execute()
+            )
+            if result is None:
+                return None
+            return Business.model_validate(result.data)
+        except Exception as e:
+            self._logger.error(f"Error while get business by context var: {str(e)}")
+            raise e
 
     async def add_business(
         self, user_id: UUID, data_business: AddBusinessIn
     ) -> Business:
-        payload = {
-            "user_id": user_id,
-            "name": data_business.name,
-            "owner_name": data_business.owner_name,
-            "phone_number": data_business.phone_number,
-            "description": data_business.description,
-            "address": data_business.address,
-        }
-        result: APIResponse = (
-            await self.db.table("Businesses").insert(payload).execute()
-        )
+        try:
+            payload = {
+                "user_id": user_id,
+                "name": data_business.name,
+                "owner_name": data_business.owner_name,
+                "phone_number": data_business.phone_number,
+                "description": data_business.description,
+                "address": data_business.address,
+            }
+            result: APIResponse = (
+                await self.db.table("Businesses").insert(payload).execute()
+            )
 
-        return Business.model_validate(result.data[0])
+            return Business.model_validate(result.data[0])
+        except Exception as e:
+            self._logger.error(f"Error while add business: {str(e)}")
+            raise e
 
     async def update_business_by_id(
         self, business_id: UUID, business_data: BusinessUpdateIn
     ) -> Business:
-        payload = business_data.dict(exclude_unset=True)
-        result = (
-            await self.db.table("Businesses")
-            .update(payload)
-            .eq("id", business_id)
-            .execute()
-        )
+        try:
+            payload = business_data.dict(exclude_unset=True)
+            result = (
+                await self.db.table("Businesses")
+                .update(payload)
+                .eq("id", business_id)
+                .execute()
+            )
 
-        return Business.model_validate(result.data[0])
+            return Business.model_validate(result.data[0])
+        except Exception as e:
+            self._logger.error(f"Error while update business by id: {str(e)}")
+            raise e
 
     async def update_business_by_user_id(
         self, user_id: UUID, business_data: BusinessUpdateIn
     ) -> Business:
-        payload = business_data.dict(exclude_unset=True)
-        result = (
-            await self.db.table("Businesses")
-            .update(payload)
-            .eq("user_id", user_id)
-            .execute()
-        )
+        try:
+            payload = business_data.dict(exclude_unset=True)
+            result = (
+                await self.db.table("Businesses")
+                .update(payload)
+                .eq("user_id", user_id)
+                .execute()
+            )
 
-        return Business.model_validate(result.data[0])
+            return Business.model_validate(result.data[0])
+        except Exception as e:
+            self._logger.error(f"Error while update business by user id: {str(e)}")
