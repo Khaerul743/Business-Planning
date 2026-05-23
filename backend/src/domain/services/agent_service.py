@@ -436,6 +436,7 @@ class AgentService(BaseService):
             self.logger.warning(f"User {user_email}: Unauthorized exception")
             raise UnauthorizedException()
 
+        self.logger.info(f"User {user_email}: Invoked agent")
         agent = await self.agent_repo.get_agent_by_user_id(user_id)
         if agent is None:
             self.logger.warning(f"User {user_email}: Agent not found")

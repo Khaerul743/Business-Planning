@@ -2,7 +2,7 @@ from uuid import UUID
 
 from fastapi import UploadFile
 from src.app.validators.document_knowladge_schema import AddDocumentKnowladge
-from src.core.context.request_context import current_user_id
+from src.core.context.request_context import current_user_id, current_user_email
 from src.core.exceptions.agent_exception import AgentNotFound
 from src.core.exceptions.auth_exception import UnauthorizedException
 from src.core.utils.save_file import save_file_handler
@@ -49,17 +49,24 @@ class DocumentKnowladgeService(BaseService):
 
     async def get_all_document_knowladges(self):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: get all document knowladges")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized Exception")
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
 
         usecase_result = await self.get_all_document_knowladge_usecase.execute(
             GetAllDocumentKnowladgeUsecaseInput(agent_id=agent_id)
         )
         if not usecase_result.is_success():
+            self.logger.error(
+                f"User {user_email}: Get all document knowladge usecase is error"
+            )
             self.raise_error_usecase(usecase_result)
 
         result_data = usecase_result.get_data()
@@ -67,16 +74,22 @@ class DocumentKnowladgeService(BaseService):
             raise RuntimeError(
                 "get all document knowladges usecase did not returned the data"
             )
-
+        self.logger.info(
+            f"User {user_email}: get all document knowladge is successfully"
+        )
         return result_data.document_knowladge_list
 
     async def add_document_to_agent(self, file: UploadFile, file_description: str):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: add document to agent")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized Exception")
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: agent not found")
             raise AgentNotFound()
 
         file_upload_result = await self.file_upload_usecase.execute(
@@ -84,6 +97,7 @@ class DocumentKnowladgeService(BaseService):
         )
 
         if not file_upload_result.is_success():
+            self.logger.error(f"User {user_email}: File upload usecase is error")
             self.raise_error_usecase(file_upload_result)
 
         file_data = file_upload_result.get_data()
@@ -100,23 +114,28 @@ class DocumentKnowladgeService(BaseService):
         rag_result = await self.rag_process_usecase.execute(
             RagProcessUsecaseInput(agent_id, document_data)
         )
-        print("Aman bang k")
         if not rag_result.is_success():
+            self.logger.error(f"User {user_email}: Rag processs usecase is error")
             self.raise_error_usecase(rag_result)
-        print("Aman bang")
         rag_result_data = rag_result.get_data()
         if rag_result_data is None:
             raise RuntimeError("file rag process usecase did not returned the data")
+        self.logger.info(f"User {user_email}: add document to agent is successfully")
 
         return rag_result_data.document_data
 
     async def delete_document_knowladge(self, document_knowladge_id: UUID):
         user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: delete document knowladge")
         if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized exception")
+
             raise UnauthorizedException()
 
         agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
         if agent_id is None:
+            self.logger.warning(f"User {user_email}: agent not found")
             raise AgentNotFound()
 
         usecase_result = await self.delete_document_knowladge_usecase.execute(
@@ -124,6 +143,9 @@ class DocumentKnowladgeService(BaseService):
         )
 
         if not usecase_result.is_success():
+            self.logger.error(
+                f"User {user_email}: Delete document knowladge usecase is error"
+            )
             self.raise_error_usecase(usecase_result)
 
         result_data = usecase_result.get_data()
@@ -131,5 +153,8 @@ class DocumentKnowladgeService(BaseService):
             raise RuntimeError(
                 "delete document knowladge usecase did not returned the data"
             )
+        self.logger.info(
+            f"User {user_email}: delete document knowladge is successfully"
+        )
 
         return result_data.document_knowladge_data

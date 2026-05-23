@@ -79,24 +79,24 @@ class InvokeAgentUseCase(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
                 else result_response
             )
 
-            # Insert Agent Analytic
-            date_now = datetime.now().date()
+            # # Insert Agent Analytic
+            # date_now = datetime.now().date()
 
-            agent_analytic = await self.agent_analytic_repo.insert_agent_analytic(
-                input_data.agent_id,
-                InsertAgentAnalytic(
-                    date=str(date_now),
-                    total_message=2,
-                    response_time=response_time,
-                    token=total_token,
-                    ai_response=result_message,
-                    human_takeover=agent_result["human_fallback"],
-                    user_message=input_data.agent_state.user_message,
-                    category=agent_result["category"],
-                    is_business_related=agent_result["is_business_related"],
-                    knowledge_gap_detected=agent_result["knowledge_gap_detected"],
-                ),
-            )
+            # agent_analytic = await self.agent_analytic_repo.insert_agent_analytic(
+            #     input_data.agent_id,
+            #     InsertAgentAnalytic(
+            #         date=str(date_now),
+            #         total_message=2,
+            #         response_time=response_time,
+            #         token=total_token,
+            #         ai_response=result_message,
+            #         human_takeover=agent_result["human_fallback"],
+            #         user_message=input_data.agent_state.user_message,
+            #         category=agent_result["category"],
+            #         is_business_related=agent_result["is_business_related"],
+            #         knowledge_gap_detected=agent_result["knowledge_gap_detected"],
+            #     ),
+            # )
 
             return UseCaseResult.success_result(
                 InvokeAgentOutput(
