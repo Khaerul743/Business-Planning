@@ -12,7 +12,6 @@ from src.infrastructure.queue.handler import (
 from src.infrastructure.queue.redis import redis_client
 
 message_queue = RedisQueue(redis_client, "message_queue")
-generator_queue = RedisQueue(redis_client, "generator_queue")
 
 lock = RedisLock(redis_client)
 
