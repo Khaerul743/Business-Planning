@@ -73,6 +73,7 @@ class WhatsappAgentNode(BaseNode):
             result = self.call_llm_with_structured_output(messages, MainAgentOutput)
 
         result_dict = result.model_dump()
+
         # Count token usage
         self.estimate_structured_output_tokens(
             messages,
@@ -128,8 +129,6 @@ class WhatsappAgentNode(BaseNode):
             prompt,
             str(result_dict["category"]),
         )
-        print(f"agent_response: {state.response}")
-        print(result_dict)
         return {
             "category": result_dict["category"],
             "is_business_related": result_dict["is_business_related"],

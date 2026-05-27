@@ -47,6 +47,8 @@ class DocumentKnowladgeService(BaseService):
             self.document_knowladge_repo, self.save_file_handler, self.rag_system
         )
 
+        super().__init__(__name__)
+
     async def get_all_document_knowladges(self):
         user_id = current_user_id.get()
         user_email = current_user_email.get()

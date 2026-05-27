@@ -89,15 +89,13 @@ class CreateAgentObjUseCase(BaseUseCase[CreateAgentObjInput, CreateAgentObjOutpu
             document_knowladge = await self.document_knowladge_repo.get_all_document_knowladge_by_agent_id(
                 input_data.agent_id
             )
-            if document_knowladge is None:
-                return UseCaseResult.error_result(
-                    "Document knowladge not found", DocumentKnowladgeNotFound()
-                )
-
-            list_document_knowladge_detail = [
-                DocumentRagDetail(title=i.title, description=i.description)
-                for i in document_knowladge
-            ]
+            if document_knowladge:
+                list_document_knowladge_detail = [
+                    DocumentRagDetail(title=i.title, description=i.description)
+                    for i in document_knowladge
+                ]
+            else:
+                list_document_knowladge_detail = None
 
             # Get agent configuration
             agent_conf = await self.agent_conf_repo.get_agent_conf_by_agent_id(

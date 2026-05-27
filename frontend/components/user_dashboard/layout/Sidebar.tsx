@@ -12,6 +12,10 @@ import {
   Users
 } from 'lucide-react';
 import React from 'react';
+import Image from 'next/image';
+import { Exo_2 } from 'next/font/google';
+
+const exo2 = Exo_2({ subsets: ['latin'], weight: ['600', '700'] });
 import { SidebarItem } from './SidebarItem';
 import { SidebarSection } from './SidebarSection';
 import { redirect } from 'next/dist/server/api-utils';
@@ -53,11 +57,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
         h-16 flex items-center border-b border-gray-200
         ${isCollapsed ? 'justify-center px-2' : 'px-6'}
       `}>
-        <div className="flex items-center gap-2 font-bold text-xl text-indigo-600">
-          <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
-            CF
-          </div>
-          {!isCollapsed && <span className="text-gray-900 transition-opacity duration-300">ChatFlow</span>}
+        <div className="flex items-center gap-2 font-bold text-xl text-indigo-950">
+          <Image 
+            src="/Logo_NUSARA.png" 
+            alt="Nusara Logo" 
+            width={32} 
+            height={32} 
+            className="object-contain"
+          />
+          {!isCollapsed && <span className={`tracking-wide transition-opacity duration-300 ${exo2.className}`}>NUSARA</span>}
         </div>
       </div>
 

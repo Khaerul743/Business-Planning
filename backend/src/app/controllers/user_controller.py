@@ -13,6 +13,9 @@ class UserController(BaseController):
 
     async def get_current_user(self):
         try:
-            return await self.user_service.get_current_user()
+            user = await self.user_service.get_current_user()
+            user_dict = user.model_dump()
+            del user_dict["password"]
+            return user_dict
         except UnauthorizedException as e:
             raise e

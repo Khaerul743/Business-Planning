@@ -53,7 +53,7 @@ class WhatsappAgentManager:
         config: AgentConf,
         business_detail_information: BusinessDetailInformation,
         business_knowladge: dict[str, BusinessKnowladgeContent],
-        document_rag_detail: list[DocumentRagDetail],
+        document_rag_detail: list[DocumentRagDetail] | None,
     ) -> WhatsappAgent:
         if phone_number_id not in self._agents:
             self._agents[phone_number_id] = WhatsappAgent(

@@ -61,7 +61,7 @@ class InvokeAgentHandler(BaseJobHandler):
             self.create_agent_obj_usecase,
         )
         self.human_fallback_usecase = HumanFallbackUseCase(
-            self.human_fallback_repo, self.conversation_repo
+            self.human_fallback_repo, self.conversation_repo, self.customer_repo
         )
         self.save_conversation_usecase = SaveConversationUseCase(
             self.conversation_repo, self.message_repo, self.human_fallback_usecase

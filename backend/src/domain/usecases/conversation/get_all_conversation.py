@@ -47,8 +47,10 @@ class GetAllConversationUseCase(
                 )
 
             # Get business_id from user_id
-            business_id = await self.business_repo.get_business_id_by_user_id(
-                input_data.user_id
+            business_id, _ = (
+                await self.business_repo.get_business_id_n_agent_id_by_user_id(
+                    input_data.user_id
+                )
             )
             if business_id is None:
                 return UseCaseResult.error_result(

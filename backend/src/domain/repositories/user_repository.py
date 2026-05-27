@@ -48,7 +48,7 @@ class UserRepository(IUserRepository):
 
     async def get_by_context_user(self) -> User | None:
         user_id = current_user_id.get()
-        result: SingleAPIResponse | None = (
+        result = (
             await self.db.table("Users")
             .select("*")
             .eq("id", user_id)

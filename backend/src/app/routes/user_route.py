@@ -18,6 +18,4 @@ async def get_me(
     controller: UserController = Depends(get_user_controller),
 ):
     result = await controller.get_current_user()
-    result_data = result.model_dump()
-
-    return success_response(result_data)
+    return success_response(result)

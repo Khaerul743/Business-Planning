@@ -4,6 +4,7 @@ from src.app.controllers import WhatsappController
 from src.app.validators.whatsapp_schema import WebhookPayload
 from src.core.exceptions import TokenIsNotVerified, WhatsappBadRequest
 from src.core.utils.factory import controller_factory
+from src.infrastructure.meta.wa_manager import whatsapp_manager
 
 router = APIRouter(prefix="/api/whatsapp", tags=["whatsapp"])
 
@@ -13,10 +14,9 @@ get_whatsapp_controller = controller_factory(WhatsappController)
 @router.get("/webhook", status_code=status.HTTP_200_OK)
 def verify_webhook(
     request: Request,
-    controller: WhatsappController = Depends(get_whatsapp_controller),
 ):
     try:
-        result = controller.whatsapp_service.whatsapp_manager.verify_webhook(request)
+        result = whatsapp_manager.verify_webhook(request)
         return result
 
     except WhatsappBadRequest as e:

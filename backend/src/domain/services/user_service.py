@@ -15,5 +15,4 @@ class UserService(BaseService):
         user = await self.user_repo.get_by_context_user()
         if user is None:
             raise UnauthorizedException()
-
         return user

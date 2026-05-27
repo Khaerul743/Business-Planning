@@ -57,14 +57,12 @@ class ReceiveMessageUseCase(BaseUseCase[ReceiveMessageInput, ReceiveMessageOutpu
                 )
             )
             if not result_message.is_success():
-                print("1")
                 return self.raise_error_usecase(
                     result_message, "message processing usecase isn't successfully"
                 )
 
             result_message_data = result_message.get_data()
             if result_message_data is None:
-                print("2")
                 return UseCaseResult.error_result(
                     "Message processing usecase did not return the data",
                     RuntimeError("Message processing usecase didnot return the data"),
@@ -98,9 +96,10 @@ class ReceiveMessageUseCase(BaseUseCase[ReceiveMessageInput, ReceiveMessageOutpu
                 SendTextMessageInput(
                     result_sv_conv_data.conversation_id,
                     "ai",
-                    result_message_data.text_message,
+                    result_message_data.response,
                 )
             )
+
             if not result_send_text.is_success():
                 return self.raise_error_usecase(
                     result_send_text, "Send text message usecase isnt successfully"

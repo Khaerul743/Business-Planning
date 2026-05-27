@@ -56,8 +56,12 @@ class ConversationService(BaseService):
             self.conversation_repo, self.business_repo
         )
 
+        super().__init__(__name__)
+
     async def _get_business_id(self, user_id: UUID) -> UUID | None:
-        business_id = await self.business_repo.get_business_id_by_user_id(user_id)
+        business_id, _ = await self.business_repo.get_business_id_n_agent_id_by_user_id(
+            user_id
+        )
         return business_id
 
     async def get_all_conversation(self, page: int = 1, limit: int = 10):
@@ -76,7 +80,9 @@ class ConversationService(BaseService):
 
         result_data = usc_result.get_data()
         if result_data is None:
-            self.logger.warning(f"User {user_email}: get all conversation usecase did not return the data")
+            self.logger.warning(
+                f"User {user_email}: get all conversation usecase did not return the data"
+            )
             raise RuntimeError("get all conversation usecase did not return the data")
 
         list_data = []
@@ -112,7 +118,9 @@ class ConversationService(BaseService):
         if conversation_fallback is None:
             self.logger.warning(f"User {user_email}: Conversation not found")
             raise ConversationNotFound()
-        self.logger.info(f"User {user_email}: Get conversation fallback is successfully")
+        self.logger.info(
+            f"User {user_email}: Get conversation fallback is successfully"
+        )
         return conversation_fallback
 
     async def get_all_conversation_with_human_fallback(self):
@@ -133,10 +141,14 @@ class ConversationService(BaseService):
         )
 
         if conversation_human_fallbacks is None:
-            self.logger.info(f"User {user_email}: Get all conversation with human fallback is successfully")
+            self.logger.info(
+                f"User {user_email}: Get all conversation with human fallback is successfully"
+            )
             return []
 
-        self.logger.info(f"User {user_email}: Get all conversation with human fallback is successfully")
+        self.logger.info(
+            f"User {user_email}: Get all conversation with human fallback is successfully"
+        )
         return conversation_human_fallbacks
 
     async def post_new_message(self, conversation_id: UUID, text_message: str):
@@ -159,7 +171,9 @@ class ConversationService(BaseService):
 
         result_data = send_message_result.get_data()
         if result_data is None:
-            self.logger.warning(f"User {user_email}: Send message use case did not returned the data")
+            self.logger.warning(
+                f"User {user_email}: Send message use case did not returned the data"
+            )
             raise RuntimeError("Send message use case did not returned the data")
 
         self.logger.info(f"User {user_email}: Post new message is successfully")
@@ -177,7 +191,9 @@ class ConversationService(BaseService):
 
         customer_id = conversation.customer_id
         if customer_id is None:
-            self.logger.warning(f"User {user_email}: Customer not found: id {customer_id}")
+            self.logger.warning(
+                f"User {user_email}: Customer not found: id {customer_id}"
+            )
             raise CustomerNotFound()
 
         customer_status_agent = (
@@ -189,7 +205,9 @@ class ConversationService(BaseService):
             self.logger.warning(f"User {user_email}: Customer status agent not found")
             raise CustomerNotFound()
 
-        self.logger.info(f"User {user_email}: Get customer status agent is successfully")
+        self.logger.info(
+            f"User {user_email}: Get customer status agent is successfully"
+        )
         return customer_status_agent
 
     async def update_customer_status_agent(self, conversation_id: UUID, status: bool):
@@ -204,19 +222,32 @@ class ConversationService(BaseService):
 
         customer_id = conversation.customer_id
         if customer_id is None:
-            self.logger.warning(f"User {user_email}: Customer not found: id {customer_id}")
+            self.logger.warning(
+                f"User {user_email}: Customer not found: id {customer_id}"
+            )
             raise CustomerNotFound()
 
-        updated_customer = await (
-            self.customer_repo.update_customer_status_agent_by_customer_id(
-                customer_id, status
+        updated_customer = (
+            await (
+                self.customer_repo.update_customer_status_agent_by_customer_id(
+                    customer_id, status
+                )
             )
         )
         if updated_customer is None:
             self.logger.warning(f"User {user_email}: Customer not found")
             raise CustomerNotFound()
-
-        self.logger.info(f"User {user_email}: Update customer status agent is successfully")
+        if status:
+            await self.conversation_repo.update_conversation_status(
+                conversation_id, False
+            )
+        else:
+            await self.conversation_repo.update_conversation_status(
+                conversation_id, True
+            )
+        self.logger.info(
+            f"User {user_email}: Update customer status agent is successfully"
+        )
         return updated_customer
 
     async def delete_conversation_fallback(self, conversation_id: UUID):
@@ -226,15 +257,21 @@ class ConversationService(BaseService):
             DeleteConversationFallbackInput(conversation_id)
         )
         if not usc_result.is_success():
-            self.logger.warning(f"User {user_email}: Failed to delete conversation fallback")
+            self.logger.warning(
+                f"User {user_email}: Failed to delete conversation fallback"
+            )
             self.raise_error_usecase(usc_result)
 
         result_data = usc_result.get_data()
         if result_data is None:
-            self.logger.warning(f"User {user_email}: delete conversation fallback usecase did not return the data")
+            self.logger.warning(
+                f"User {user_email}: delete conversation fallback usecase did not return the data"
+            )
             raise RuntimeError(
                 "delete conversation fallback usecase did not return the data"
             )
 
-        self.logger.info(f"User {user_email}: Delete conversation fallback is successfully")
+        self.logger.info(
+            f"User {user_email}: Delete conversation fallback is successfully"
+        )
         return result_data.result

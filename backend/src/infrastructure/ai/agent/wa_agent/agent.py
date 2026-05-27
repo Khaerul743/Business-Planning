@@ -27,7 +27,7 @@ class WhatsappAgent(BaseAgent):
         tone: Literal["friendly", "formal", "casual", "profesional"],
         business_detail_information: BusinessDetailInformation,
         business_knowladge: dict[str, BusinessKnowladgeContent],
-        document_rag_detail: list[DocumentRagDetail],
+        document_rag_detail: list[DocumentRagDetail] | None,
     ):
         self.retrieve_document = RetrieveDocumentTool(chromadb_path, collection_name)
         self.prompt = WhatsappAgentPrompt(

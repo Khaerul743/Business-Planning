@@ -11,22 +11,22 @@ export type ActionResponse = {
   errors?: Record<string, string[]>;
 };
 
-export async function registerAction(prevData: ActionResponse | null,formData: FormData): Promise<ActionResponse>{
+export async function registerAction(prevData: ActionResponse | null, formData: FormData): Promise<ActionResponse> {
   const rawData = Object.fromEntries(formData.entries());
   const validatedFields = registerSchema.safeParse(rawData)
 
   if (!validatedFields.success) {
     logger.warn("Validation failed")
     return {
-    success: false,
-    message: "Validation failed",
-    errors: validatedFields.error.flatten().fieldErrors,
+      success: false,
+      message: "Validation failed",
+      errors: validatedFields.error.flatten().fieldErrors,
     };
   }
 
-  try{
+  try {
     const res = await authService.register(validatedFields.data)
-    if (res.status !== "success"){
+    if (res.status !== "success") {
       logger.warn(`User registration failed with email ${validatedFields.data.email}`)
       return {
         success: false,
@@ -40,7 +40,7 @@ export async function registerAction(prevData: ActionResponse | null,formData: F
       message: res.message
     }
 
-  }catch(error){
+  } catch (error) {
     logger.error(`Unexpected error while execute register action: ${error}`)
     return {
       success: false,
@@ -49,22 +49,22 @@ export async function registerAction(prevData: ActionResponse | null,formData: F
   }
 }
 
-export async function loginAction(prevData: ActionResponse | null, formData: FormData): Promise<ActionResponse>{
+export async function loginAction(prevData: ActionResponse | null, formData: FormData): Promise<ActionResponse> {
   const rawData = Object.fromEntries(formData.entries());
-  const validatedFields = loginSchema.safeParse(rawData) 
+  const validatedFields = loginSchema.safeParse(rawData)
   if (!validatedFields.success) {
     logger.warn("Validation Failed")
     return {
-    success: false,
-    message: "Validation failed",
-    errors: validatedFields.error.flatten().fieldErrors,
+      success: false,
+      message: "Validation failed",
+      errors: validatedFields.error.flatten().fieldErrors,
     };
   }
 
-  try{
+  try {
     const res = await authService.login(validatedFields.data)
     console.log(res)
-    if (res.status !== "success"){
+    if (res.status !== "success") {
       logger.warn(`User login is failed with email ${validatedFields.data.email}`)
       return {
         success: false,
@@ -96,7 +96,7 @@ export async function loginAction(prevData: ActionResponse | null, formData: For
       success: true,
       message: res.message
     }
-  }catch(error){
+  } catch (error) {
     logger.error(`Unexpected error while execute register action: ${error}`)
     return {
       success: false,

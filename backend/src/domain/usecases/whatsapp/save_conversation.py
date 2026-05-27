@@ -68,7 +68,9 @@ class SaveConversationUseCase(
                         "decision_summary"
                     ],
                 )
-                await self.human_fallback_usecase.execute(HumanFallbackInput(payload))
+                await self.human_fallback_usecase.execute(
+                    HumanFallbackInput(payload, input_data.customer_id)
+                )
 
             return UseCaseResult.success_result(
                 SaveConversationOutput(conversation_id=conversation.id)

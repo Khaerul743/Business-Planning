@@ -21,7 +21,7 @@ class WhatsappAgentPrompt:
         base_prompt: str,
         business_knowladge: dict[str, BusinessKnowladgeContent],
         business_information: BusinessDetailInformation,
-        document_rag_detail: list[DocumentRagDetail],
+        document_rag_detail: list[DocumentRagDetail] | None,
         tone: Literal["friendly", "formal", "casual", "profesional"],
     ):
         self.base_prompt = base_prompt
@@ -192,8 +192,11 @@ Berikut adalah pertanyaan dari customer dan jawaban dari agent:
             business_knowladge_str += f"category= {k}\n{v.category_description}\n"
 
         document_rag_detail_str = ""
-        for i in self.document_rag_detail:
-            document_rag_detail_str += f"title= {i.title}\n{i.description}\n"
+        if self.document_rag_detail:
+            for i in self.document_rag_detail:
+                document_rag_detail_str += f"title= {i.title}\n{i.description}\n"
+        else:
+            document_rag_detail_str = "Tidak ada dokument yang ditambahkan."
 
         system_message = f"""
 ROLE:

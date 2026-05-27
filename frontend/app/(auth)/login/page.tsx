@@ -3,12 +3,20 @@ import { AuthButton } from "@/components/auth/AuthButton";
 import { AuthCard } from "@/components/auth/AuthCard";
 import { AuthInput } from "@/components/auth/AuthInput";
 import Link from "next/link";
-import { useActionState } from "react"; // React 19 / Next.js 15
+import { useActionState, useEffect } from "react"; // React 19 / Next.js 15
 import { loginAction } from "../action";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [state, formAction, isPending] = useActionState(loginAction, null as any);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (state?.success) {
+            router.push("/dashboard");
+        }
+    }, [state?.success, router]);
 
     return (
         <AuthCard title="Welcome Back" subtitle="Log in to your dashboard account">

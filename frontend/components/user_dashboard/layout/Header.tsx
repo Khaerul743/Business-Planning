@@ -1,17 +1,39 @@
 import { Bell, ChevronLeft, Menu, Search, User } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface HeaderProps {
   isSidebarCollapsed: boolean;
   toggleSidebar: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ 
-  isSidebarCollapsed, 
-  toggleSidebar 
+export const Header: React.FC<HeaderProps> = ({
+  isSidebarCollapsed,
+  toggleSidebar
 }) => {
   const pathname = usePathname();
+  const [userName, setUserName] = useState<string>('Loading...');
+  const [userRole, setUserRole] = useState<string>('');
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await fetch('/api/user');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.status === 'success' && data.data) {
+            setUserName(data.data.name);
+            setUserRole(data.data.role || 'User');
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+        setUserName('User');
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   // Basic title logic based on route
   const getPageTitle = (path: string) => {
@@ -28,14 +50,14 @@ export const Header: React.FC<HeaderProps> = ({
       flex items-center justify-between px-6
     `}>
       <div className="flex items-center gap-4">
-        <button 
+        <button
           onClick={toggleSidebar}
           className="p-2 rounded-lg hover:bg-gray-100 text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           aria-label="Toggle Sidebar"
         >
           {isSidebarCollapsed ? <Menu size={20} /> : <ChevronLeft size={20} />}
         </button>
-        
+
         <h1 className="text-xl font-semibold text-gray-800">
           {getPageTitle(pathname)}
         </h1>
@@ -45,9 +67,9 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Search Bar - Hidden on small screens */}
         <div className="hidden md:flex items-center relative">
           <Search size={16} className="absolute left-3 text-gray-400" />
-          <input 
-            type="text" 
-            placeholder="Search..." 
+          <input
+            type="text"
+            placeholder="Search..."
             className="pl-9 pr-4 py-1.5 rounded-full border border-gray-200 text-sm focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 w-64 transition-all"
           />
         </div>
@@ -60,13 +82,13 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* User Profile */}
         <div className="flex items-center gap-3 pl-2 border-l border-gray-200">
-           <div className="text-right hidden sm:block">
-              <p className="text-sm font-medium text-gray-900">John Doe</p>
-              <p className="text-xs text-gray-500">Admin</p>
-           </div>
-           <button className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 hover:ring-2 hover:ring-offset-2 hover:ring-indigo-400 transition-all">
-             <User size={18} />
-           </button>
+          <div className="text-right hidden sm:block">
+            <p className="text-sm font-medium text-gray-900">{userName}</p>
+            <p className="text-xs text-gray-500 capitalize">{userRole}</p>
+          </div>
+          <button className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 hover:ring-2 hover:ring-offset-2 hover:ring-indigo-400 transition-all">
+            <User size={18} />
+          </button>
         </div>
       </div>
     </header>

@@ -23,6 +23,7 @@ class WhatsappManager:
         )
 
     def verify_webhook(self, request: Request):
+        print(self.waba_verify_token)
         mode = request.query_params.get("hub.mode")
         token = request.query_params.get("hub.verify_token")
         challenge = request.query_params.get("hub.challenge")
@@ -63,3 +64,6 @@ class WhatsappManager:
     #         return response.json()
     #     except requests.exceptions.HTTPError as err:
     #         self._logger.warning(f"Failed to send text message: {err}")
+
+
+whatsapp_manager = WhatsappManager()
