@@ -9,7 +9,7 @@ def main() -> None:
     """Run the LangGraph development server."""
     # Get the directory containing this script
     project_dir = Path(__file__).parent / "src"
-    
+
     # Run langgraph dev command
     try:
         result = subprocess.run(
@@ -25,7 +25,9 @@ def main() -> None:
         )
         sys.exit(1)
     except subprocess.CalledProcessError as e:
-        print(f"Error: LangGraph development server failed with exit code {e.returncode}")
+        print(
+            f"Error: LangGraph development server failed with exit code {e.returncode}"
+        )
         sys.exit(e.returncode)
 
 

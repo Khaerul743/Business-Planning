@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "shared"
+version = "0.1.0"
+description = "Shared schemas and contracts"
+requires-python = ">=3.13"
+
+dependencies = [
+    "pydantic>=2.0.0",
+    "colorama>=0.4.6"
+]
