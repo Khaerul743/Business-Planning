@@ -3,6 +3,7 @@ from supabase import AsyncClient
 from shared.schemas.business_knowladge import BusinessKnowladge
 from shared.utils.logger import get_logger
 from shared.schemas import Business, DocumentKnowladge, BusinessKnowladge
+from shared.schemas import AgentConfiguration
 
 
 class KnowladgeRepository:
@@ -72,3 +73,19 @@ class KnowladgeRepository:
                 f"Error while get all document knowladge by agent id: {str(e)}"
             )
             raise e
+
+    async def get_agent_conf_by_agent_id(
+        self, agent_id: UUID
+    ) -> AgentConfiguration | None:
+        result = (
+            await self.db.table("Agent_configurations")
+            .select("*")
+            .eq("agent_id", agent_id)
+            .maybe_single()
+            .execute()
+        )
+
+        if result is None:
+            return None
+
+        return AgentConfiguration.model_validate(result.data)

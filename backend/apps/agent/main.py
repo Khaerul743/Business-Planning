@@ -7,8 +7,8 @@ from pathlib import Path
 
 def main() -> None:
     """Run the LangGraph development server."""
-    # Get the directory containing this script
-    project_dir = Path(__file__).parent / "src"
+    # Get the directory containing this script (agent root)
+    project_dir = Path(__file__).parent
 
     # Run langgraph dev command
     try:
