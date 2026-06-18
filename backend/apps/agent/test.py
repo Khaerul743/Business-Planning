@@ -2,7 +2,7 @@ from uuid import UUID
 import asyncio
 from src.repositories.knowladge_repository import KnowladgeRepository
 from src.config.supabase import init_supabase, get_supabase
-from src.whatsapp_agent.utils.business_context_manager import BusinessContextManager
+from core.business_context_manager import BusinessContextManager
 
 
 async def main():

@@ -279,3 +279,55 @@
 {"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-05-28 20:01:19"}
 {"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-05-30 19:59:46"}
 {"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-05-30 19:59:49"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-08 19:04:01"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-08 19:04:04"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-12 15:45:54"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-12 15:45:56"}
+{"level":"info","message":"Starting user registration process","timestamp":"2026-06-12 15:50:46","user":{"email":"khaerul1234@gmail.com","name":"Khaerul Lutfi"}}
+{"level":"warn","message":"User registration failed with email khaerul1234@gmail.com","timestamp":"2026-06-12 15:50:46"}
+{"level":"info","message":"Starting user registration process","timestamp":"2026-06-12 15:51:31","user":{"email":"khaerullutfi24@gmail.com","name":"Khaerul Lutfi"}}
+{"level":"info","message":"User registration is successfully with email khaerullutfi24@gmail.com","timestamp":"2026-06-12 15:51:32"}
+{"email":"khaerullutfi24@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-12 15:51:49"}
+{"level":"info","message":"User login is successfully with email khaerullutfi24@gmail.com","timestamp":"2026-06-12 15:51:50"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-12 15:55:49"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-12 15:55:50"}
+{"email":"khaerullutfi24@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 08:52:26"}
+{"level":"info","message":"User login is successfully with email khaerullutfi24@gmail.com","timestamp":"2026-06-13 08:52:28"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 09:03:12"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-13 09:03:13"}
+{"email":"khaerullutfi028@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 09:03:49"}
+{"level":"info","message":"User login is successfully with email khaerullutfi028@gmail.com","timestamp":"2026-06-13 09:03:50"}
+{"email":"khaerullutfi024@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 09:07:33"}
+{"level":"warn","message":"User login is failed with email khaerullutfi024@gmail.com","timestamp":"2026-06-13 09:07:33"}
+{"email":"khaerullutfi24@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 09:07:52"}
+{"level":"info","message":"User login is successfully with email khaerullutfi24@gmail.com","timestamp":"2026-06-13 09:07:53"}
+{"email":"khaerullutfi24@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 09:30:15"}
+{"level":"info","message":"User login is successfully with email khaerullutfi24@gmail.com","timestamp":"2026-06-13 09:30:18"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 09:32:36"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-13 09:32:38"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 11:36:49"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-13 11:36:51"}
+{"email":"khaerullutfi24@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 11:48:39"}
+{"level":"info","message":"User login is successfully with email khaerullutfi24@gmail.com","timestamp":"2026-06-13 11:48:41"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 11:58:39"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-13 11:58:42"}
+{"email":"khaerullutfi24@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 12:01:55"}
+{"level":"info","message":"User login is successfully with email khaerullutfi24@gmail.com","timestamp":"2026-06-13 12:01:57"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 12:23:47"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-13 12:23:48"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 15:44:34"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-13 15:44:37"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 19:03:35"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-13 19:03:37"}
+{"email":"khaerullutfi24@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 21:40:57"}
+{"level":"info","message":"User login is successfully with email khaerullutfi24@gmail.com","timestamp":"2026-06-13 21:40:59"}
+{"level":"info","message":"Starting user registration process","timestamp":"2026-06-13 21:41:35","user":{"email":"john@gmail.com","name":"John cena"}}
+{"level":"info","message":"User registration is successfully with email john@gmail.com","timestamp":"2026-06-13 21:41:36"}
+{"email":"john@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 21:41:53"}
+{"level":"info","message":"User login is successfully with email john@gmail.com","timestamp":"2026-06-13 21:41:54"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-13 21:44:27"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-13 21:44:28"}
+{"email":"john@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-14 20:32:30"}
+{"level":"info","message":"User login is successfully with email john@gmail.com","timestamp":"2026-06-14 20:32:34"}
+{"email":"khaerul123@gmail.com","level":"info","message":"Starting user login process","timestamp":"2026-06-14 20:38:45"}
+{"level":"info","message":"User login is successfully with email khaerul123@gmail.com","timestamp":"2026-06-14 20:38:46"}

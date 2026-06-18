@@ -43,6 +43,7 @@ class AgentRepository(IAgentRepository):
             )
             if result is None:
                 return None
+                
             return Agents.model_validate(result.data["Agents"][0])
         except Exception as e:
             self._logger.error(f"Error while get agent by user id: {str(e)}")
@@ -85,7 +86,7 @@ class AgentRepository(IAgentRepository):
             result = (
                 await self.db.table("Agents")
                 .select("*")
-                .eq("business_id", business_id)
+                .eq("business_id", str(business_id))
                 .maybe_single()
                 .execute()
             )
@@ -118,7 +119,9 @@ class AgentRepository(IAgentRepository):
     ) -> Agents:
         try:
             payload = agent_data.model_dump()
-            payload["business_id"] = business_id
+            payload["business_id"] = str(business_id)
+            del payload["fallback_to_human"]
+
 
             result = await self.db.table("Agents").insert(payload).execute()
 

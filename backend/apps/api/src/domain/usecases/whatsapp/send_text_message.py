@@ -19,12 +19,13 @@ class SendTextMessageInput:
     conversation_id: UUID
     sender_type: Literal["ai", "human_admin", "customer"]
     text_message: str
+    business_id: str
 
 
 @dataclass
 class SendTextMessageOutput:
     conversation_id: UUID
-    response_webhook: dict[str, Any]
+    response_webhook: dict[str, Any] | None
 
 
 class SendTextMessage(BaseUseCase[SendTextMessageInput, SendTextMessageOutput]):
@@ -67,7 +68,7 @@ class SendTextMessage(BaseUseCase[SendTextMessageInput, SendTextMessageOutput]):
                 )
 
             result = self.whatsapp_manager.send_text_message(
-                phone_number, input_data.text_message
+                input_data.business_id,phone_number, input_data.text_message
             )
 
             return UseCaseResult.success_result(

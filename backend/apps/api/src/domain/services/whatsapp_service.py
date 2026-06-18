@@ -1,4 +1,4 @@
-from uuid import uuid4
+from uuid import uuid4, UUID
 from supabase import AsyncClient
 
 from src.app.validators.whatsapp_schema import FilteredPayload, WebhookPayload
@@ -7,8 +7,12 @@ from src.domain.repositories import (
 )
 from src.infrastructure.queue.redis import redis_client
 from src.infrastructure.queue import RedisQueue
-
-
+from src.infrastructure.whatsapp_session import whatsapp_session_manager
+from src.domain.repositories import BusinessRepository, WhatsappChannelRepository
+from src.core.exceptions.business_exception import BusinessNotFound
+from src.app.validators.whatsapp_schema import SendMessagePayload
+from src.app.validators.wa_service_schema import SaveChannelDataPayload
+from src.domain.usecases.whatsapp.save_channel_data import SaveChannelDataUseCase, SaveChannelDataInput
 from .base import BaseService
 
 
@@ -20,8 +24,9 @@ class WhatsappService(BaseService):
         self.redis_queue = RedisQueue(redis_client, "message_queue")
 
         # repositories
-        # self.business_repo = BusinessRepository(db)
+        self.business_repo = BusinessRepository(db)
         self.agent_repo = AgentRepository(db)
+        self.channel_repo = WhatsappChannelRepository(db)
         # self.customer_repo = CustomerRepository(db)
         # self.agent_conf_repo = AgentConfigurationRepository(db)
         # self.conversation_repo = ConversationRepository(db)
@@ -70,6 +75,7 @@ class WhatsappService(BaseService):
 
                     # Ekstrak phone_number_id (ID nomor bisnis Anda)
                     phone_number_id = value.get("metadata", {}).get("phone_number_id")
+                    is_from_wa_service = value.get("metadata", {}).get("is_from_wa_service", False)
 
                     # Inisialisasi variabel pendukung
                     name = None
@@ -114,6 +120,7 @@ class WhatsappService(BaseService):
                             from_number=from_number,
                             message_type=message_type,
                             text=incoming_text,
+                            is_from_wa_service=is_from_wa_service,
                         )
 
         return None
@@ -125,9 +132,14 @@ class WhatsappService(BaseService):
             if filtered_payload is None:
                 raise RuntimeWarning("Filtered payload is None")
 
-            agent = await self.agent_repo.get_agent_by_phone_number_id(
-                filtered_payload.phone_number_id
-            )
+            if filtered_payload.is_from_wa_service:
+                agent = await self.agent_repo.get_agent_by_business_id(UUID(filtered_payload.phone_number_id))
+                print(f"Agent: {agent}")
+            else:
+                agent = await self.agent_repo.get_agent_by_phone_number_id(
+                    filtered_payload.phone_number_id
+                )
+                
             if agent is None:
                 return
 
@@ -241,3 +253,62 @@ class WhatsappService(BaseService):
 
         finally:
             return {"status": "receive"}
+    
+    
+##FOKUS PADA KODE DIBAWAH INI
+    async def create_session(self, business_id: str):
+        business = await self.business_repo.get_business_by_id(UUID(business_id))
+        if business is None:
+            raise BusinessNotFound()
+        
+        result = whatsapp_session_manager.create_session(business_id)
+        return result.data
+    
+    async def get_session_status(self, business_id: str):
+        business = await self.business_repo.get_business_by_id(UUID(business_id))
+        if business is None:
+            raise BusinessNotFound()
+        
+        result = whatsapp_session_manager.get_session_status(business_id)
+        return result.data
+    
+    async def get_all_sessions(self):
+        result = whatsapp_session_manager.get_all_session()
+        return result.data
+    
+    async def delete_session(self, business_id: str):
+        business = await self.business_repo.get_business_by_id(UUID(business_id))
+        if business is None:
+            raise BusinessNotFound()
+        
+        result = whatsapp_session_manager.delete_session(business_id)
+        return result.data     
+    
+    async def reconnect_session(self, business_id: str):
+        business = await self.business_repo.get_business_by_id(UUID(business_id))
+        if business is None:
+            raise BusinessNotFound()
+        
+        result = whatsapp_session_manager.reconnect_session(business_id)
+        return result.data
+
+    async def send_message(self, payload: SendMessagePayload):
+        business = await self.business_repo.get_business_by_id(UUID(payload.business_id))
+        if business is None:
+            raise BusinessNotFound()
+        
+        result = whatsapp_session_manager.send_message(payload)
+        return result.data
+
+    async def save_channel_data(self, business_id: str, payload: SaveChannelDataPayload):
+        usecase = SaveChannelDataUseCase(self.channel_repo)
+        input_data = SaveChannelDataInput(
+            business_id=UUID(business_id),
+            phone_number=payload.phone_number,
+            status=payload.status,
+            display_name=payload.display_name
+        )
+        result = await usecase.execute(input_data)
+        if not result.is_success():
+            self.raise_error_usecase(result)
+        return result.get_data()

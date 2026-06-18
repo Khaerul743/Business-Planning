@@ -11,6 +11,7 @@ from .messages import Messages
 from .users import User
 from .insigt import Insight
 from .gap_knowladge import GapKnowladge
+from .whatsapp_channel import WhatsappChannel
 
 __all__ = [
     "User",
@@ -26,4 +27,5 @@ __all__ = [
     "Human_Fallback",
     "Insight",
     "GapKnowladge",
+    "WhatsappChannel"
 ]

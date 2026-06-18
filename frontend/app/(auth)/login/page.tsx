@@ -13,9 +13,24 @@ export default function Login() {
     const router = useRouter();
 
     useEffect(() => {
-        if (state?.success) {
-            router.push("/dashboard");
-        }
+        const checkBusinessSetup = async () => {
+            if (state?.success) {
+                try {
+                    const res = await fetch("/api/business/me");
+                    // Assuming a 404 means the business is not set up
+                    if (res.status === 404 || res.status === 400) {
+                        router.push("/setup/business");
+                    } else {
+                        router.push("/dashboard");
+                    }
+                } catch (error) {
+                    console.error("Failed to check business setup status:", error);
+                    router.push("/dashboard");
+                }
+            }
+        };
+
+        checkBusinessSetup();
     }, [state?.success, router]);
 
     return (

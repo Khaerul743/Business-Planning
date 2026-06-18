@@ -10,6 +10,7 @@ from .message_repository import MessageRepository
 from .user_repository import UserRepository
 from .human_fallback_repository import HumanFallbackRepository
 from .insight_repository import InsightRepository
+from .whatsapp_channel_repository import WhatsappChannelRepository
 
 __all__ = [
     "UserRepository",
@@ -24,4 +25,5 @@ __all__ = [
     "AnalyticsRepository",
     "HumanFallbackRepository",
     "InsightRepository",
+    "WhatsappChannelRepository",
 ]

@@ -55,7 +55,7 @@ def create_call_preparation_tool_model(business_knowladge: list[str]):
         rag_query=(
             Optional[str],  # Gunakan Optional
             Field(
-                default="",  # Kasih default string kosong
+                default=None,
                 description="Query untuk RAG. Isi hanya jika butuh mencari di dokumen. Kosongkan jika tidak butuh.",
             ),
         ),
@@ -66,16 +66,6 @@ def create_call_preparation_tool_model(business_knowladge: list[str]):
                 description="List category key. Isi hanya yang relevan. Kosongkan jika tidak ada yang cocok.",
             ),
         ),
-        # business_knowladge=(
-        #     List[business_knowladge_type],
-        #     Field(
-        #         default_factory=list,
-        #         description=(
-        #             "key business knowladge"
-        #             "Pilih category key yang paling relevan untuk menjawab pertanyaan pengguna"
-        #         ),
-        #     ),
-        # ),
         decision_summary=(
             str,
             Field(
@@ -147,3 +137,5 @@ class WhatsappAgentState(BaseAgentStateModel):
     fallback_human: bool = False
     is_business_related: bool = False
     knowledge_gap_detected: bool = False
+
+    reasoning_trace: Optional[str] = None

@@ -45,3 +45,14 @@ class CustomerNotFound(BaseCustomeException):
                 "message": "customer not found, please enter the right id",
             },
         )
+
+
+class WaBridgeException(BaseCustomeException):
+    def __init__(self, message: str = "WhatsApp Bridge Service Error", status_code: int = status.HTTP_500_INTERNAL_SERVER_ERROR):
+        super().__init__(
+            status_code=status_code,
+            detail={
+                "code": "WA_BRIDGE_ERROR",
+                "message": message,
+            },
+        )

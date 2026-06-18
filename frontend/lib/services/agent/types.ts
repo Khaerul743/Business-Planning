@@ -26,6 +26,19 @@ export interface UpdateAgent{
     temperature: number,
 }
 
+export interface CreateAgent {
+    name: string;
+    llm_provider: string;
+    llm_model: LLM_MODEL;
+    base_prompt?: string;
+    temperature?: number;
+    enable_ai?: boolean;
+    tone: Tone;
+    include_memory?: boolean;
+    fallback_to_human: string;
+}
+
+
 type DETAIL_INVOKE_RES = {
     decision_summary: string,
     human_fallback: boolean,

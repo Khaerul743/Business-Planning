@@ -32,7 +32,8 @@ class AgentConfigurationRepository(IAgentConfigurationRepository):
     ) -> Agent_configuration:
         payload = agent_conf.model_dump()
         payload["agent_id"] = str(agent_id)
-        print(payload)
+        del payload["include_memory"]
+        del payload["user_memory_id"]
         result = await self.db.table("Agent_configurations").insert(payload).execute()
 
         return Agent_configuration.model_validate(result.data[0])

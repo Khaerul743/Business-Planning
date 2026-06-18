@@ -153,16 +153,21 @@ class ConversationService(BaseService):
 
     async def post_new_message(self, conversation_id: UUID, text_message: str):
         user_email = current_user_email.get()
+        user_id = current_user_id.get()
+        if user_id is None:
+            raise UnauthorizedException()
+        
         self.logger.info(f"User {user_email}: Post new message")
         conversation = await self.conversation_repo.get_conversation_by_id(
             conversation_id
         )
+        business_id = await self._get_business_id(user_id)
         if conversation is None:
             self.logger.warning(f"User {user_email}: Conversation not found")
             raise ConversationNotFound()
 
         send_message_result = await self.send_text_message_use_case.execute(
-            SendTextMessageInput(conversation.id, "human_admin", text_message)
+            SendTextMessageInput(conversation.id, "human_admin", text_message, business_id=str(business_id))
         )
 
         if not send_message_result.is_success():

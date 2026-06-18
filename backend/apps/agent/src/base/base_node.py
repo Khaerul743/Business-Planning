@@ -1,8 +1,11 @@
 from typing import Literal, List, Sequence, Any
 from langchain_openai import ChatOpenAI
 from shared.utils.logger import get_logger
-from langchain_core.messages import BaseMessage
+from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, ToolMessage
 from pydantic import BaseModel
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class BaseNode:
@@ -52,7 +55,7 @@ class BaseNode:
             self._logger.error(f"Error while invoke llm model: {e}")
             raise e
 
-    def invoke_llm_with_structured_output(
+    async def invoke_llm_with_structured_output(
         self,
         provider: Literal["openai", "anthropic", "google"],
         model: str,
@@ -68,7 +71,7 @@ class BaseNode:
             )
 
             if hasattr(llm_model, "ainvoke"):
-                response = llm_model.ainvoke(messages)
+                response = await llm_model.ainvoke(messages)
             else:
                 raise TypeError("Provided LLM does not support invoke/ainvoke.")
 
@@ -107,6 +110,46 @@ class BaseNode:
             self._logger.error(f"Error while invoking LLM: {e}")
             raise
 
+    async def invoke_llm_with_tool(self,
+        provider: Literal["openai", "anthropic", "google"],
+        model: str,
+        temperature: float, messages: Any, tools: Sequence[Any]) -> Any:
+        """
+        Call LLM with tools bound to it.
+
+        Args:
+            messages: Messages to send to LLM (can be list of BaseMessage or string)
+            tools: Sequence of tools to bind to LLM (e.g., [tool1, tool2, ...])
+
+        Returns:
+            LLM response with tool bindings
+
+        Raises:
+            TypeError: If LLM does not support bind_tools or invoke/ainvoke
+            Exception: If error occurs during LLM invocation
+        """
+        try:
+            llm_model = self.llm(provider, model, temperature)
+
+
+            llm_with_tools = llm_model.bind_tools(tools)
+
+            # Call LLM with tools (async or sync safe)
+            # if hasattr(llm_with_tools, "ainvoke") and asyncio.iscoroutinefunction(
+            #     llm_with_tools.ainvoke
+            # ):
+            # response = await llm_with_tools.ainvoke(messages)
+            if hasattr(llm_with_tools, "invoke"):
+                response = await llm_with_tools.ainvoke(messages)
+            else:
+                raise TypeError("LLM with tools does not support invoke/ainvoke.")
+
+            return response
+
+        except Exception as e:
+            self._logger.error(f"Error while invoking LLM with tools: {e}")
+            raise
+
     def get_all_previous_messages(
         self, messages: Sequence[BaseMessage], max_trim: int = 0
     ):
@@ -128,3 +171,15 @@ class BaseNode:
             [agent_prompt[0]] + list(all_previous_messages) + [agent_prompt[1]]
         )
         return setup_prompt
+
+    def history_messages_output(self, history_messages: Sequence[BaseMessage]):
+        history_messages_str = ""
+        for i in history_messages:
+            if isinstance(i, HumanMessage):
+                history_messages_str += f"*Customer*\n{i.content}\n\n"
+            elif isinstance(i, AIMessage):
+                history_messages_str += f"*AI*\n{i.content}\n\n"
+            elif isinstance(i, ToolMessage):
+                history_messages_str += f"*Tool Message*\n{i.content}\n\n"
+
+        return history_messages_str

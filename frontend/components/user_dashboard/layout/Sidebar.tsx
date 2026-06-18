@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   LogOut,
   MessageSquare,
+  MessageCircle,
   PieChart,
   Lightbulb,
   Play,
@@ -75,6 +76,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
         <SidebarSection title="Main" isCollapsed={isCollapsed}>
           <SidebarItem icon={LayoutDashboard} label="Dashboard" href="/dashboard" isCollapsed={isCollapsed} />
           <SidebarItem icon={MessageSquare} label="Conversations" href="/conversations" isCollapsed={isCollapsed} />
+        </SidebarSection>
+
+        <SidebarSection title="Channels" isCollapsed={isCollapsed}>
+          <SidebarItem icon={MessageCircle} label="WhatsApp" href="/whatsapp" isCollapsed={isCollapsed} />
         </SidebarSection>
 
         <SidebarSection title="Agent Control" isCollapsed={isCollapsed}>

@@ -24,6 +24,7 @@ from src.app.routes import (
     business_route,
     conversation_route,
     document_knowladge_route,
+    websocket,
 )
 
 logger = get_logger(__name__)
@@ -46,6 +47,7 @@ app.include_router(business_knowladge_route.router)
 app.include_router(agent_route.router)
 app.include_router(document_knowladge_route.router)
 app.include_router(conversation_route.router)
+app.include_router(websocket.router)
 
 
 @app.get("/")

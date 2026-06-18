@@ -122,12 +122,16 @@ class AgentService(BaseService):
         if user_id is None:
             self.logger.warning("Unauthorized Exception")
             raise UnauthorizedException()
-
-        agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
-        if agent_id is None:
+        business = await self.business_repo.get_business_by_contextvar()
+        if business is None:
+            self.logger.warning(f"User {user_email}: Business not found")
+            raise BusinessNotFound()
+        business_id = business.id
+        agent = await self.agent_repo.get_agent_by_business_id(business_id)
+        if agent is None:
             self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
-
+        agent_id = agent.id
         result = await self.get_agent_usecase.execute(GetAgentInput(agent_id=agent_id))
         if not result.is_success():
             self.raise_error_usecase(result)
@@ -149,13 +153,13 @@ class AgentService(BaseService):
                 self.logger.warning(f"User {user_email}: Unauthorized Exception")
                 raise UnauthorizedException()
 
-            business_id, _ = (
-                await self.business_repo.get_business_id_n_agent_id_by_user_id(user_id)
+            business  = (
+                await self.business_repo.get_business_by_contextvar()
             )
-            if business_id is None:
+            if business is None:
                 self.logger.warning(f"User {user_email}: Business not found")
                 raise BusinessNotFound()
-
+            business_id = business.id
             result = await self.create_agent_usecase.execute(
                 CreateAgentUseCaseInput(business_id=business_id, agent_data=payload)
             )

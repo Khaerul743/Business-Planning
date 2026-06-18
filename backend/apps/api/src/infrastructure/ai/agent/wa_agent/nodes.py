@@ -31,14 +31,14 @@ class WhatsappAgentNode(BaseNode):
         self.business_knowladge = business_knowladge
         self.retrieve_document = retrieve_document
         self.business_knowladge_list = []
+        for k, v in business_knowladge.items():
+            self.business_knowladge_list.append(k)
 
         self.retry = 0
         self.MAX_MESSAGES = 10
         self.last_len_messages = 0
         self.con_repeat = 0
         self.con_summary = None
-        for k, v in business_knowladge.items():
-            self.business_knowladge_list.append(k)
         super().__init__(llm_model, llm_provider, use_long_memory)
 
     def _create_conversation_summary(

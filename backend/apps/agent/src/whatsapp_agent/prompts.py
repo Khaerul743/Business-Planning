@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Literal
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 
 from .utils.tone import get_tone
@@ -7,58 +7,42 @@ from .schema.business_context import (
     BusinessDetailInformation,
     BusinessContext,
 )
+from shared.schemas import AgentConfig
 
 
 class WhatsappAgentPrompt:
-    @staticmethod
-    def main_llm(
-        agent_configuration: AgentConfiguration,
-        business_context: BusinessContext,
-        user_message: str,
-        conversation_summary: Optional[str] = None,
-    ) -> list[BaseMessage]:
-        business_knowladge_str = ""
-        if business_context.business_knowladge_content:
-            for k, v in business_context.business_knowladge_content.items():
-                # Tambahkan label 'ACTION: REQUIRE_LOOKUP' supaya AI sadar ini data yang terkunci
-                business_knowladge_str += f"- ID: {k} | DESCRIPTION: [ACTION: REQUIRE_LOOKUP] {v.category_description}\n"
-        system_message = f"""
-# Role
-Professional AI Customer Service Agent.
-
-# Mental Model (Strict)
-* Confidence = Emotional stability & trust (Bukan indikator pengetahuan).
-* Lack of information != Low confidence. Keep confidence >= 60% unless escalating.
-
-# Context & Data
-* Summary: {conversation_summary or "None"}
-* Base Prompt: {agent_configuration.base_prompt}
-* Tone/Persona: {get_tone(agent_configuration.tone)}
-
-## Business Identity (DATA YANG BOLEH DIJAWAB LANGSUNG)
+    def main_prompt(self,base_prompt: str, tone: Literal["friendly", "formal", "casual", "profesional"], business_context: BusinessContext):
+        return f"""
+Kamu adalah AI Customer Service Agent pada sebuah bisnis.
+Berikut adalah detail mengenai bisnis tersebut:
 * Name: {business_context.business_detail_information.business_name if business_context.business_detail_information else ""}
 * Description: {business_context.business_detail_information.business_desc if business_context.business_detail_information else ""}
 * Location: {business_context.business_detail_information.business_location if business_context.business_detail_information else ""}
 
-## Available Tools/Metadata (DATA TERKUNCI - HARUS DICARI)
-Daftar di bawah ini adalah KATALOG informasi. Kamu HANYA tahu judulnya, BUKAN isinya.
-{business_knowladge_str if business_knowladge_str != "" else "TIDAK ADA BUSINESS KNOWLADGE"}
+# Base prompt yang diterapkan kepada kamu:
+{base_prompt}
 
-# Decision Rules
-1. **Missing Info/Knowledge Lookup**: 
-   - TRIGGER: User bertanya tentang topik di "Available Tools/Metadata" (misal: menu, jam operasional, cara pesan).
-   - MANDATORY ACTION: Set `need_more_information = true`. 
-   - RULES: DILARANG KERAS menebak isi detail. Jawab hanya dengan konfirmasi bahwa kamu akan mengecek data tersebut.
-   
-2. **Human Fallback (EMOTIONAL Only)**:
-   - TRIGGER: Marah, frustrasi, atau minta manusia secara eksplisit.
-   - ACTION: Set `human_fallback = true`, Set `confidence < 50%`.
+Tone yang diterapkan kepada kamu:
+{get_tone(tone)}
+"""
+    def main_llm(
+        self,
+        agent_configuration: AgentConfig,
+        business_context: BusinessContext,
+        user_message: str,
+        conversation_summary: Optional[str] = None,
+    ) -> list[BaseMessage]:
+        system_message = f"""
+{self.main_prompt(agent_configuration.base_prompt or "", agent_configuration.tone, business_context)}
 
 # Constraints (Strict)
 * **No Hallucination**: Jika informasi spesifik (seperti daftar harga atau menu detail) tidak ada di "Business Identity", kamu dianggap TIDAK TAHU.
-* **Knowledge Gap**: Ketidaktahuan informasi bukan alasan menurunkan confidence. Tetap tenang, set `need_more_information = true`.
+* **Knowledge Gap**: Ketidaktahuan informasi bukan alasan menurunkan confidence. Tetap tenang, gunakan tools yang tersedia.
 * **Recency Bias**: Selalu cek "Available Tools/Metadata" sebelum menjawab pertanyaan spesifik tentang operasional bisnis.
 """
+    # @staticmethod
+    # def response_with_tool_context(agent_configuration: AgentConfig):
+
         # f"""
         # You are a professional AI Customer Service Agent.
 
@@ -139,8 +123,8 @@ Daftar di bawah ini adalah KATALOG informasi. Kamu HANYA tahu judulnya, BUKAN is
             HumanMessage(content=human_message),
         ]
 
+    @staticmethod
     def message_analysis_prompt(
-        self,
         business_detail_information: BusinessDetailInformation | None,
         user_message: str,
         response: Optional[str] = None,
@@ -170,8 +154,8 @@ Berikut adalah pertanyaan dari customer dan jawaban dari agent:
             HumanMessage(content=human_message),
         ]
 
+    @staticmethod
     def call_preparation_tool(
-        self,
         business_context: BusinessContext,
         user_message: str,
         decision_summary_past: Optional[str] = None,
@@ -237,9 +221,9 @@ Berdasarkan konteks di atas, tentukan:
             HumanMessage(content=human_message),
         ]
 
+    @staticmethod
     def say_sorry(
-        self,
-        agent_configuration: AgentConfiguration,
+        agent_configuration: AgentConfig,
         user_message: str,
         response_past: Optional[str] = None,
         decision_summary_past: Optional[str] = None,
@@ -278,8 +262,8 @@ decision_summary: {decision_summary_past}
             HumanMessage(content=human_message),
         ]
 
+    @staticmethod
     def human_fallback(
-        self,
         history_messages: str,
         confidence: float,
         decision_summary: Optional[str] = None,
@@ -321,8 +305,8 @@ Tuliskan alasan fallback sekarang:
             HumanMessage(content=human_message),
         ]
 
+    @staticmethod
     def conversation_summary(
-        self,
         history_messages: str,
         conversation_summary_past: Optional[str] = None,
     ) -> list[BaseMessage]:

@@ -6,6 +6,8 @@ from fastapi import Request
 
 from src.core.exceptions import TokenIsNotVerified, WhatsappBadRequest
 from src.core.utils import get_logger
+from src.infrastructure.whatsapp_session import whatsapp_session_manager
+from src.app.validators.whatsapp_schema import SendMessagePayload
 
 load_dotenv()
 
@@ -36,8 +38,11 @@ class WhatsappManager:
                 raise TokenIsNotVerified()
         raise WhatsappBadRequest()
 
-    def send_text_message(self, to_number: str, text_message: str):
-        return {"to_number": to_number, "text_message": text_message}
+    def send_text_message(self,business_id: str, to_number: str, text_message: str):
+        payload = SendMessagePayload(business_id=business_id, to=to_number, message=text_message)
+        result = whatsapp_session_manager.send_message(payload)
+        return result
+
 
     # def send_text_message(self, to_number: str, text_message: str):
     #     """

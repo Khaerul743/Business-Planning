@@ -97,6 +97,7 @@ class ReceiveMessageUseCase(BaseUseCase[ReceiveMessageInput, ReceiveMessageOutpu
                     result_sv_conv_data.conversation_id,
                     "ai",
                     result_message_data.response,
+                    business_id=str(input_data.business_id)
                 )
             )
 

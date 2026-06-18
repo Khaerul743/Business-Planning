@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <button onclick="connectWs()">
+        Connect
+    </button>
+    <div id="image"></div>
+    <img src="" alt="">
+    <script>
+        const image = document.getElementById("image")
+        function connectWs() {
+
+            const ws = new WebSocket(
+                "ws://localhost:8000/ws/channels/06a8a34c-12f8-42c6-bf09-33f2e3a08171"
+            );
+
+            ws.onopen = () => {
+                console.log("Connected");
+            };
+
+            ws.onmessage = ({ data }) => {
+
+                const payload = JSON.parse(data);
+
+                if (payload.event === "qr") {
+                    image.innerHTML = `
+                        <img
+                            src="${payload.qr_code}"
+                            alt="WhatsApp QR"
+                        />
+                    `;
+                }
+
+            };
+
+        }
+    </script>
+
+</body>
+
+</html>

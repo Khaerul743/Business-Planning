@@ -20,7 +20,7 @@ class AgentConfiguration(BaseEntity):
 class AgentConfig(BaseModel):
     chromadb_path: Optional[str] = None
     collection_name: Optional[str] = None
-    llm_provider: str
+    llm_provider: Literal["openai", "google", "anthropic"]
     llm_model: str
     tone: Literal["friendly", "formal", "casual", "profesional"]
     base_prompt: Optional[str] = None
