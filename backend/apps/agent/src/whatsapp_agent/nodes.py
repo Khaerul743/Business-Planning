@@ -3,8 +3,8 @@ from langchain_core.runnables import RunnableConfig
 from langgraph.graph import END
 from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.runtime import Runtime
-from ..core.business_context_manager import BusinessContextManager
-from ..core.agent_configuration_manager import AgentConfigurationManager
+from src.core.business_context_manager import BusinessContextManager
+from src.core.agent_configuration_manager import AgentConfigurationManager
 from src.base.base_node import BaseNode
 from .prompts import WhatsappAgentPrompt
 from .model import (

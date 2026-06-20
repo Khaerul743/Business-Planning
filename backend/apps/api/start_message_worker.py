@@ -28,8 +28,7 @@ async def main():
     message_dispatcher.register("invoke_agent", InvokeAgentHandler(db))
 
     message_worker = Worker(message_queue, lock, message_dispatcher)
-
-    # Buat file worker baru mas
+    
     await message_worker.start()
 
 

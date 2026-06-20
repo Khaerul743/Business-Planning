@@ -5,7 +5,6 @@ from uuid import UUID
 
 from dotenv import load_dotenv
 
-# from langchain_community.chains import RetrievalQA
 from langchain_community.document_loaders import (
     DirectoryLoader,
     PyPDFLoader,
@@ -25,9 +24,6 @@ from src.core.exceptions.document_store_exception import (
     DocumentLoadException,
     DocumentNotFoundException,
     EmbeddingInitializationException,
-    ListDocumentsException,
-    QAQueryException,
-    RetrieverException,
     SimilaritySearchException,
     UnsupportedFileTypeException,
 )
@@ -38,16 +34,12 @@ logger = get_logger(__name__)
 load_dotenv()
 
 
-# ...existing code...
-
-
 class RAGSystem:
     def __init__(self, chroma_directiory: str):
         try:
             self.client = chromadb.PersistentClient(chroma_directiory)
             self.collection_name = None
         except Exception as e:
-            # logging.error(f"Failed to initialize ChromaDB client or collection: {e}")
             raise ChromaInitializationException(
                 "Failed to initialize ChromaDB client or collection"
             ) from e
