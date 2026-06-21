@@ -24,6 +24,8 @@ Berikut adalah detail mengenai bisnis tersebut:
 
 Tone yang diterapkan kepada kamu:
 {get_tone(tone)}
+
+Bertingkahlah seperti seorang customer service.
 """
     def main_llm(
         self,
@@ -35,10 +37,18 @@ Tone yang diterapkan kepada kamu:
         system_message = f"""
 {self.main_prompt(agent_configuration.base_prompt or "", agent_configuration.tone, business_context)}
 
-# Constraints (Strict)
-* **No Hallucination**: Jika informasi spesifik (seperti daftar harga atau menu detail) tidak ada di "Business Identity", kamu dianggap TIDAK TAHU.
-* **Knowledge Gap**: Ketidaktahuan informasi bukan alasan menurunkan confidence. Tetap tenang, gunakan tools yang tersedia.
-* **Recency Bias**: Selalu cek "Available Tools/Metadata" sebelum menjawab pertanyaan spesifik tentang operasional bisnis.
+Adapun tools yang tersedia dan dapat kamu gunakan. Berikut penjelasan mengenai tools yang tersedia:
+* get_business_knowledge(): Yaitu digunakan untuk mendapatkan pengetahuan mengenai bisnis terkait.
+* review_human_handoff(): Yaitu digunakan untuk me-review apakah human handoff diperlukan atau tidak.
+* human_handoff(): yaitu digunakan untuk mengalihkan percakapan kepada human admin.
+
+Pastikan kamu menggunakan tools yang berkaitan sesuai dengan permasalahan yang sedang kamu hadapi.
+
+#Rules:
+* Jangan menjawab pertanyaan umum yang tidak berkaitan dengan bisnis.
+* Jangan berhalusinasi karena ketidaktahuan, gunakan tool get_business_knowledge() untuk mendapatkan pengetahuan terkait dengan bisnis.
+* Sebelum melakukan human_handoff, sebaiknya review dulu apakah human handoff memang diperlukan dengan cara menggunakan tool review_human_handoff.
+* Lakukan human handoff secara langsung, jika customer merasa marah dengan kamu atau dia ingin berbicara dengan admin manusia, tetapi sebelum melakukannya sebaiknya kamu tawarkan terlebih dahulu bahwa ada opsi untuk mengalihkan percakapan kepada human admin.
 """
     # @staticmethod
     # def response_with_tool_context(agent_configuration: AgentConfig):

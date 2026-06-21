@@ -1,4 +1,6 @@
 from langchain.tools import tool, ToolRuntime
+from langchain_core.messages import ToolMessage
+from langgraph.types import Command
 from langchain_openai import ChatOpenAI
 from src.whatsapp_agent.model import ContextAgent
 from src.whatsapp_agent.schema.business_context import BusinessContext
@@ -43,12 +45,16 @@ business_knowladge_service = BusinessKnowladgeTool()
 @tool(args_schema=BusinessKnowladgeInput)
 def get_business_knowladge(query: str, conversation_context: str, decision_summary: str, runtime: ToolRuntime[ContextAgent]):
     """Untuk mengambil informasi terkait dengan bisnis/perusahaan"""
-    print(query,conversation_context, decision_summary)
     business_context = runtime.state.business_context or None
     if business_context is None:
         return "Tidak ada business knowladge yang tersedia."
         
-    knowladge = business_knowladge_service.gathering_knowledge(business_context, query, conversation_context)
+    knowledge = business_knowladge_service.gathering_knowledge(business_context, query, conversation_context)
 
-    return knowladge
+    return Command(
+        update={
+            "messages": ToolMessage(content=knowledge, tool_call_id=runtime.tool_call_id),
+            "skip_human_message": True,
+        }
+    )
 

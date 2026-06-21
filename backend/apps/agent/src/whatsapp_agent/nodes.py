@@ -15,7 +15,7 @@ from .model import (
     create_call_preparation_tool_model,
     FinalResultOutput,
 )
-from src.components.tools import get_business_knowladge
+from src.components.tools import get_business_knowladge, human_handoff, review_human_handoff
 
 
 class WhatsappAgentNode(BaseNode):
@@ -51,11 +51,22 @@ class WhatsappAgentNode(BaseNode):
     async def main_agent(self, state: WhatsappAgentState):
         if state.business_context is None or state.configuration is None:
             raise RuntimeError("Business context or agent configuration is None")
+        
+        if state.skip_human_message:
+            main_prompt = self.wa_agent_prompt.main_llm(state.configuration, state.business_context, state.user_message)
+            prompt_setup = main_prompt[0] + list(state.messages)
+            result = await self.invoke_llm_with_tool("openai","gpt-4o-mini",0.7,prompt_setup, [get_business_knowladge, review_human_handoff, human_handoff])
+            return {
+                "messages": result,
+                "skip_human_message": False,
+                "response": result.content
+            }
         main_prompt = self.wa_agent_prompt.main_llm(state.configuration, state.business_context, state.user_message)
         prompt_setup = self.get_prompt_setup(main_prompt, state.messages)
-        result = await self.invoke_llm_with_tool("openai","gpt-4o-mini",0.7,prompt_setup, [get_business_knowladge])
+        result = await self.invoke_llm_with_tool("openai","gpt-4o-mini",0.7,prompt_setup, [get_business_knowladge, review_human_handoff, human_handoff])
         return {
-            "messages": [HumanMessage(content=state.user_message), result]
+            "messages": [HumanMessage(content=state.user_message), result],
+            "response": result.content
         }
 
     def should_continue(self, state: WhatsappAgentState):
@@ -63,6 +74,7 @@ class WhatsappAgentNode(BaseNode):
         print(f"State === {state}")
         if last_message.tool_calls:
             return "tool"
+        return END
     
     async def response_with_tool_context(self, state: WhatsappAgentState):
         if state.business_context is None or state.configuration is None:

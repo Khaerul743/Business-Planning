@@ -113,9 +113,7 @@ class WhatsappAgentState(BaseAgentStateModel):
     # Business Context
     business_context: Optional[BusinessContext] = None
 
-    human_fallback: bool = False
-    need_more_information: bool = False
-    call_tool_again: bool = False
+    # human_fallback: bool = False
     decision_summary: Optional[str] = None
     category: Literal[
         "pengiriman",
@@ -128,10 +126,6 @@ class WhatsappAgentState(BaseAgentStateModel):
         "refund",
         "lainnya",
     ] = "lainnya"
-    rag_query: Optional[str] = None
-    rag_query_result: Optional[str] = None
-    business_knowladge_key: List = []
-    business_knowladge_result: Optional[str] = None
     confidence_level: float = 100
     conversation_summary: Optional[str] = None
     fallback_human: bool = False
@@ -139,3 +133,5 @@ class WhatsappAgentState(BaseAgentStateModel):
     knowledge_gap_detected: bool = False
 
     reasoning_trace: Optional[str] = None
+    skip_human_message: bool = False
+    handoff_reason: str = ""

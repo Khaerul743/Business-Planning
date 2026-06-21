@@ -2,7 +2,7 @@ from langgraph.graph import StateGraph, START, END
 from .nodes import WhatsappAgentNode
 from .model import WhatsappAgentState, ContextAgent
 from langgraph.prebuilt import ToolNode
-from src.components.tools import get_business_knowladge
+from src.components.tools import get_business_knowladge, human_handoff, review_human_handoff
 
 class WhatsappAgentWorkflow:
     def __init__(self, nodes: WhatsappAgentNode):
@@ -12,8 +12,8 @@ class WhatsappAgentWorkflow:
         graph = StateGraph(WhatsappAgentState, context_schema=ContextAgent)
         graph.add_node("get_context", self.nodes.get_context)
         graph.add_node("main_agent", self.nodes.main_agent)
-        graph.add_node("tool", ToolNode([get_business_knowladge]))
-        graph.add_node("res_tool_context", self.nodes.response_with_tool_context)
+        graph.add_node("tool", ToolNode([get_business_knowladge, review_human_handoff, human_handoff]))
+    
 
         # graph.add_node(
         #     "update_state_aftet_main_agent", self.nodes.update_state_after_main_agent
@@ -36,8 +36,8 @@ class WhatsappAgentWorkflow:
         graph.add_conditional_edges("main_agent",
             self.nodes.should_continue
         )
-        graph.add_edge("tool", "res_tool_context")
-        graph.add_edge("res_tool_context", END)
+        graph.add_edge("tool", "main_agent")
+
 
         # graph.add_conditional_edges(
         #     "main_agent",
