@@ -23,6 +23,12 @@ class Settings(BaseSettings):
     WABA_ACCESS_TOKEN: str
     PHONE_NUMBER_ID: str
 
+    OPENAI_API_KEY: str
+
+    #Service
+    WA_WEB_SERVICE: str
+    LANGGRAPH_SERVER: str
+    
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
