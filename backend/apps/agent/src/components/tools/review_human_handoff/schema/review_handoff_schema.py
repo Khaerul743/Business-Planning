@@ -17,7 +17,6 @@ class JudgeDecision(BaseModel):
     )
 
     justification: str = Field(
-        max_length=150,
         description="A brief justification for the decision."
     )
     

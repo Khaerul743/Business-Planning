@@ -50,10 +50,10 @@ def get_business_knowladge(query: str, conversation_context: str, decision_summa
         return "Tidak ada business knowladge yang tersedia."
         
     knowledge = business_knowladge_service.gathering_knowledge(business_context, query, conversation_context)
-
+    print("LLM PAKE TOOL==========")
     return Command(
         update={
-            "messages": ToolMessage(content=knowledge, tool_call_id=runtime.tool_call_id),
+            "messages": [ToolMessage(content=knowledge, tool_call_id=runtime.tool_call_id)],
             "skip_human_message": True,
         }
     )

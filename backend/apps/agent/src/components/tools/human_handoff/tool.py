@@ -10,7 +10,7 @@ def human_handoff(confidence_level: float, handoff_reason: str,decision_summary:
 
     return Command(
         update={
-            "messages": ToolMessage("Human Handoff berhasil dilakukan", tool_call_id=runtime.tool_call_id),
+            "messages": [ToolMessage(content="Human Handoff berhasil dilakukan", tool_call_id=runtime.tool_call_id)],
             "decision_summary": decision_summary,
             "confidence_level": confidence_level,
             "handoff_reason": handoff_reason,
