@@ -54,6 +54,7 @@ def review_human_handoff(handoff_reason: str, decision_summary: str, conversatio
         update={
             "fallback_human": judge_decision.handoff,
             "messages": [ToolMessage(content=f"{judge_decision.justification}\n\nRECOMMENDATION:\n{judge_decision.recommendation or ""}", tool_call_id=runtime.tool_call_id)],
-            "skip_human_message": True
+            "skip_human_message": True,
+            "decision_summary": decision_summary
         }
     )
