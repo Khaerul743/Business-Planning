@@ -13,7 +13,7 @@ class CustomerRepository(ICustomerRepository):
 
     async def get_or_insert_custormer(
         self, agent_id: UUID, customer_data: InsertNewCustomer
-    ) -> Customers:
+    ) -> tuple[Customers, bool]:
         customer = await (
             self.db.table("Customers")
             .select("*")
@@ -25,8 +25,9 @@ class CustomerRepository(ICustomerRepository):
             payload = customer_data.model_dump()
             payload["agent_id"] = str(agent_id)
             result = await self.db.table("Customers").insert(payload).execute()
-            return Customers.model_validate(result.data[0])
-        return Customers.model_validate(customer.data)
+            return Customers.model_validate(result.data[0]), True
+        
+        return Customers.model_validate(customer.data), False
 
     async def get_all_customer_by_business_id(
         self, business_id: UUID

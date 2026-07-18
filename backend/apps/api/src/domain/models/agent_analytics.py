@@ -27,3 +27,4 @@ class AgentAnalytics(BaseEntity):
     ]
     knowledge_gap_detected: bool
     is_business_related: bool
+    sentiment: Literal["positif", "netral", "negatif"]

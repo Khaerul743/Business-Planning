@@ -74,7 +74,8 @@ class AgentController(BaseController):
 
     async def invoke_agent_handler(self, text_message: str):
         result = await self.agent_service.invoke_agent(text_message)
-        return {"response": result.response, "detail": result.detail_agent_output}
+        # return {"response": result.response, "detail": result.detail_agent_output}
+        return result
 
     async def insight_handler(self):
         await self.agent_service.triger_insight_generator()

@@ -2,12 +2,10 @@ from uuid import UUID
 from dataclasses import dataclass
 from src.domain.usecases.base import UseCaseResult, BaseUseCase
 from src.app.validators.customer_schema import InsertNewCustomer
-from src.infrastructure.ai.agent.base import BaseAgentStateModel
 from src.app.validators.whatsapp_schema import WebhookPayload
 from .message_processing import MessageProcessingUseCase, MessageProcessingUseCaseInput
 from .save_conversation import SaveConversationInput, SaveConversationUseCase
 from .send_text_message import SendTextMessage, SendTextMessageInput
-from .human_fallback import HumanFallbackInput, HumanFallbackUseCase
 
 
 @dataclass
@@ -16,7 +14,7 @@ class ReceiveMessageInput:
     business_id: UUID
     phone_number_id: str
     customer_data: InsertNewCustomer
-    agent_state: BaseAgentStateModel
+    text_message: str
     raw_webhook: WebhookPayload
 
 
@@ -36,6 +34,8 @@ class ReceiveMessageUseCase(BaseUseCase[ReceiveMessageInput, ReceiveMessageOutpu
         self.save_conversation = save_conversation
         self.send_text_message = send_text_message
 
+        super().__init__(__name__)
+
     def raise_error_usecase(self, use_case: UseCaseResult, error_message: str):
         exception = use_case.get_exception()
         if exception:
@@ -47,13 +47,14 @@ class ReceiveMessageUseCase(BaseUseCase[ReceiveMessageInput, ReceiveMessageOutpu
         self, input_data: ReceiveMessageInput
     ) -> UseCaseResult[ReceiveMessageOutput]:
         try:
+            self.logger.info("Executing message processing usecase")
             result_message = await self.message_processing.execute(
                 MessageProcessingUseCaseInput(
                     input_data.agent_id,
                     input_data.business_id,
                     input_data.phone_number_id,
                     input_data.customer_data,
-                    input_data.agent_state,
+                    text_message=input_data.text_message
                 )
             )
             if not result_message.is_success():
@@ -67,7 +68,8 @@ class ReceiveMessageUseCase(BaseUseCase[ReceiveMessageInput, ReceiveMessageOutpu
                     "Message processing usecase did not return the data",
                     RuntimeError("Message processing usecase didnot return the data"),
                 )
-
+            self.logger.info("Executing message processing usecase is successfully")
+            self.logger.info("Executing save conversation usecase")
             # Save conversation
             result_sv_conv = await self.save_conversation.execute(
                 SaveConversationInput(
@@ -91,6 +93,8 @@ class ReceiveMessageUseCase(BaseUseCase[ReceiveMessageInput, ReceiveMessageOutpu
                     RuntimeError("Save conversation usecase did not return the data"),
                 )
 
+            self.logger.info("Executing save conversation usecase is successfully")
+            self.logger.info("Executing send message usecase")
             # Send text message
             result_send_text = await self.send_text_message.execute(
                 SendTextMessageInput(
@@ -111,6 +115,7 @@ class ReceiveMessageUseCase(BaseUseCase[ReceiveMessageInput, ReceiveMessageOutpu
                 return UseCaseResult.error_result(
                     "send text message did not returned the data"
                 )
+            self.logger.info("Executing send message usecase is successfully")
             return UseCaseResult.success_result(ReceiveMessageOutput())
         except Exception as e:
             return UseCaseResult.error_result(

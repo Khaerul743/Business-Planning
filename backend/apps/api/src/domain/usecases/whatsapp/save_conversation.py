@@ -38,16 +38,20 @@ class SaveConversationUseCase(
         self.message_repo = message_repo
         self.human_fallback_usecase = human_fallback_usecase
 
+        super().__init__(__name__)
+
     async def execute(
         self, input_data: SaveConversationInput
     ) -> UseCaseResult[SaveConversationOutput]:
         try:
             raw_webhook = input_data.raw_webhook.model_dump()
+            self.logger.info("Get or insert conversation data")
             # get or insert conversation
             conversation = await self.conversation_repo.get_or_create_conversation(
                 input_data.business_id, input_data.agent_id, input_data.customer_id
             )
 
+            self.logger.info("Insert customer message")
             # Insert customer message
             customer_message = await self.message_repo.insert_new_message(
                 conversation.id,
@@ -59,13 +63,14 @@ class SaveConversationUseCase(
                 ),
             )
 
-            if input_data.detail_agent_output["human_fallback"]:
+            if input_data.detail_agent_output["fallback_human"]:
+                self.logger.info("Insert new human fallback")
                 payload = InsertNewHumanFallback(
                     business_id=input_data.business_id,
                     conversation_id=conversation.id,
                     confidence_level=input_data.detail_agent_output["confidence_level"],
                     last_decision_summary=input_data.detail_agent_output[
-                        "decision_summary"
+                        "handoff_reason"
                     ],
                 )
                 await self.human_fallback_usecase.execute(

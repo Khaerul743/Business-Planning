@@ -41,12 +41,15 @@ class SendTextMessage(BaseUseCase[SendTextMessageInput, SendTextMessageOutput]):
         self.customer_repo = customer_repo
         self.whatsapp_manager = whatsapp_manager
 
+        super().__init__(__name__)
+
     async def execute(
         self, input_data: SendTextMessageInput
     ) -> UseCaseResult[SendTextMessageOutput]:
         try:
             raw_webhook = {"type": "Direct response"}
 
+            self.logger.info("Insert agent message")
             # Insert message
             agent_message = await self.message_repo.insert_new_message(
                 input_data.conversation_id,
@@ -57,7 +60,7 @@ class SendTextMessage(BaseUseCase[SendTextMessageInput, SendTextMessageOutput]):
                     raw_webhook=raw_webhook,
                 ),
             )
-
+            self.logger.info("Get customer phone number")
             # Get customer phone number
             phone_number = await self.customer_repo.get_phone_number_by_conversation_id(
                 input_data.conversation_id
@@ -66,7 +69,8 @@ class SendTextMessage(BaseUseCase[SendTextMessageInput, SendTextMessageOutput]):
                 return UseCaseResult.error_result(
                     "Conversation not found", ConversationNotFound()
                 )
-
+            
+            self.logger.info("Send text message")
             result = self.whatsapp_manager.send_text_message(
                 input_data.business_id,phone_number, input_data.text_message
             )

@@ -43,6 +43,7 @@ from src.domain.usecases.insight import (
     GenerateGapKnowladgeInput,
     GenerateGapKnowladge,
 )
+from src.domain.usecases.agent_new import InvokeCSAgentInput, InvokeCSAgent
 from src.infrastructure.ai.agent.manager import whatsapp_agent_manager
 from src.infrastructure.ai.agent.wa_agent import WhatsappAgentState
 
@@ -101,11 +102,7 @@ class AgentService(BaseService):
             self.business_knowladge_repo,
             self.whatsapp_agent_manager,
         )
-        self.invoke_agent_usecase = InvokeAgentUseCase(
-            self.analytic_repo,
-            self.whatsapp_agent_manager,
-            self.create_agent_obj_usecase,
-        )
+        self.invoke_agent_usecase = InvokeCSAgent(self.agent_repo)
         self.generate_insight_usecase = GenerateInsight(
             self.insight_repo, self.business_repo, self.get_category_percentages_usecase
         )
@@ -446,15 +443,7 @@ class AgentService(BaseService):
             self.logger.warning(f"User {user_email}: Agent not found")
             raise AgentNotFound()
 
-        result = await self.invoke_agent_usecase.execute(
-            InvokeAgentInput(
-                agent.phone_number_id,
-                agent.business_id,
-                agent.id,
-                str(agent.business_id),
-                WhatsappAgentState(messages=[], user_message=text_message),
-            )
-        )
+        result = await self.invoke_agent_usecase.execute(InvokeCSAgentInput(agent.id, str(agent.business_id), text_message))
 
         if not result.is_success():
             self.logger.error(f"User {user_email}: invoke agent usecase is error")

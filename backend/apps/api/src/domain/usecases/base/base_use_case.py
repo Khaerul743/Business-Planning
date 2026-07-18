@@ -21,8 +21,8 @@ class BaseUseCase(ABC, Generic[InputType, OutputType]):
     the business logic required to perform that operation.
     """
 
-    def __init__(self):
-        self.logger = get_logger(__name__)
+    def __init__(self, name):
+        self.logger = get_logger(name)
 
     @abstractmethod
     async def execute(self, input_data: InputType) -> UseCaseResult[OutputType]:

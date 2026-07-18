@@ -63,10 +63,10 @@ class BaseNode:
         messages: list[Any],
         output_model: type[BaseModel],
     ):
-        """Call LLM and return a parsed pydantic model instance as a dictionary (structured output)."""
+        """Call LLM and return a parsed pydantic model instance and token usage."""
         try:
             llm_model = self.llm(provider, model, temperature).with_structured_output(
-                output_model
+                output_model, include_raw=True
             )
 
             if hasattr(llm_model, "ainvoke"):
@@ -74,7 +74,10 @@ class BaseNode:
             else:
                 raise TypeError("Provided LLM does not support invoke/ainvoke.")
 
-            return response
+            parsed = response["parsed"]
+            raw = response["raw"]
+            tokens = raw.usage_metadata.get("total_tokens", 0) if hasattr(raw, "usage_metadata") and raw.usage_metadata else 0
+            return parsed, tokens
         except Exception as e:
             self._logger.error(f"Error while invoking LLM: {e}")
             raise

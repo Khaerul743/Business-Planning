@@ -9,7 +9,7 @@ class ICustomerRepository(ABC):
     @abstractmethod
     async def get_or_insert_custormer(
         self, agent_id: UUID, customer_data: InsertNewCustomer
-    ) -> Customers:
+    ) -> tuple[Customers, bool]:
         pass
 
     @abstractmethod

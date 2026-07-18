@@ -111,6 +111,7 @@ class WhatsappAgentState(BaseAgentStateModel):
     is_business_related: bool = False
     knowledge_gap_detected: bool = False
     sentiment: Literal["positif", "negatif", "netral"] = "netral"
+    token_usage: int = 0
 
     reasoning_trace: Optional[str] = None
     skip_human_message: bool = False

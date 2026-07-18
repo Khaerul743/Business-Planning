@@ -15,5 +15,6 @@ def human_handoff(confidence_level: float, handoff_reason: str,decision_summary:
             "confidence_level": confidence_level,
             "handoff_reason": handoff_reason,
             "skip_human_message": True,
+            "token_usage": runtime.state.token_usage
         }
     )

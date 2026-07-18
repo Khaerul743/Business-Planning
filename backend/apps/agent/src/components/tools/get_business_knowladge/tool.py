@@ -28,7 +28,10 @@ class BusinessKnowladgeTool:
         prompt = ToolPrompt.gathering_knowledge(business_context, query, conversation_context)
         business_knowladge_key = self._get_business_knowledge_key(business_context)
 
-        result = self.model.with_structured_output(create_gathering_knowledge_output(business_knowladge_key)).invoke(prompt)
+        result_dict = self.model.with_structured_output(create_gathering_knowledge_output(business_knowladge_key), include_raw=True).invoke(prompt)
+        result = result_dict["parsed"]
+        raw = result_dict["raw"]
+        tokens = raw.usage_metadata.get("total_tokens", 0) if hasattr(raw, "usage_metadata") and raw.usage_metadata else 0
         rag_query = result.rag_query
         business_knowladge_key_choosed = result.business_knowladge
 
@@ -38,7 +41,7 @@ class BusinessKnowladgeTool:
 
         #RAG HERE
 
-        return f"BUSINESS KNOWLEDGE: \n {'\n'.join(business_knowladge_result)}"
+        return f"BUSINESS KNOWLEDGE: \n {'\n'.join(business_knowladge_result)}", tokens
 
 business_knowladge_service = BusinessKnowladgeTool()
 
@@ -49,12 +52,13 @@ def get_business_knowladge(query: str, conversation_context: str, decision_summa
     if business_context is None:
         return "Tidak ada business knowladge yang tersedia."
         
-    knowledge = business_knowladge_service.gathering_knowledge(business_context, query, conversation_context)
+    knowledge, tokens = business_knowladge_service.gathering_knowledge(business_context, query, conversation_context)
     return Command(
         update={
             "messages": [ToolMessage(content=knowledge, tool_call_id=runtime.tool_call_id)],
             "skip_human_message": True,
-            "decision_summary": decision_summary
+            "decision_summary": decision_summary,
+            "token_usage": runtime.state.token_usage + tokens
         }
     )
 

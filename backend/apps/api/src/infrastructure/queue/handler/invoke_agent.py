@@ -9,7 +9,7 @@ from src.domain.usecases.whatsapp import (
 )
 from src.domain.repositories import (
     CustomerRepository,
-    AgentConfigurationRepository,
+    AgentRepository,
     AnalyticsRepository,
     BusinessRepository,
     DocumentKnowladgeRepository,
@@ -21,10 +21,7 @@ from src.domain.repositories import (
 from src.app.validators.customer_schema import InsertNewCustomer
 from src.app.validators.whatsapp_schema import WebhookPayload
 from src.infrastructure.meta import WhatsappManager
-from src.domain.usecases.agent import CreateAgentObjUseCase
-from src.infrastructure.ai.agent.wa_agent import WhatsappAgentState
-
-from src.infrastructure.ai.agent.manager import whatsapp_agent_manager
+from src.domain.usecases.agent_new import InvokeCSAgent
 from .base import BaseJobHandler, BaseJob
 
 
@@ -33,7 +30,7 @@ class InvokeAgentHandler(BaseJobHandler):
         self.db = db
         # Repositories
         self.customer_repo = CustomerRepository(self.db)
-        self.agent_conf_repo = AgentConfigurationRepository(self.db)
+        self.agent_repo = AgentRepository(self.db)
         self.analytic_repo = AnalyticsRepository(self.db)
         self.business_repo = BusinessRepository(self.db)
         self.document_knowladge_repo = DocumentKnowladgeRepository(self.db)
@@ -46,20 +43,8 @@ class InvokeAgentHandler(BaseJobHandler):
         self.whatsapp_manager = WhatsappManager()
 
         # usecases
-        self.create_agent_obj_usecase = CreateAgentObjUseCase(
-            self.agent_conf_repo,
-            self.business_repo,
-            self.document_knowladge_repo,
-            self.business_knowladge_repo,
-            whatsapp_agent_manager,
-        )
-        self.message_processing_usecase = MessageProcessingUseCase(
-            self.customer_repo,
-            self.agent_conf_repo,
-            self.analytic_repo,
-            whatsapp_agent_manager,
-            self.create_agent_obj_usecase,
-        )
+        self.invoke_agent_cs_usecase = InvokeCSAgent(self.agent_repo)
+        self.message_processing_usecase = MessageProcessingUseCase(self.customer_repo, self.analytic_repo, self.invoke_agent_cs_usecase)
         self.human_fallback_usecase = HumanFallbackUseCase(
             self.human_fallback_repo, self.conversation_repo, self.customer_repo
         )
@@ -85,17 +70,15 @@ class InvokeAgentHandler(BaseJobHandler):
             phone_number=payload["customer_data"]["phone_number"],
             name=payload["customer_data"]["name"],
         )
-        agent_state = WhatsappAgentState(
-            messages=[], user_message=payload["user_message"]
-        )
         webhook_payload = WebhookPayload.model_validate(payload["webhook_payload"])
         input_data = ReceiveMessageInput(
             payload["agent_id"],
             payload["business_id"],
             payload["phone_number_id"],
             customer_data,
-            agent_state,
-            webhook_payload,
+            payload["user_message"],
+            webhook_payload
         )
+        print(input_data)
         await self.receive_message_usecase.execute(input_data)
         return None

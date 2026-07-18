@@ -25,4 +25,5 @@ class InsertAgentAnalytic(BaseModel):
     ai_response: str
     is_business_related: bool
     knowledge_gap_detected: bool
+    sentiment: Literal["positif", "netral", "negatif"]
     created_at: Optional[datetime] = None

@@ -42,7 +42,14 @@ class WhatsappAgentNode(BaseNode):
 
         agent_config = await self.agent_configuration_manager.get(uuid.UUID(agent_id))
 
-        return {"configuration": agent_config, "business_context": business_context}
+        return {
+            "configuration": agent_config,
+            "business_context": business_context,
+            "fallback_human": False,
+            "confidence_level": 100,
+            "handoff_reason": "",
+            "token_usage": 0
+        }
 
     
     async def main_agent(self, state: WhatsappAgentState):
@@ -53,22 +60,25 @@ class WhatsappAgentNode(BaseNode):
             main_prompt = self.wa_agent_prompt.main_llm(state.configuration, state.business_context, state.user_message)
             prompt_setup = [main_prompt[0]] + list(state.messages)
             result = await self.invoke_llm_with_tool("openai","gpt-4o-mini",0.7,prompt_setup, [get_business_knowladge, review_human_handoff, human_handoff])
+            tokens = result.usage_metadata.get("total_tokens", 0) if hasattr(result, "usage_metadata") and result.usage_metadata else 0
             return {
                 "messages": result,
                 "skip_human_message": False,
-                "response": result.content
+                "response": result.content,
+                "token_usage": state.token_usage + tokens
             }
         main_prompt = self.wa_agent_prompt.main_llm(state.configuration, state.business_context, state.user_message)
         prompt_setup = self.get_prompt_setup(main_prompt, state.messages)
         result = await self.invoke_llm_with_tool("openai","gpt-4o-mini",0.7,prompt_setup, [get_business_knowladge, review_human_handoff, human_handoff])
+        tokens = result.usage_metadata.get("total_tokens", 0) if hasattr(result, "usage_metadata") and result.usage_metadata else 0
         return {
             "messages": [HumanMessage(content=state.user_message), result],
-            "response": result.content
+            "response": result.content,
+            "token_usage": state.token_usage + tokens
         }
 
     def should_continue(self, state: WhatsappAgentState):
         last_message = state.messages[-1]
-        print(f"State === {state}")
         if last_message.tool_calls:
             return "tool"
         return "message_analysis"
@@ -77,10 +87,11 @@ class WhatsappAgentNode(BaseNode):
         if state.business_context is None or state.configuration is None:
             raise RuntimeError("Business context or agent configuration is None")    
         message_analysis_prompt = self.wa_agent_prompt.message_analysis_prompt(state.business_context.business_detail_information, state.user_message, state.response)
-        result = await self.invoke_llm_with_structured_output(state.configuration.llm_provider, state.configuration.llm_model, state.configuration.temperature or 0.7,message_analysis_prompt, MessageAnalysisOutput)
+        result, tokens = await self.invoke_llm_with_structured_output(state.configuration.llm_provider, state.configuration.llm_model, state.configuration.temperature or 0.7,message_analysis_prompt, MessageAnalysisOutput)
         return {
             "category": result.category,
             "is_business_related": result.is_business_related,
             "knowledge_gap_detected": result.knowledge_gap_detected,
-            "sentiment": result.sentiment
+            "sentiment": result.sentiment,
+            "token_usage": state.token_usage + tokens
         }
