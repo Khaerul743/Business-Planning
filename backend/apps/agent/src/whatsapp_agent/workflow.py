@@ -1,8 +1,9 @@
 from langgraph.graph import StateGraph, START, END
 from .nodes import WhatsappAgentNode
-from .model import WhatsappAgentState, ContextAgent
+from .model import WhatsappAgentState
 from langgraph.prebuilt import ToolNode
 from src.components.tools import get_business_knowladge, human_handoff, review_human_handoff
+from src.core.context_model import ContextAgent
 
 class WhatsappAgentWorkflow:
     def __init__(self, nodes: WhatsappAgentNode):

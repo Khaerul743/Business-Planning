@@ -1,7 +1,5 @@
 from pydantic import BaseModel, Field
 from typing import Optional
-from langchain_core.messages import BaseMessage
-from langgraph.graph import add_messages
 from src.infrastructure.ai.agent.base import BaseAgentStateModel
 
 

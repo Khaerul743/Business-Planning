@@ -1,7 +1,6 @@
 from typing import Annotated, Any, List, Literal, Optional
 
 from pydantic import BaseModel, Field, create_model
-from typing_extensions import TypedDict
 from src.base.base_state import BaseAgentStateModel
 from .schema.business_context import BusinessContext
 from shared.schemas import AgentConfig
@@ -78,11 +77,6 @@ def create_call_preparation_tool_model(business_knowladge: list[str]):
         ),
         __base__=BaseModel,
     )
-
-
-class ContextAgent(TypedDict):
-    business_id: str
-    agent_id: str
 
 
 class WhatsappAgentState(BaseAgentStateModel):

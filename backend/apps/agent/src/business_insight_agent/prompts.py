@@ -1,18 +1,11 @@
-import typing
-import langchain_core.messages
+from typing import Optional
+from langchain_core.messages import SystemMessage, HumanMessage, BaseMessage
 
-class AgentAnalysisPrompt:
-    def _get_prompt_setup(
-        self, system_message: str, human_message: str
-    ) -> list[langchain_core.messages.BaseMessage]:
-        return [
-            langchain_core.messages.SystemMessage(content=system_message),
-            langchain_core.messages.HumanMessage(content=human_message),
-        ]
-
+class BusinessInsightPrompt:
+    @staticmethod
     def context_builder_prompt(
-        self, business_description: str, raw_data: dict
-    ) -> list[langchain_core.messages.BaseMessage]:
+        business_description: str, raw_data: dict
+    ) -> list[BaseMessage]:
 
         system_message = (
             "You are a data context builder for a WhatsApp customer service SaaS platform. "
@@ -28,11 +21,12 @@ class AgentAnalysisPrompt:
             "Write in Indonesian."
         )
 
-        return self._get_prompt_setup(system_message, human_message)
+        return [SystemMessage(content=system_message), HumanMessage(content=human_message)]
 
+    @staticmethod
     def insight_generator(
-        self, business_description: str, insight_context: typing.Optional[str] = None
-    ):
+        business_description: str, context: Optional[str] = None
+    ) -> list[BaseMessage]:
 
         system_message = (
             "You are a business analyst for a WhatsApp customer service SaaS platform. "
@@ -43,7 +37,7 @@ class AgentAnalysisPrompt:
 
         human_message = (
             f"Business: {business_description}\n\n"
-            f"Context:\n{insight_context}\n\n"
+            f"Context:\n{context}\n\n"
             "Generate:\n"
             "1. insight — what is happening (positive and/or negative)\n"
             "2. reason — why it is happening (based on data)\n"
@@ -51,15 +45,15 @@ class AgentAnalysisPrompt:
             "Write in Indonesian."
         )
 
-        return self._get_prompt_setup(system_message, human_message)
+        return [SystemMessage(content=system_message), HumanMessage(content=human_message)]
 
+    @staticmethod
     def recommendation_generator(
-        self,
         business_description: str,
-        insight: typing.Optional[list[str]] = None,
-        reason: typing.Optional[str] = None,
-        impact: typing.Optional[list[str]] = None,
-    ):
+        insight: Optional[list[str]] = None,
+        reason: Optional[str] = None,
+        impact: Optional[list[str]] = None,
+    ) -> list[BaseMessage]:
 
         system_message = (
             "You are a business consultant for a SaaS customer service platform. "
@@ -76,5 +70,4 @@ class AgentAnalysisPrompt:
             f"Dampak: {impact}\n\n"
             "Berikan 2–3 rekomendasi singkat dan spesifik."
         )
-
-        return self._get_prompt_setup(system_message, human_message)
+        return [SystemMessage(content=system_message), HumanMessage(content=human_message)]

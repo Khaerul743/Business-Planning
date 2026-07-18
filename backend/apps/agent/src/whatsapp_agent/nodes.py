@@ -9,9 +9,9 @@ from src.base.base_node import BaseNode
 from .prompts import WhatsappAgentPrompt
 from .model import (
     WhatsappAgentState,
-    ContextAgent,
     MessageAnalysisOutput,
 )
+from src.core.context_model import ContextAgent
 from src.components.tools import get_business_knowladge, human_handoff, review_human_handoff
 
 

@@ -4,7 +4,8 @@
     "."
   ],
   "graphs": {
-    "customer_service_agent": "./src/agent/wa_agent.py:graph"
+    "customer_service_agent": "./src/agent/wa_agent.py:graph",
+    "business_insight_agent": "./src/agent/business_insight_agent.py:graph"
   },
   "env": ".env",
   "image_distro": "wolfi"
