@@ -28,7 +28,8 @@ class Settings(BaseSettings):
     #Service
     WA_WEB_SERVICE: str
     LANGGRAPH_SERVER: str
-    
+
+    CHROMADB_PATH: str
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

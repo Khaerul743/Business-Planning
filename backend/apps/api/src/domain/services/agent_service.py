@@ -505,20 +505,29 @@ class AgentService(BaseService):
         if agent_id is None:
             raise AgentNotFound()
 
-        usecase_result = await self.generate_gap_knowladge.execute(
-            GenerateGapKnowladgeInput(business_id=business_id, agent_id=agent_id)
-        )
+        # usecase_result = await self.generate_gap_knowladge.execute(
+        #     GenerateGapKnowladgeInput(business_id=business_id, agent_id=agent_id)
+        # )
 
-        if not usecase_result.is_success():
-            self.raise_error_usecase(usecase_result)
+        # if not usecase_result.is_success():
+        #     self.raise_error_usecase(usecase_result)
 
-        result_data = usecase_result.get_data()
-        if not result_data:
-            raise RuntimeError(
-                "Generate gap knowladge usecase did not returned the data"
-            )
+        # result_data = usecase_result.get_data()
+        # if not result_data:
+        #     raise RuntimeError(
+        #         "Generate gap knowladge usecase did not returned the data"
+        #     )
 
-        return result_data
+        queue_id = uuid4()
+        payload_queue = {
+            "queue_id": str(queue_id),
+            "type": "generate_gap_knowladge",
+            "retry": 0,
+            "job_payload": {"business_id": str(business_id), "agent_id": str(agent_id)},
+        }
+        self.redis_queue.enqueue(payload_queue)
+
+        return
 
     async def get_knowladge_gap(self):
         user_id = current_user_id.get()

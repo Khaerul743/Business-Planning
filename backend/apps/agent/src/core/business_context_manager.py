@@ -58,6 +58,7 @@ class BusinessContextManager:
         if document_knowladge is None:
             self._logger.warning("Document knowladge not found")
             return
+        
         list_document_knowladge = [
             DocumentRagDetail(title=i.title, description=i.description)
             for i in document_knowladge

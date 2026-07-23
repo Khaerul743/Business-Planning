@@ -2,7 +2,7 @@ from langchain.tools import tool, ToolRuntime
 from langchain_core.messages import ToolMessage
 from langgraph.types import Command
 from langchain_openai import ChatOpenAI
-from src.whatsapp_agent.model import ContextAgent
+from src.core.context_model import ContextAgent
 from src.whatsapp_agent.schema.business_context import BusinessContext
 from .schema.get_business_knowladge import BusinessKnowladgeInput
 from .schema.output_schema import create_gathering_knowledge_output

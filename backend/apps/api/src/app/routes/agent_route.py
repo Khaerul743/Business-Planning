@@ -166,11 +166,11 @@ async def get_knowlage_gap(
     return success_response(result, "get knowladge gap is successfully")
 
 
-# @router.get("/knowlage_gap/trigger", status_code=status.HTTP_200_OK)
-# async def trigger_knowlage_gap(
-#     _: None = Depends(jwtHandler.jwt_required),
-#     __: None = Depends(require_roles("admin", "user")),
-#     controller: AgentController = Depends(get_agent_controller),
-# ):
-#     result = await controller.triger_gap_knowladge_handler()
-#     return success_response(result, "Generate knowladge gap is successfully")
+@router.get("/knowlage_gap/trigger", status_code=status.HTTP_200_OK)
+async def trigger_knowlage_gap(
+    _: None = Depends(jwtHandler.jwt_required),
+    __: None = Depends(require_roles("admin", "user")),
+    controller: AgentController = Depends(get_agent_controller),
+):
+    await controller.triger_gap_knowladge_handler()
+    return success_response({"status": "receive"}, "Generate knowladge gap is successfully")

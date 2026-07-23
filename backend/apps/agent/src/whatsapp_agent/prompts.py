@@ -7,6 +7,7 @@ from .schema.business_context import (
     BusinessDetailInformation,
     BusinessContext,
 )
+from .schema.business_context import DocumentRagDetail
 from shared.schemas import AgentConfig
 
 
@@ -27,6 +28,15 @@ Tone yang diterapkan kepada kamu:
 
 Bertingkahlah seperti seorang customer service.
 """
+    def format_docs_to_llm_string(self,docs: list[DocumentRagDetail]) -> str:
+        if not docs:
+            return "Tidak ada dokumen relevan."
+        
+        formatted_items = [
+            f"### Dokumen {i}: {doc.title}\n**Deskripsi:** {doc.description.strip()}"
+            for i, doc in enumerate(docs, 1)
+        ]
+        return "\n\n".join(formatted_items)
     def main_llm(
         self,
         agent_configuration: AgentConfig,
@@ -34,6 +44,9 @@ Bertingkahlah seperti seorang customer service.
         user_message: str,
         conversation_summary: Optional[str] = None,
     ) -> list[BaseMessage]:
+        document_knowledge_str = "Tidak ada document knowledge yang tersedia"
+        if business_context.document_rag_detail != None:
+            document_knowledge_str = self.format_docs_to_llm_string(business_context.document_rag_detail)
         system_message = f"""
 {self.main_prompt(agent_configuration.base_prompt or "", agent_configuration.tone, business_context)}
 
@@ -41,15 +54,23 @@ Adapun tools yang tersedia dan dapat kamu gunakan. Berikut penjelasan mengenai t
 * get_business_knowledge(): Yaitu digunakan untuk mendapatkan pengetahuan mengenai bisnis terkait.
 * review_human_handoff(): Yaitu digunakan untuk me-review apakah human handoff diperlukan atau tidak.
 * human_handoff(): yaitu digunakan untuk mengalihkan percakapan kepada human admin.
+* similarity_search_document_knowledge(): yaitu digunakan untuk mengambil informasi dari document knowladge berdasarkan similarity search.
 
+# daftar dokument knowledge yang tersedia:
+{document_knowledge_str}
+
+daftar dokument berisi mengenai title dan deskripsi dari setiap dokument yang tersedia.
 Pastikan kamu menggunakan tools yang berkaitan sesuai dengan permasalahan yang sedang kamu hadapi.
 
-#Rules:
+# Rules penggunaan tools yang berkaitan dengan pengambilan informasi:
+* Jangan memaksa untuk menggunakan tool document knowledge apabila tidak ada daftar document yang relevan.
+
+# Rules Keseluruhan:
 * Jangan menjawab pertanyaan umum yang tidak berkaitan dengan bisnis.
 * Jangan berhalusinasi karena ketidaktahuan, gunakan tool get_business_knowledge() untuk mendapatkan pengetahuan terkait dengan bisnis.
 * Jangan menjawab karena tidak tahu, sebelum kamu mencobanya untuk mencari tahu dengan menggunakan tool get_business_knowledge().
 * Sebelum melakukan human_handoff, sebaiknya review dulu apakah human handoff memang diperlukan dengan cara menggunakan tool review_human_handoff.
-* Lakukan human handoff secara langsung, jika customer merasa marah dengan kamu atau dia ingin berbicara dengan admin manusia, tetapi sebelum melakukannya sebaiknya kamu tawarkan terlebih dahulu bahwa ada opsi untuk mengalihkan percakapan kepada human admin.
+* Lakukan human handoff secara langsung, jika customer merasa marah dengan kamu atau dia ingin berbicara dengan admin manusia, tetapi sebelum melakukannya sebaiknya kamu tawarkan terlebih dahulu bahwa terdapat opsi untuk mengalihkan percakapan kepada human admin.
 """
         human_message = user_message
         return [

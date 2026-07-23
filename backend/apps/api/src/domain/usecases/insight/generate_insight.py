@@ -1,9 +1,7 @@
+import httpx
 from uuid import UUID
 from dataclasses import dataclass
-from src.infrastructure.ai.agent.agent_analysis_messages import (
-    AgentAnalysisMessages,
-    AgentAnalysisState,
-)
+from src.infrastructure.langgraph_server import langgraph_client, InsightAgentConfig
 from src.domain.usecases.base import BaseUseCase, UseCaseResult
 from src.domain.usecases.interfaces import IInsightRepository, IBusinessRepository
 from src.app.validators.insight_schema import AddInsight
@@ -36,8 +34,8 @@ class GenerateInsight(BaseUseCase[GenerateInsightInput, GenerateInsightOutput]):
         self.insight_repo = insight_repo
         self.business_repo = business_repo
         self.category_percentage_usecase = category_percentage_usecase
-        self.agent_analysis = AgentAnalysisMessages()
 
+        super().__init__(__name__)
     async def execute(
         self, input_data: GenerateInsightInput
     ) -> UseCaseResult[GenerateInsightOutput]:
@@ -76,31 +74,35 @@ class GenerateInsight(BaseUseCase[GenerateInsightInput, GenerateInsightOutput]):
                 return UseCaseResult.error_result(
                     "Business not found", BusinessNotFound()
                 )
-
             # Generate Insight
-            result = self.agent_analysis.execute(
-                AgentAnalysisState(
-                    messages=[],
-                    user_message="",
-                    business_description=business.description,
-                    raw_data=category_percentage,
-                ),
-                "default",
-            )
+            try:
+                self.logger.info("run business insight agent")
+                result = await langgraph_client.run_business_insight_agent(str(business.id), InsightAgentConfig(str(input_data.agent_id), business.description, category_percentage))
+            except httpx.HTTPStatusError as exc:
+                self.logger.error(f"Error run business insight agent: {exc}")
+                self.logger.info("Registered new thread id by business id")
+                await langgraph_client.register_thread_id(business.id)
+                self.logger.info("Re-run business insight agent")
+                result = await langgraph_client.run_business_insight_agent(str(business.id), InsightAgentConfig(str(input_data.agent_id), business.description, category_percentage))
 
+            insight_str = "\n".join([i["content"] for i in result["insight"]])
+            impact_str = "\n".join([i["content"] for i in result["impact"]])
+            recommendation_str = "\n".join([i["content"] for i in result["recommendation"]])
             insight_payload = AddInsight(
                 overview=result["insight_context"],
-                insight=result["insight"],
+                insight=insight_str,
                 reason=result["reason"],
-                impact=result["impact"],
-                recommendation=result["recommendation"],
+                impact=impact_str,
+                recommendation=recommendation_str,
             )
+
             insight = await self.insight_repo.createInsight(
                 input_data.business_id, insight_payload
             )
 
             return UseCaseResult.success_result(GenerateInsightOutput(insight=insight))
         except Exception as e:
+            self.logger.error(f"Unexpected error in generate insight usecase: :{e}")
             return UseCaseResult.error_result(
                 f"Unexpected error in generate insight usecase: {e}", e
             )

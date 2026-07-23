@@ -1,3 +1,4 @@
+import httpx
 from uuid import UUID
 from typing import Optional
 from dataclasses import dataclass
@@ -8,12 +9,8 @@ from src.domain.usecases.interfaces import (
     IInsightRepository,
 )
 from src.core.exceptions.business_exception import BusinessNotFound
-from src.infrastructure.ai.agent.agent_analysis_gap import (
-    AgentAnalysisGap,
-    AgentAnalysisGapState,
-)
 from src.app.validators.insight_schema import AddGapKnowlage
-
+from src.infrastructure.langgraph_server import langgraph_client, GapAnalysisAgentConfig
 
 @dataclass
 class GenerateGapKnowladgeInput:
@@ -40,7 +37,8 @@ class GenerateGapKnowladge(
         self.business_repo = business_repo
         self.analytic_repo = analytic_repo
         self.insight_repo = insight_repo
-        self.agent_analysis_gap = AgentAnalysisGap()
+
+        super().__init__(__name__)
 
     async def execute(
         self, input_data: GenerateGapKnowladgeInput
@@ -54,25 +52,29 @@ class GenerateGapKnowladge(
                 return UseCaseResult.error_result(
                     "Business not found", BusinessNotFound()
                 )
-            business_description = business.description
 
             # get conversation gap
             gap_conversation = await self.analytic_repo.get_knowladge_gap(
                 input_data.agent_id
             )
+
+            print("=========================")
+            print(gap_conversation)
+
             if gap_conversation is None:
                 return UseCaseResult.success_result(GenerateGapKnowladgeOutput())
+            
+            try:
+                self.logger.info("run business insight agent")
+                result = await langgraph_client.run_gap_analysis_agent(str(business.id), GapAnalysisAgentConfig(str(input_data.agent_id), business.description, gap_conversation))
+            except httpx.HTTPStatusError as exc:
+                self.logger.error(f"Error run business insight agent: {exc}")
+                self.logger.info("Registered new thread id by business id")
+                await langgraph_client.register_thread_id(business.id)
+                self.logger.info("Re-run business insight agent")
+                result = await langgraph_client.run_gap_analysis_agent(str(business.id), GapAnalysisAgentConfig(str(input_data.agent_id), business.description, gap_conversation))
 
-            result = self.agent_analysis_gap.execute(
-                AgentAnalysisGapState(
-                    messages=[],
-                    user_message="",
-                    business_description=business_description,
-                    raw_data=gap_conversation,
-                ),
-                thread_id="default",
-            )
-
+            print(result)
             # Insert into database
             result_db = await self.insight_repo.insert_gap_knowladge(
                 input_data.business_id,
@@ -92,6 +94,7 @@ class GenerateGapKnowladge(
             )
 
         except Exception as e:
+            self.logger.error(f"Error while generate gap knowladge: {e}")
             return UseCaseResult.error_result(
                 f"Unexpected error in usecase Generate gap knowladge: {e}", e
             )

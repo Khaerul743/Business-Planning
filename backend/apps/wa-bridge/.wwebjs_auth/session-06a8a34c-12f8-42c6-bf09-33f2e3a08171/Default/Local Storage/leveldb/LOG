@@ -1,3 +1,2 @@
-2026/06/24-10:47:47.979 4f67 Reusing MANIFEST /home/khaerul/Documents/project_wa/backend/apps/wa-bridge/.wwebjs_auth/session-06a8a34c-12f8-42c6-bf09-33f2e3a08171/Default/Local Storage/leveldb/MANIFEST-000001
-2026/06/24-10:47:48.005 4f67 Recovering log #3
-2026/06/24-10:47:48.008 4f67 Reusing old log /home/khaerul/Documents/project_wa/backend/apps/wa-bridge/.wwebjs_auth/session-06a8a34c-12f8-42c6-bf09-33f2e3a08171/Default/Local Storage/leveldb/000003.log 
+2026/07/23-18:36:18.610 40fd Creating DB /home/khaerul/Documents/project_wa/backend/apps/wa-bridge/.wwebjs_auth/session-06a8a34c-12f8-42c6-bf09-33f2e3a08171/Default/Local Storage/leveldb since it was missing.
+2026/07/23-18:36:18.656 40fd Reusing MANIFEST /home/khaerul/Documents/project_wa/backend/apps/wa-bridge/.wwebjs_auth/session-06a8a34c-12f8-42c6-bf09-33f2e3a08171/Default/Local Storage/leveldb/MANIFEST-000001

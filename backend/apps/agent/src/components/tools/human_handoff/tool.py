@@ -1,7 +1,7 @@
 from langgraph.types import Command
 from langchain.tools import tool, ToolRuntime
 from langchain_core.messages import ToolMessage
-from src.whatsapp_agent.model import ContextAgent
+from src.core.context_model import ContextAgent
 from .schema.handoff_schema import HumanHandoffInput
 
 @tool(args_schema=HumanHandoffInput)

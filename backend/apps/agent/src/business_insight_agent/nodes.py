@@ -10,9 +10,12 @@ class BusinessInsightNodes(BaseNode):
     def __init__(self, agent_configuration_manager):
         self.agent_configuration_manager = agent_configuration_manager
 
+        super().__init__(__name__)
+
     async def get_business_context(
         self, state: BusinessInsightState, runtime: Runtime[ContextAgent]
     ):
+        print(f"Business Insight KONTOL============================================================================================================")
         configurable = runtime.context or {}
         agent_id = configurable.get("agent_id")
         if agent_id is None:
@@ -38,20 +41,19 @@ class BusinessInsightNodes(BaseNode):
             raise RuntimeError("Agent configuration not found.")
         
         prompt = BusinessInsightPrompt.insight_generator(state.business_description, state.insight_context)
-        response = await self.invoke_llm_with_structured_output(state.configuration.llm_provider, state.configuration.llm_model, state.configuration.temperature or 0.5, prompt, InsightGeneratorOutput)
-        result_dict = response.model_dump()
+        result, tokens = await self.invoke_llm_with_structured_output(state.configuration.llm_provider, state.configuration.llm_model, state.configuration.temperature or 0.5, prompt, InsightGeneratorOutput)
+
         return {
-            "insight": result_dict["insight"],
-            "reason": result_dict["reason"],
-            "impact": result_dict["impact"],
+            "insight": result.insight,
+            "reason": result.reason,
+            "impact": result.impact,
         }
     
     async def recommdationGenerator(self, state: BusinessInsightState):
         if state.configuration is None:
             raise RuntimeError("Agent configuration not found.") 
         prompt = BusinessInsightPrompt.recommendation_generator(state.business_description, state.insight, state.reason, state.impact)
-        response = await self.invoke_llm_with_structured_output(state.configuration.llm_provider, state.configuration.llm_model, state.configuration.temperature or 0.5, prompt, RecommendationOutput)
-        result_dict = response.model_dump()
+        result, tokens = await self.invoke_llm_with_structured_output(state.configuration.llm_provider, state.configuration.llm_model, state.configuration.temperature or 0.5, prompt, RecommendationOutput)
         return {
-            "recommendation": result_dict["recommendation"]
+            "recommendation": result.recommendation
         }

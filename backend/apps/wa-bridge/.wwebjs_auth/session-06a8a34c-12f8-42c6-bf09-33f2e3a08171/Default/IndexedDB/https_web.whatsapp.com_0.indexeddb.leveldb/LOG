@@ -1,5 +1,5 @@
-2026/06/24-10:53:17.669 4f47 Reusing MANIFEST /home/khaerul/Documents/project_wa/backend/apps/wa-bridge/.wwebjs_auth/session-06a8a34c-12f8-42c6-bf09-33f2e3a08171/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/06/24-10:53:17.677 4f47 Recovering log #109
-2026/06/24-10:53:17.774 4f47 Reusing old log /home/khaerul/Documents/project_wa/backend/apps/wa-bridge/.wwebjs_auth/session-06a8a34c-12f8-42c6-bf09-33f2e3a08171/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000109.log 
-2026/06/24-10:53:17.776 4f47 Delete type=2 #110
-2026/06/24-10:53:17.776 4f47 Delete type=2 #108
+2026/07/23-18:36:22.534 40d7 Creating DB /home/khaerul/Documents/project_wa/backend/apps/wa-bridge/.wwebjs_auth/session-06a8a34c-12f8-42c6-bf09-33f2e3a08171/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb since it was missing.
+2026/07/23-18:36:22.542 40d7 Reusing MANIFEST /home/khaerul/Documents/project_wa/backend/apps/wa-bridge/.wwebjs_auth/session-06a8a34c-12f8-42c6-bf09-33f2e3a08171/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/07/23-18:37:05.688 40d7 Level-0 table #5: started
+2026/07/23-18:37:05.911 40d7 Level-0 table #5: 1036150 bytes OK
+2026/07/23-18:37:05.923 40d7 Delete type=0 #3

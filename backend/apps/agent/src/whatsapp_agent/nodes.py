@@ -12,8 +12,7 @@ from .model import (
     MessageAnalysisOutput,
 )
 from src.core.context_model import ContextAgent
-from src.components.tools import get_business_knowladge, human_handoff, review_human_handoff
-
+from src.components.tools import get_business_knowladge, human_handoff, review_human_handoff, similarity_search_document_knowledge
 
 class WhatsappAgentNode(BaseNode):
     def __init__(
@@ -69,8 +68,9 @@ class WhatsappAgentNode(BaseNode):
             }
         main_prompt = self.wa_agent_prompt.main_llm(state.configuration, state.business_context, state.user_message)
         prompt_setup = self.get_prompt_setup(main_prompt, state.messages)
-        result = await self.invoke_llm_with_tool("openai","gpt-4o-mini",0.7,prompt_setup, [get_business_knowladge, review_human_handoff, human_handoff])
+        result = await self.invoke_llm_with_tool("openai","gpt-4o-mini",0.7,prompt_setup, [get_business_knowladge, similarity_search_document_knowledge, review_human_handoff, human_handoff])
         tokens = result.usage_metadata.get("total_tokens", 0) if hasattr(result, "usage_metadata") and result.usage_metadata else 0
+
         return {
             "messages": [HumanMessage(content=state.user_message), result],
             "response": result.content,
@@ -78,6 +78,7 @@ class WhatsappAgentNode(BaseNode):
         }
 
     def should_continue(self, state: WhatsappAgentState):
+        print(state)
         last_message = state.messages[-1]
         if last_message.tool_calls:
             return "tool"

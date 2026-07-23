@@ -10,7 +10,6 @@ async def main():
     # Membuat thread baru (thread digunakan untuk menyimpan conversation history / state)
     custom_thread_id = str(uuid7())
     thread = await client.threads.create(thread_id=custom_thread_id)
-    print(f"Created thread: {thread['thread_id']}")
 
     # Input state awal, sesuai dengan BaseAgentStateModel dan tipe input yang dibutuhkan
     inputs = {"messages": [], "user_message": "metode pembayarannya apa?"}

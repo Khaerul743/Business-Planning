@@ -45,3 +45,7 @@ class DocumentKnowladgeController(BaseController):
             return result.model_dump()
         except Exception as e:
             raise e
+
+    async def get_rag_simsearch_handler(self, agent_id: str, query: str):
+        result = await self.document_knowladge_service.get_similarity_search(agent_id, query)
+        return result

@@ -38,7 +38,7 @@ class AuthService(BaseService):
         self.samesite: Literal["lax", "strict", "none"] = "lax"
 
         # Use case
-        self.register_validation = RegisterValidation()
+        self.register_validation = RegisterValidation(__name__)
         self.register_new_user_usecase = RegisterNewUser(
             self.user_repo, self.register_validation, self.password_hashed
         )

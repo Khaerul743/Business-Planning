@@ -6,7 +6,7 @@ from src.whatsapp_agent.schema.business_context import BusinessContext
 from .schema.review_handoff_schema import JudgeDecision
 from .schema.review_handoff_schema import ReviewHumanHandoffInput
 from .prompt import HumanHandoffPrompt
-from src.whatsapp_agent.model import ContextAgent
+from src.core.context_model import ContextAgent
 
 class HumanHandoffService:
     def __init__(self):

@@ -83,12 +83,7 @@ class AgentController(BaseController):
 
     async def triger_gap_knowladge_handler(self):
         result = await self.agent_service.triger_knowladge_gap()
-        return {
-            "insight": result.insight,
-            "knolwadge_business_gap": result.knowladge_business_gap,
-            "recommendation": result.recommendation,
-        }
-
+        return 
     async def get_knowladge_gap_handler(self):
         result = await self.agent_service.get_knowladge_gap()
         if result is None:

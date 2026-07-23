@@ -30,4 +30,10 @@ dependencies = [
     "colorama>=0.4.6",
     "redis>=7.4.0",
     "langgraph-sdk>=0.3.1",
+    "pytest-asyncio>=1.4.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
 ]

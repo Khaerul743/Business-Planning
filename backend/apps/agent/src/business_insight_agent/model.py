@@ -25,10 +25,10 @@ class BusinessInsightState(BaseAgentStateModel):
     business_description: str
     raw_data: dict
     insight_context: Optional[str] = None
-    insight: Optional[list[str]] = None
+    insight: Optional[list[TextContent]] = None
     reason: Optional[str] = None
-    impact: Optional[list[str]] = None
-    recommendation: Optional[str] = None
+    impact: Optional[list[TextContent]] = None
+    recommendation: Optional[list[TextContent]] = None
 
     # Configuration
     configuration: Optional[AgentConfig] = None

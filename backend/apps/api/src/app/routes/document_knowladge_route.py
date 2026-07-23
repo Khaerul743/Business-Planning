@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from uuid import UUID
 from fastapi import APIRouter, Depends, Form, UploadFile, status
 
@@ -53,3 +54,17 @@ async def delete_document_knowladge(
 ):
     result = await controller.delete_document_knowladge_handler(document_knowladge_id)
     return success_response(result, "Delete document knowladge is successfully")
+
+class GetSimSearchPayload(BaseModel):
+    agent_id: str
+    query: str
+
+@router.post("/similarity_search")
+async def get_similiraty_search(
+    payload: GetSimSearchPayload,
+    controller: DocumentKnowladgeController = Depends(
+        get_document_knowladge_controller
+    )
+):
+    result = await controller.get_rag_simsearch_handler(payload.agent_id, payload.query)
+    return success_response({"result": result}, "Get similarity search is successfully")

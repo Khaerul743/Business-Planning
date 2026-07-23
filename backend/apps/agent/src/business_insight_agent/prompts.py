@@ -1,5 +1,6 @@
 from typing import Optional
 from langchain_core.messages import SystemMessage, HumanMessage, BaseMessage
+from .model import TextContent
 
 class BusinessInsightPrompt:
     @staticmethod
@@ -50,10 +51,13 @@ class BusinessInsightPrompt:
     @staticmethod
     def recommendation_generator(
         business_description: str,
-        insight: Optional[list[str]] = None,
+        insight: Optional[list[TextContent]] = None,
         reason: Optional[str] = None,
-        impact: Optional[list[str]] = None,
+        impact: Optional[list[TextContent]] = None,
     ) -> list[BaseMessage]:
+
+        insight_str = "\n".join([i.content for i in insight]) if insight != None else ""
+        impact_str = "\n".join([i.content for i in impact]) if impact != None else ""
 
         system_message = (
             "You are a business consultant for a SaaS customer service platform. "
@@ -65,9 +69,9 @@ class BusinessInsightPrompt:
 
         human_message = (
             f"Bisnis: {business_description}\n\n"
-            f"Insight: {insight}\n"
+            f"Insight: {insight_str}\n"
             f"Alasan: {reason}\n"
-            f"Dampak: {impact}\n\n"
+            f"Dampak: {impact_str}\n\n"
             "Berikan 2–3 rekomendasi singkat dan spesifik."
         )
         return [SystemMessage(content=system_message), HumanMessage(content=human_message)]

@@ -63,16 +63,17 @@ class MessageProcessingUseCase(
                     ),
                 )
 
-            if is_new_customer:
-                self.logger.info("Register new thread id")
-                thread_id = await langgraph_client.register_thread_id(customer.id)
-            else:
-                self.logger.info("Thread id is registered")
-                thread_id = customer.id
+            # if is_new_customer:
+            #     self.logger.info("Register new thread id")
+            #     thread_id = await langgraph_client.register_thread_id(customer.id)
+            # else:
+            #     self.logger.info("Thread id is registered")
+            #     thread_id = customer.id
 
             self.logger.info("Executing invoke agent cs usecase")
             start_time = perf_counter()
-            usecase_result = await self.invoke_cs_agent_usecase.execute(InvokeCSAgentInput(input_data.agent_id, str(thread_id), input_data.text_message))
+
+            usecase_result = await self.invoke_cs_agent_usecase.execute(InvokeCSAgentInput(input_data.agent_id, str(customer.id), input_data.text_message))
             response_time = perf_counter() - start_time
             if not usecase_result.is_success():
                 self.logger.error(f"invoke agent usecase is error")

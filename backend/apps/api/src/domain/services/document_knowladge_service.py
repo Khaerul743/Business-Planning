@@ -17,6 +17,7 @@ from src.domain.usecases.agent import (
     RagProcessUseCase,
     RagProcessUsecaseInput,
 )
+from src.domain.usecases.agent_new import GetRagSimSearch, GetRagSimSearchInput
 from src.infrastructure.vectorstore.chroma_db import rag_system
 from supabase import AsyncClient
 
@@ -46,6 +47,7 @@ class DocumentKnowladgeService(BaseService):
         self.delete_document_knowladge_usecase = DeleteDocumentKnowladgeUsecase(
             self.document_knowladge_repo, self.save_file_handler, self.rag_system
         )
+        self.get_rag_sim_search_usecase = GetRagSimSearch()
 
         super().__init__(__name__)
 
@@ -160,3 +162,18 @@ class DocumentKnowladgeService(BaseService):
         )
 
         return result_data.document_knowladge_data
+
+    async def get_similarity_search(self, agent_id: str, query: str):
+        usecase_result = await self.get_rag_sim_search_usecase.execute(GetRagSimSearchInput(agent_id=agent_id,query=query))
+        if not usecase_result.is_success():
+            self.logger.error(
+                f"get rag simsearch usecase is error"
+            )
+            self.raise_error_usecase(usecase_result)
+        result_data = usecase_result.get_data()
+        if result_data is None:
+            raise RuntimeError(
+                "rag simsearch usecase did not returned the data"
+            )
+
+        return result_data.result
