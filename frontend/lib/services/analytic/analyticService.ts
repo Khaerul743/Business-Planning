@@ -25,6 +25,10 @@ class AnalyticService extends HttpClient{
         return this.sendRequestWithAuth(request, "/agent/analytic/knowlage_gap");
     }
 
+    async getSentimentAnalysis(request: NextRequest): Promise<Response> {
+        return this.sendRequestWithAuth(request, "/agent/analytic/sentiment/me");
+    }
+
 }
 
 export const analyticService = new AnalyticService()

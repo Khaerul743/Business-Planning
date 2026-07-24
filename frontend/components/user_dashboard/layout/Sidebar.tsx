@@ -96,7 +96,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
         </SidebarSection>
         
         <SidebarSection title="System" isCollapsed={isCollapsed}>
-          <SidebarItem icon={Settings} label="Settings" href="/settings" isCollapsed={isCollapsed} />
+          <SidebarItem icon={Settings} label="Settings" href="/setting" isCollapsed={isCollapsed} />
         </SidebarSection>
 
       </div>

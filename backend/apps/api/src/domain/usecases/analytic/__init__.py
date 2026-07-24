@@ -23,6 +23,11 @@ from .get_category_percentages import (
     GetCategoryPercentagesOutput,
     GetCategoryPercentages,
 )
+from .get_sentiment_analysis import (
+    GetSentimentAnalysisInput,
+    GetSentimentAnalysisOutput,
+    GetSentimentAnalysisUseCase,
+)
 
 __all__ = [
     "GetAgentAnalyticsInput",
@@ -36,4 +41,8 @@ __all__ = [
     "GetCategoryPercentagesInput",
     "GetCategoryPercentagesOutput",
     "GetCategoryPercentages",
+    "GetSentimentAnalysisInput",
+    "GetSentimentAnalysisOutput",
+    "GetSentimentAnalysisUseCase",
 ]
+

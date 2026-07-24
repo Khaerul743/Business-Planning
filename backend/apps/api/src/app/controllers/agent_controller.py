@@ -53,6 +53,14 @@ class AgentController(BaseController):
             "samples": [s.model_dump() for s in result.samples],
         }
 
+    async def get_sentiment_analysis_handler(self):
+        result = await self.agent_service.get_sentiment_analysis()
+        return {
+            **result.summary,
+            "samples": result.samples,
+        }
+
+
     async def get_insight_handler(self):
         result = await self.agent_service.get_insight()
         result_dict = result.model_dump()

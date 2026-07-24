@@ -1,5 +1,6 @@
 import { Bell, ChevronLeft, Menu, Search, User } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 interface HeaderProps {
@@ -86,9 +87,9 @@ export const Header: React.FC<HeaderProps> = ({
             <p className="text-sm font-medium text-gray-900">{userName}</p>
             <p className="text-xs text-gray-500 capitalize">{userRole}</p>
           </div>
-          <button className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 hover:ring-2 hover:ring-offset-2 hover:ring-indigo-400 transition-all">
+          <Link href="/setting" className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 hover:ring-2 hover:ring-offset-2 hover:ring-indigo-400 transition-all" title="Business Settings">
             <User size={18} />
-          </button>
+          </Link>
         </div>
       </div>
     </header>

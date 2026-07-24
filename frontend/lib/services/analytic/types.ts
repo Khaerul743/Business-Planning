@@ -48,3 +48,17 @@ export interface KnowledgeGapResponse {
     knowladge_business_gap: string;
     recommendation: string;
 }
+
+export interface SentimentSamples {
+    positif: string;
+    netral: string;
+    negatif: string;
+}
+
+export interface SentimentAnalysisResponse {
+    positif: number;
+    netral: number;
+    negatif: number;
+    total: number;
+    samples: SentimentSamples;
+}

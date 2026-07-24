@@ -3,19 +3,24 @@
 import {
     MessageTrendHumanVsAiResponse,
     MessageUsageTrendResponse,
+    SentimentAnalysisResponse,
     TokenUsageTrendResponse
 } from '@/lib/services/analytic/types';
-import { AlertCircle, RefreshCcw, TrendingUp } from 'lucide-react';
+import { 
+    AlertCircle, RefreshCcw, TrendingUp, Smile, Meh, Frown, 
+    MessageSquare, HeartHandshake, ThumbsUp, ThumbsDown, MinusCircle 
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import {
     Bar, BarChart, CartesianGrid, Legend, Line, LineChart,
-    ResponsiveContainer, Tooltip, XAxis, YAxis
+    ResponsiveContainer, Tooltip, XAxis, YAxis, PieChart, Pie, Cell
 } from 'recharts';
 
 export default function AnalyticPage() {
   const [tokenData, setTokenData] = useState<TokenUsageTrendResponse[]>([]);
   const [messageData, setMessageData] = useState<MessageUsageTrendResponse[]>([]);
   const [humanVsAiData, setHumanVsAiData] = useState<MessageTrendHumanVsAiResponse[]>([]);
+  const [sentimentData, setSentimentData] = useState<SentimentAnalysisResponse | null>(null);
   
   const [humanVsAiPeriod, setHumanVsAiPeriod] = useState<string>('weekly');
   const [isHumanVsAiLoading, setIsHumanVsAiLoading] = useState(false);
@@ -42,7 +47,7 @@ export default function AnalyticPage() {
         setHumanVsAiData(formatDataDate(result.data || []));
     } catch (err: any) {
         console.error("Human Vs AI fetch error:", err);
-    } finally {
+    } fontinally: {
         setIsHumanVsAiLoading(false);
     }
   };
@@ -52,14 +57,16 @@ export default function AnalyticPage() {
     setError(null);
     try {
       // Fetch concurrently
-      const [tokenRes, messageRes] = await Promise.all([
+      const [tokenRes, messageRes, sentimentRes] = await Promise.all([
         fetch('/api/analytic/token'),
-        fetch('/api/analytic/message')
+        fetch('/api/analytic/message'),
+        fetch('/api/analytic/sentiment-analysis')
       ]);
 
-      const [tokenResult, messageResult] = await Promise.all([
+      const [tokenResult, messageResult, sentimentResult] = await Promise.all([
         tokenRes.json(),
-        messageRes.json()
+        messageRes.json(),
+        sentimentRes.json()
       ]);
 
       if (!tokenRes.ok) throw new Error(tokenResult.message || "Failed to fetch Token Usage Data");
@@ -67,6 +74,10 @@ export default function AnalyticPage() {
 
       setTokenData(formatDataDate(tokenResult.data));
       setMessageData(formatDataDate(messageResult.data));
+
+      if (sentimentRes.ok && sentimentResult.data) {
+        setSentimentData(sentimentResult.data);
+      }
       
       // Also fetch human vs ai independently to sync up
       await fetchHumanVsAi(humanVsAiPeriod);
@@ -103,6 +114,17 @@ export default function AnalyticPage() {
     return null;
   };
 
+  // Prepare Sentiment Pie Chart Data
+  const sentimentChartData = sentimentData ? [
+    { name: 'Positif', value: sentimentData.positif, color: '#10b981' },
+    { name: 'Netral', value: sentimentData.netral, color: '#6366f1' },
+    { name: 'Negatif', value: sentimentData.negatif, color: '#ef4444' },
+  ] : [];
+
+  const totalSentiment = sentimentData?.total || (
+    (sentimentData?.positif || 0) + (sentimentData?.netral || 0) + (sentimentData?.negatif || 0)
+  );
+
   return (
     <div className="max-w-7xl mx-auto space-y-8 pb-12">
       
@@ -115,7 +137,7 @@ export default function AnalyticPage() {
              </div>
              <h1 className="text-3xl font-bold text-gray-900">Analytics Hub</h1>
            </div>
-           <p className="text-gray-500 mt-2 text-lg">Monitor token consumption, traffic volume, and agent performance over time.</p>
+           <p className="text-gray-500 mt-2 text-lg">Monitor token consumption, traffic volume, agent performance, and customer sentiment over time.</p>
         </div>
         
         <button 
@@ -147,6 +169,7 @@ export default function AnalyticPage() {
              <div className="h-80 bg-gray-100 animate-pulse rounded-2xl border border-gray-200"></div>
            </div>
            <div className="h-[400px] bg-gray-100 animate-pulse rounded-2xl border border-gray-200"></div>
+           <div className="h-[350px] bg-gray-100 animate-pulse rounded-2xl border border-gray-200"></div>
         </div>
       ) : (
         <>
@@ -206,6 +229,143 @@ export default function AnalyticPage() {
             </div>
             
           </div>
+
+          {/* Sentiment Analysis Section */}
+          {sentimentData && (
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 space-y-6">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="p-1.5 bg-emerald-50 text-emerald-600 rounded-lg">
+                    <HeartHandshake size={20} />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900">Sentiment Analysis</h3>
+                </div>
+                <p className="text-sm text-gray-500">Analisis sentimen pesan pelanggan dari percakapan AI.</p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                
+                {/* Donut Chart Visual */}
+                <div className="lg:col-span-5 flex flex-col items-center justify-center p-4 bg-slate-50/70 border border-slate-100 rounded-2xl">
+                  <div className="w-full h-[220px] relative flex items-center justify-center">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={sentimentChartData}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={60}
+                          outerRadius={85}
+                          paddingAngle={4}
+                          dataKey="value"
+                        >
+                          {sentimentChartData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <Tooltip />
+                      </PieChart>
+                    </ResponsiveContainer>
+                    <div className="absolute flex flex-col items-center justify-center text-center pointer-events-none">
+                      <span className="text-2xl font-bold text-slate-800">{totalSentiment}</span>
+                      <span className="text-xs font-medium text-slate-500">Total Chat</span>
+                    </div>
+                  </div>
+
+                  {/* Legends & Percentages */}
+                  <div className="grid grid-cols-3 gap-2 w-full pt-2 text-center">
+                    <div className="p-2 bg-emerald-50/80 border border-emerald-100 rounded-xl">
+                      <div className="text-xs font-semibold text-emerald-700">Positif</div>
+                      <div className="text-base font-bold text-emerald-800">{sentimentData.positif}</div>
+                      <div className="text-[10px] text-emerald-600">
+                        {totalSentiment > 0 ? ((sentimentData.positif / totalSentiment) * 100).toFixed(0) : 0}%
+                      </div>
+                    </div>
+                    <div className="p-2 bg-indigo-50/80 border border-indigo-100 rounded-xl">
+                      <div className="text-xs font-semibold text-indigo-700">Netral</div>
+                      <div className="text-base font-bold text-indigo-800">{sentimentData.netral}</div>
+                      <div className="text-[10px] text-indigo-600">
+                        {totalSentiment > 0 ? ((sentimentData.netral / totalSentiment) * 100).toFixed(0) : 0}%
+                      </div>
+                    </div>
+                    <div className="p-2 bg-rose-50/80 border border-rose-100 rounded-xl">
+                      <div className="text-xs font-semibold text-rose-700">Negatif</div>
+                      <div className="text-base font-bold text-rose-800">{sentimentData.negatif}</div>
+                      <div className="text-[10px] text-rose-600">
+                        {totalSentiment > 0 ? ((sentimentData.negatif / totalSentiment) * 100).toFixed(0) : 0}%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample Messages Preview */}
+                <div className="lg:col-span-7 space-y-3">
+                  <h4 className="text-sm font-semibold text-gray-700 mb-2">Contoh Sample Percakapan Sentimen:</h4>
+
+                  {/* Positif Sample */}
+                  {sentimentData.samples?.positif && (
+                    <div className="p-3.5 bg-emerald-50/50 border border-emerald-200/80 rounded-xl flex items-start gap-3">
+                      <div className="p-1.5 bg-emerald-100 text-emerald-700 rounded-lg shrink-0 mt-0.5">
+                        <Smile size={18} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">Sentimen Positif</span>
+                          <span className="text-[11px] font-semibold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
+                            {sentimentData.positif} pesan
+                          </span>
+                        </div>
+                        <p className="text-sm text-slate-700 italic mt-1 bg-white/70 p-2 rounded-lg border border-emerald-100">
+                          "{sentimentData.samples.positif}"
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Netral Sample */}
+                  {sentimentData.samples?.netral && (
+                    <div className="p-3.5 bg-indigo-50/50 border border-indigo-200/80 rounded-xl flex items-start gap-3">
+                      <div className="p-1.5 bg-indigo-100 text-indigo-700 rounded-lg shrink-0 mt-0.5">
+                        <Meh size={18} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-indigo-800 uppercase tracking-wide">Sentimen Netral</span>
+                          <span className="text-[11px] font-semibold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">
+                            {sentimentData.netral} pesan
+                          </span>
+                        </div>
+                        <p className="text-sm text-slate-700 italic mt-1 bg-white/70 p-2 rounded-lg border border-indigo-100">
+                          "{sentimentData.samples.netral}"
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Negatif Sample */}
+                  {sentimentData.samples?.negatif && (
+                    <div className="p-3.5 bg-rose-50/50 border border-rose-200/80 rounded-xl flex items-start gap-3">
+                      <div className="p-1.5 bg-rose-100 text-rose-700 rounded-lg shrink-0 mt-0.5">
+                        <Frown size={18} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-rose-800 uppercase tracking-wide">Sentimen Negatif</span>
+                          <span className="text-[11px] font-semibold bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full">
+                            {sentimentData.negatif} pesan
+                          </span>
+                        </div>
+                        <p className="text-sm text-slate-700 italic mt-1 bg-white/70 p-2 rounded-lg border border-rose-100">
+                          "{sentimentData.samples.negatif}"
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+              </div>
+            </div>
+          )}
 
           {/* Bottom Row: Human vs AI comparison */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">

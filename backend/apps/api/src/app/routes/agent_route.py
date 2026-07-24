@@ -115,6 +115,17 @@ async def get_category_percentages(
     return success_response(result, "Get category percentages is successfully")
 
 
+@router.get("/analytic/sentiment/me", status_code=status.HTTP_200_OK)
+async def get_sentiment_analysis(
+    _: None = Depends(jwtHandler.jwt_required),
+    __: None = Depends(require_roles("admin", "user")),
+    controller: AgentController = Depends(get_agent_controller),
+):
+    result = await controller.get_sentiment_analysis_handler()
+    return success_response(result, "Get sentiment analysis is successfully")
+
+
+
 @router.get("/analytic/insight", status_code=status.HTTP_200_OK)
 async def get_insight(
     _: None = Depends(jwtHandler.jwt_required),

@@ -31,6 +31,7 @@ dependencies = [
     "redis>=7.4.0",
     "langgraph-sdk>=0.3.1",
     "pytest-asyncio>=1.4.0",
+    "pypdfium2>=5.12.1",
 ]
 
 [tool.pytest.ini_options]

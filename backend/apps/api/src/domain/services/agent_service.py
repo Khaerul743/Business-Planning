@@ -37,6 +37,8 @@ from src.domain.usecases.analytic import (
     GetMessageUsageTrendUseCase,
     GetTokenUsageTrendInput,
     GetTokenUsageTrendUseCase,
+    GetSentimentAnalysisInput,
+    GetSentimentAnalysisUseCase,
 )
 from src.domain.usecases.insight import (
     GenerateInsight,
@@ -89,6 +91,9 @@ class AgentService(BaseService):
         )
 
         self.get_category_percentages_usecase = GetCategoryPercentages(
+            self.analytic_repo
+        )
+        self.get_sentiment_analysis_usecase = GetSentimentAnalysisUseCase(
             self.analytic_repo
         )
 
@@ -330,6 +335,37 @@ class AgentService(BaseService):
                 "Get category percentages usecase did not returned the data"
             )
         self.logger.info(f"User {user_email}: get category percentages is successfully")
+
+        return result_data
+
+    async def get_sentiment_analysis(self):
+        user_id = current_user_id.get()
+        user_email = current_user_email.get()
+        self.logger.info(f"User {user_email}: get sentiment analysis")
+        if user_id is None:
+            self.logger.warning(f"User {user_email}: Unauthorized Exception")
+            raise UnauthorizedException()
+
+        agent_id = await self.agent_repo.get_agent_id_by_user_id(user_id)
+        if agent_id is None:
+            self.logger.warning(f"User {user_email}: Agent not found")
+            raise AgentNotFound()
+
+        result = await self.get_sentiment_analysis_usecase.execute(
+            GetSentimentAnalysisInput(agent_id=agent_id)
+        )
+        if not result.is_success():
+            self.logger.error(
+                f"User {user_email}: Get sentiment analysis usecase is error"
+            )
+            self.raise_error_usecase(result)
+
+        result_data = result.get_data()
+        if result_data is None:
+            raise RuntimeError(
+                "Get sentiment analysis usecase did not returned the data"
+            )
+        self.logger.info(f"User {user_email}: get sentiment analysis is successfully")
 
         return result_data
 

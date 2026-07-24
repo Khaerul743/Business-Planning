@@ -34,13 +34,13 @@ export class HttpClient {
     return res.json();
   }
 
-  protected async sendRequestWithAuth<T>(request: NextRequest,endpoint: string,option?: RequestInit): Promise<Response>{
+  protected async sendRequestWithAuth<T>(request: NextRequest, endpoint: string, option?: RequestInit): Promise<Response> {
     const access_token = request.cookies.get("access_token")?.value
     const refresh_token = request.cookies.get("refresh_token")?.value
-    if (!access_token && !refresh_token){
+    if (!access_token && !refresh_token) {
       return new Response(
         JSON.stringify({ status: "error", message: "Unauthorized", code: "UNAUTHORIZED" }),
-        { status: 401}
+        { status: 401 }
       );
     }
 
@@ -51,7 +51,7 @@ export class HttpClient {
         ...option?.headers,
       },
     });
-  
+
     if (res.status === 401 && refresh_token) {
       const refreshRes = await fetch(`${this.baseUrl}/api/auth/refresh`, {
         method: "POST",
@@ -72,17 +72,17 @@ export class HttpClient {
 
       // Langsung set cookie HTTP-only menggunakan next/headers
       const cookieStore = await cookies();
-      
+
       // Jika Backend mengembalikan access_token di root (refreshData.access_token)
       // Sesuaikan jika ternyata Backend mengembalikan refreshData.data.access_token
       const newAccessToken = refreshData.access_token || refreshData.data?.access_token;
-      
+
       if (newAccessToken) {
-          cookieStore.set("access_token", newAccessToken, {
-            httpOnly: true,
-            path: "/",
-            maxAge: 60 * 60, // 1 jam
-          });
+        cookieStore.set("access_token", newAccessToken, {
+          httpOnly: true,
+          path: "/",
+          maxAge: 60 * 60, // 1 jam
+        });
       }
       // retry request pakai token baru
       const retryRes = await fetch(`${this.baseUrl}/api${endpoint}`, {

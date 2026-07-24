@@ -22,9 +22,10 @@ def similarity_search_document_knowledge(query: str, runtime: ToolRuntime[Contex
     response = requests.post(f"{backend_url}/api/document_knowladge/similarity_search" or "http://localhost:8000/api/document_knowladge/similarity_search", json={"agent_id": agent_id, "query": query})
     if response.status_code != 200:
         return "Terjadi kesalahan sistem saat mendapatkan dokument knowledge"
+    
     result = response.json()
     return Command(
         update={
-            "messages": [ToolMessage(content=result["result"], tool_call_id=runtime.tool_call_id)],
+            "messages": [ToolMessage(content=result["data"]["result"], tool_call_id=runtime.tool_call_id)],
         }
     )

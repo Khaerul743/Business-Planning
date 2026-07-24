@@ -40,3 +40,13 @@ class IAnalyticRepository(ABC):
     @abstractmethod
     async def get_knowladge_gap(self, agent_id: UUID) -> None | list[dict]:
         pass
+
+    @abstractmethod
+    async def get_sentiment_analysis(
+        self,
+        agent_id: UUID,
+        since: datetime | None = None,
+        until: datetime | None = None,
+    ) -> list[dict] | None:
+        pass
+

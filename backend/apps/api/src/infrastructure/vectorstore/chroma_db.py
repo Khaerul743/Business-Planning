@@ -2,6 +2,7 @@ import logging
 import os
 from typing import List
 from uuid import UUID
+import re
 
 from dotenv import load_dotenv
 
@@ -9,6 +10,7 @@ from langchain_community.document_loaders import (
     DirectoryLoader,
     PyPDFLoader,
     TextLoader,
+    PyPDFium2Loader
 )
 from langchain_core.documents import Document
 from langchain_openai.embeddings import OpenAIEmbeddings
@@ -48,7 +50,7 @@ class RAGSystem:
             self.embedding = OpenAIEmbeddings()
             self.llm = OpenAI(temperature=0.7)
             self.text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=1000, chunk_overlap=200, length_function=len
+                chunk_size=400, chunk_overlap=50, length_function=len
             )
         except Exception as e:
             # raise e
@@ -102,8 +104,11 @@ class RAGSystem:
                     directory_path, glob=f"{file_name}", loader_cls=TextLoader
                 )
             elif file_type == "pdf":
+                # loader = DirectoryLoader(
+                #     directory_path, glob=f"{file_name}", loader_cls=PyPDFLoader
+                # )
                 loader = DirectoryLoader(
-                    directory_path, glob=f"{file_name}", loader_cls=PyPDFLoader
+                    directory_path, glob=f"{file_name}", loader_cls=PyPDFium2Loader
                 )
 
             # Load documents
@@ -160,6 +165,21 @@ class RAGSystem:
             # logger.error(f"Error listing documents: {e}")
             # raise ListDocumentsException("Failed to list documents") from e
 
+    def _clean_document_content(self, documents: List[Document]) -> List[Document]:
+        for doc in documents:
+            # Ganti newline ganda atau lebih menjadi satu spasi/newline biasa
+            # jika itu berada di tengah kalimat
+            text = doc.page_content
+            
+            # Merapikan multiple newline (\n\n\n...) jadi maksimal single newline atau space
+            text = re.sub(r'\n+', ' ', text) 
+            
+            # Merapikan spasi ganda yang berlebihan
+            text = re.sub(r' +', ' ', text)
+            
+            doc.page_content = text.strip()
+        return documents
+    
     def add_documents(
         self, documents: List[Document], doc_id: UUID, chunk: bool = True
     ) -> List[str]:
@@ -173,6 +193,8 @@ class RAGSystem:
             if not documents:
                 # logger.warning(f"Document not found: document_id {doc_id}")
                 raise DocumentNotFoundException("")
+            
+            documents = self._clean_document_content(documents)
 
             if chunk:
                 splits = self.text_splitter.split_documents(documents)
