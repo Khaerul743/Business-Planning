@@ -11,8 +11,6 @@ logs/
 .venv
 .env
 
+# Local data & storage directories
 chromadb/
-chromadb
-
 documents/
-documents

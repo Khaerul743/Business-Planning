@@ -21,6 +21,7 @@ logs/
 htmlcov/
 
 # Data & Database stores
-chromadb/
-documents/
+/chromadb/
+/documents/
 db.sqlite3
+
