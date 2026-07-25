@@ -162,87 +162,8 @@ class WhatsappService(BaseService):
                 },
             }
             print(payload_queue)
-            # payload_queue = {
-            #     "queue_id": "121233",
-            #     "type": "invoke_agent",
-            #     "retry": 0,
-            #     "job_payload": {
-            #         "user_message": "hello",
-            #         "phone_number_id": "12345678",
-            #         "agent_id": "a04b8eb2-3b32-44e2-9a6a-bbca2c23ab58",
-            #         "business_id": "06a8a34c-12f8-42c6-bf09-33f2e3a08171",
-            #         "webhook_payload": {"object": "str", "entry": ["test", "entry"]},
-            #         "customer_data": {
-            #             "wa_id": "02899239",
-            #             "phone_number": "0493940054",
-            #             "name": "rusdi",
-            #         },
-            #     },
-            # }
             self.redis_queue.enqueue(payload_queue)
             print("REDIS QUEUE PUSH")
-            # if agent is None:
-            #     raise RuntimeWarning("Agent not found")
-
-            # if not agent.enable_ai:
-            #     raise RuntimeWarning("agent is not active")
-
-            # customer_data = InsertNewCustomer(
-            #     wa_id=filtered_payload.wa_id,
-            #     name=filtered_payload.name,
-            #     phone_number=filtered_payload.from_number,
-            # )
-
-            # agent_state = WhatsappAgentState(
-            #     messages=[], user_message=filtered_payload.text
-            # )
-            # message_processing_result = await self.message_processing_usecase.execute(
-            #     MessageProcessingUseCaseInput(
-            #         agent.id,
-            #         agent.business_id,
-            #         agent.phone_number_id,
-            #         customer_data,
-            #         agent_state,
-            #     )
-            # )
-
-            # if not message_processing_result.is_success():
-            #     self.raise_error_usecase(message_processing_result)
-
-            # message_processing_result_data = message_processing_result.get_data()
-            # if message_processing_result_data is None:
-            #     raise RuntimeError("Message processing usecase did not returned data")
-
-            # print(f"Message processing result: \n{message_processing_result_data}")
-            # save_conversation_result = await self.save_conversation_usecase.execute(
-            #     SaveConversationInput(
-            #         agent.business_id,
-            #         agent.id,
-            #         message_processing_result_data.customer_id,
-            #         message_processing_result_data.text_message,
-            #         payload,
-            #         message_processing_result_data.detail_agent_output,
-            #     )
-            # )
-
-            # if not save_conversation_result.is_success():
-            #     self.raise_error_usecase(save_conversation_result)
-
-            # save_conversation_data = save_conversation_result.get_data()
-
-            # if save_conversation_data is None:
-            #     raise RuntimeError("Save conversation usecase did not returned data")
-
-            # send_text_message_result = await self.send_text_message_usecase.execute(
-            #     SendTextMessageInput(
-            #         conversation_id=save_conversation_data.conversation_id,
-            #         text_message=message_processing_result_data.response,
-            #         sender_type="ai",
-            #     )
-            # )
-
-            # if not send_text_message_result.is_success():
-            #     self.raise_error_usecase(send_text_message_result)
 
         except RuntimeWarning as e:
             self.logger.warning(str(e))
@@ -255,7 +176,6 @@ class WhatsappService(BaseService):
             return {"status": "receive"}
     
     
-##FOKUS PADA KODE DIBAWAH INI
     async def create_session(self, business_id: str):
         business = await self.business_repo.get_business_by_id(UUID(business_id))
         if business is None:

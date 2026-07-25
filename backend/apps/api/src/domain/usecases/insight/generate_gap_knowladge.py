@@ -1,5 +1,5 @@
 import httpx
-from uuid import UUID
+from uuid import UUID, uuid4
 from typing import Optional
 from dataclasses import dataclass
 from src.domain.usecases.base import BaseUseCase, UseCaseResult
@@ -64,15 +64,15 @@ class GenerateGapKnowladge(
             if gap_conversation is None:
                 return UseCaseResult.success_result(GenerateGapKnowladgeOutput())
             
+            thread_id = uuid4()
             try:
-                self.logger.info("run business insight agent")
-                result = await langgraph_client.run_gap_analysis_agent(str(business.id), GapAnalysisAgentConfig(str(input_data.agent_id), business.description, gap_conversation))
+                result = await langgraph_client.run_gap_analysis_agent(str(thread_id), GapAnalysisAgentConfig(str(input_data.agent_id),str(input_data.business_id), business.description, gap_conversation))
             except httpx.HTTPStatusError as exc:
                 self.logger.error(f"Error run business insight agent: {exc}")
                 self.logger.info("Registered new thread id by business id")
-                await langgraph_client.register_thread_id(business.id)
+                await langgraph_client.register_thread_id(thread_id)
                 self.logger.info("Re-run business insight agent")
-                result = await langgraph_client.run_gap_analysis_agent(str(business.id), GapAnalysisAgentConfig(str(input_data.agent_id), business.description, gap_conversation))
+                result = await langgraph_client.run_gap_analysis_agent(str(thread_id), GapAnalysisAgentConfig(str(input_data.agent_id),str(input_data.business_id), business.description, gap_conversation))
 
             print(result)
             # Insert into database

@@ -180,3 +180,15 @@ chromadb
 
 documents/
 documents
+
+# Node & Next.js
+node_modules/
+.next/
+out/
+
+# WhatsApp Web JS
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Langgraph API backup
+.langgraph_api_backup/

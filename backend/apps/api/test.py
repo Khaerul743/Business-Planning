@@ -22,8 +22,8 @@ from datetime import datetime
 from uuid import UUID
 
 # from src.app.validators.message_schema import InsertNewMessage
-from apps.api.src.config.supabase import get_supabase, init_supabase
-
+from src.config.supabase import get_supabase, init_supabase
+from postgrest.exceptions import APIError
 # from src.domain.models import Human_Fallback
 
 
@@ -31,15 +31,28 @@ async def main():
     await init_supabase()
     db = get_supabase()
 
-    result = (
-        await db.table("Businesses")
-        .select("id, Agents(id)")
-        .eq("user_id", "95050121-195f-4783-98f7-9e24b94f7cd3")
-        .maybe_single()
-        .execute()
-    )
+    try:
+        result = (
+        await db.table("Agents")
+            .select("*")
+            .eq("business_id", str("d3320237-526e-4b80-92d8-c08dd73f8afd"))
+            .maybe_single()
+            .execute()
+        )
 
-    print(result.data)
+        print(result)
+    except APIError as e:
+        print("--- DETAIL ERROR SUPABASE ---")
+        print(f"Message : {e.message}")
+        print(f"Code    : {e.code}")
+        print(f"Hint    : {e.hint}")
+        print(f"Details : {e.details}")
+        # Jika e memiliki response object dari httpx:
+        if hasattr(e, 'response'):
+            print(f"HTTP Status: {e.response.status_code}")
+            print(f"HTTP Body  : {e.response.text}")
+    except Exception as e:
+        print(f"Error Lain: {type(e).__name__} - {e}")
 
 
 asyncio.run(main())

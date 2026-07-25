@@ -562,7 +562,6 @@ class AgentService(BaseService):
             "job_payload": {"business_id": str(business_id), "agent_id": str(agent_id)},
         }
         self.redis_queue.enqueue(payload_queue)
-
         return
 
     async def get_knowladge_gap(self):

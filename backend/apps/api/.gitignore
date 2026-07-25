@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+wheels/
+*.egg-info/
+
+# Environments
+.venv/
+.env
+.env.*
+
+# Logs & Cache
+logs/
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Data & Database stores
+chromadb/
+documents/
+db.sqlite3

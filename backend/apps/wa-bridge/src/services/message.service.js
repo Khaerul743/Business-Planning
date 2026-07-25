@@ -80,7 +80,7 @@ class MessageService {
           status: 'success',
           business_id: businessId,
           to,
-          message_id: sentMessage.id?._serialized || sentMessage.id?.id || null,
+          message_id: null,
         };
       } catch (sendError) {
         logger.error(

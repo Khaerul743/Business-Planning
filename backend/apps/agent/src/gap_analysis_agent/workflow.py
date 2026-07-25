@@ -9,15 +9,17 @@ class GapAnalysisWorkflow:
     
     def build(self):
         graph = StateGraph(AgentAnalysisGapState, context_schema=ContextAgent)
-        graph.add_node("context_builder", self.nodes.context_builder)
-        graph.add_node("insight_generator", self.nodes.insight_generator)
-        graph.add_node("recommendation_generator", self.nodes.recommendation_generator)
-        graph.add_edge(START, "context_builder")
+        graph.add_node("get_business_context_gap", self.nodes.get_business_context_gap)
+        graph.add_node("context_builder_gap", self.nodes.context_builder_gap)
+        graph.add_node("insight_generator_gap", self.nodes.insight_generator_gap)
+        graph.add_node("recommendation_generator_gap", self.nodes.recommendation_generator_gap)
+        graph.add_edge(START, "get_business_context_gap")
+        graph.add_edge("get_business_context_gap", "context_builder_gap")
         graph.add_conditional_edges(
-            "context_builder",
+            "context_builder_gap",
             self.nodes.should_continue,
-            {"next": "insight_generator", "end": END},
+            {"next": "insight_generator_gap", "end": END},
         )
-        graph.add_edge("insight_generator", "recommendation_generator")
-        graph.add_edge("recommendation_generator", END)
+        graph.add_edge("insight_generator_gap", "recommendation_generator_gap")
+        graph.add_edge("recommendation_generator_gap", END)
         return graph.compile(name="agent_analysis_gap")

@@ -17,6 +17,7 @@ class InsightAgentConfig:
 @dataclass
 class GapAnalysisAgentConfig:
     agent_id: str
+    business_id: str
     business_description: str
     raw_data: list[dict]
 
@@ -58,14 +59,15 @@ class AgentManager:
     async def run_gap_analysis_agent(self, thread_id: str, config: GapAnalysisAgentConfig):
         agent_config = {
             "configurable":{
-                "agent_id": config.agent_id
+                "agent_id": config.agent_id,
+                "business_id": config.business_id
             }
         }
 
         inputs = {"messages": [], "business_description": config.business_description, "raw_data": config.raw_data}
 
         return await self.client.runs.wait(
-            thread_id=thread_id,
+            thread_id=f"{thread_id}",
             assistant_id="gap_analysis_agent",
             config=agent_config,
             input=inputs
