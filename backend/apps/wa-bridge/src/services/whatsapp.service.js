@@ -47,6 +47,7 @@ class WhatsAppService {
         dataPath: env.sessionPath,
       }),
       puppeteer: {
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
         headless: true,
         args: [
           '--no-sandbox',

@@ -13,7 +13,7 @@ def main() -> None:
     # Run langgraph dev command
     try:
         result = subprocess.run(
-            ["langgraph", "dev"],
+            ["langgraph", "dev", "--host", "0.0.0.0", "--port", "2024"],
             cwd=project_dir,
             check=True,
         )
