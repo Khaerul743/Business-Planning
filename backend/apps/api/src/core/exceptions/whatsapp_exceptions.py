@@ -28,7 +28,7 @@ class WhatsappBadRequest(BaseCustomeException):
 class ConversationNotFound(BaseCustomeException):
     def __init__(self):
         super().__init__(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail={
                 "code": "CONVERSATION_NOT_FOUND",
                 "message": "Conversation not found, please enter the right id",
@@ -39,7 +39,7 @@ class ConversationNotFound(BaseCustomeException):
 class CustomerNotFound(BaseCustomeException):
     def __init__(self):
         super().__init__(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail={
                 "code": "CUSTOMER_NOT_FOUND",
                 "message": "customer not found, please enter the right id",

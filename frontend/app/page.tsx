@@ -5,9 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Exo_2, Plus_Jakarta_Sans } from 'next/font/google';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ArrowRight, Bot, Clock, MessageSquare, Zap, 
-  BarChart, ShieldCheck, Smartphone, Target, 
+import {
+  ArrowRight, Bot, Clock, MessageSquare, Zap,
+  BarChart, ShieldCheck, Smartphone, Target,
   CheckCircle2, Users, FileText, BrainCircuit,
   TrendingUp, Layers, PlayCircle, Menu, X,
   Sparkles, Activity, Check, AlertTriangle, Lightbulb
@@ -38,7 +38,7 @@ export default function LandingPage() {
 
   return (
     <div className={`min-h-screen bg-white text-slate-900 ${jakarta.className} selection:bg-blue-100 selection:text-blue-900 antialiased overflow-x-hidden`}>
-      
+
       {/* NAVBAR */}
       <header className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100/80 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,7 +52,7 @@ export default function LandingPage() {
                 NUSARA
               </span>
             </Link>
-            
+
             {/* Desktop Nav Links */}
             <nav className="hidden md:flex items-center space-x-9">
               <Link href="#fitur" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
@@ -80,8 +80,8 @@ export default function LandingPage() {
 
             {/* Mobile Nav Toggle */}
             <div className="md:hidden flex items-center">
-              <button 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
                 aria-label="Toggle Menu"
               >
@@ -94,28 +94,28 @@ export default function LandingPage() {
         {/* Mobile Dropdown Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               className="md:hidden bg-white border-b border-slate-100 px-4 py-6 space-y-4 shadow-xl overflow-hidden"
             >
-              <Link 
-                href="#fitur" 
+              <Link
+                href="#fitur"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block text-base font-medium text-slate-700 hover:text-blue-600"
               >
                 Fitur
               </Link>
-              <Link 
-                href="#cara-kerja" 
+              <Link
+                href="#cara-kerja"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block text-base font-medium text-slate-700 hover:text-blue-600"
               >
                 Cara Kerja
               </Link>
-              <Link 
-                href="#solusi" 
+              <Link
+                href="#solusi"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block text-base font-medium text-slate-700 hover:text-blue-600"
               >
@@ -141,7 +141,7 @@ export default function LandingPage() {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-blue-400/20 via-sky-300/15 to-transparent rounded-full blur-[110px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -153,8 +153,8 @@ export default function LandingPage() {
             </span>
             AI Partner untuk Bisnis Modern Indonesia
           </motion.div>
-          
-          <motion.h1 
+
+          <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -163,8 +163,8 @@ export default function LandingPage() {
             AI Customer Service yang <br className="hidden md:block" />
             <span className="text-blue-600">Memahami Bisnis Anda</span>
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -172,33 +172,33 @@ export default function LandingPage() {
           >
             NUSARA membantu bisnis melayani pelanggan 24/7 dengan AI yang memahami produk, layanan, dokumen, dan kebutuhan bisnis Anda secara mendalam.
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto sm:max-w-none"
           >
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
-              <Link 
-                href="/register" 
+              <Link
+                href="/register"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-blue-600 text-white text-base font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 group"
               >
-                Mulai Sekarang 
+                Mulai Sekarang
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
-              <button 
+              <button
                 className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-slate-700 border border-slate-200 text-base font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all shadow-xs flex items-center justify-center gap-2"
               >
                 <PlayCircle size={18} className="text-slate-500" /> Lihat Demo
               </button>
             </motion.div>
           </motion.div>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -208,7 +208,7 @@ export default function LandingPage() {
           </motion.p>
 
           {/* Micro floating metrics/badges below hero */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
@@ -237,7 +237,7 @@ export default function LandingPage() {
       {/* PROBLEM SECTION */}
       <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -254,7 +254,7 @@ export default function LandingPage() {
           </motion.div>
 
           {/* Asymmetric Layout */}
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
@@ -262,7 +262,7 @@ export default function LandingPage() {
             className="grid grid-cols-1 lg:grid-cols-3 gap-6"
           >
             {/* Featured Left Card */}
-            <motion.div 
+            <motion.div
               variants={fadeInUp}
               className="lg:col-span-1 bg-slate-900 text-white rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden shadow-xl"
             >
@@ -286,39 +286,39 @@ export default function LandingPage() {
             {/* Right Side 5 Cards in Grid */}
             <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
-                { 
-                  icon: Layers, 
-                  title: "Chat Menumpuk", 
+                {
+                  icon: Layers,
+                  title: "Chat Menumpuk",
                   desc: "Tim CS kewalahan merespon antrian pesan yang terlalu banyak.",
                   badge: "Beban Kerja"
                 },
-                { 
-                  icon: Zap, 
-                  title: "Respon Lambat", 
+                {
+                  icon: Zap,
+                  title: "Respon Lambat",
                   desc: "Balasan yang lama dan tidak konsisten membuat pelanggan beralih ke kompetitor.",
                   badge: "Retensi Rendah"
                 },
-                { 
-                  icon: TrendingUp, 
-                  title: "Biaya Operasional Tinggi", 
+                {
+                  icon: TrendingUp,
+                  title: "Biaya Operasional Tinggi",
                   desc: "Membayar banyak admin customer service menguras profit bisnis Anda.",
                   badge: "Efisiensi"
                 },
-                { 
-                  icon: MessageSquare, 
-                  title: "Pertanyaan Berulang", 
+                {
+                  icon: MessageSquare,
+                  title: "Pertanyaan Berulang",
                   desc: "Waktu terbuang untuk menjawab pertanyaan yang sama setiap hari.",
                   badge: "Waktu Terbuang"
                 },
-                { 
-                  icon: BarChart, 
-                  title: "Data Terabaikan", 
+                {
+                  icon: BarChart,
+                  title: "Data Terabaikan",
                   desc: "Data percakapan berharga tidak dimanfaatkan menjadi insight bisnis.",
                   badge: "Insight Hilang"
                 }
               ].map((problem, i) => (
-                <motion.div 
-                  key={i} 
+                <motion.div
+                  key={i}
                   variants={fadeInUp}
                   whileHover={{ y: -4 }}
                   className="group bg-slate-50/70 hover:bg-white border border-slate-200/80 hover:border-blue-200 rounded-3xl p-6 transition-all duration-300 shadow-xs hover:shadow-md"
@@ -345,11 +345,11 @@ export default function LandingPage() {
         {/* Glow Lighting Accents */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none"></div>
         <div className="absolute bottom-0 left-1/4 w-[450px] h-[450px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left Content Column */}
-            <motion.div 
+            <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -367,7 +367,7 @@ export default function LandingPage() {
               <p className="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
                 NUSARA memungkinkan Anda membangun otak digital untuk bisnis Anda. Masukkan knowledge bisnis Anda, dan AI akan menggunakannya sebagai konteks untuk menjawab dengan akurat.
               </p>
-              
+
               <div className="space-y-3.5 mb-9">
                 {[
                   "Tambahkan knowledge & konteks bisnis",
@@ -375,8 +375,8 @@ export default function LandingPage() {
                   "Masukkan FAQ dan layanan",
                   "Integrasikan informasi produk"
                 ].map((item, i) => (
-                  <motion.div 
-                    key={i} 
+                  <motion.div
+                    key={i}
                     whileHover={{ x: 4 }}
                     className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm"
                   >
@@ -387,16 +387,16 @@ export default function LandingPage() {
                   </motion.div>
                 ))}
               </div>
-              
+
               <div className="bg-gradient-to-r from-blue-900/40 to-slate-900 border border-blue-500/30 rounded-2xl p-5 backdrop-blur-md relative">
                 <p className="font-medium text-blue-200 italic text-sm sm:text-base leading-relaxed">
                   "The AI uses this business context to answer customers more accurately and naturally."
                 </p>
               </div>
             </motion.div>
-            
+
             {/* Right Bento Grid Column */}
-            <motion.div 
+            <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -425,8 +425,8 @@ export default function LandingPage() {
                   desc: "Tangani ribuan chat serentak tanpa tambah admin."
                 }
               ].map((card, i) => (
-                <motion.div 
-                  key={i} 
+                <motion.div
+                  key={i}
                   variants={fadeInUp}
                   whileHover={{ y: -4 }}
                   className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-500/40 rounded-3xl p-6 transition-all duration-300 group backdrop-blur-sm"
@@ -446,7 +446,7 @@ export default function LandingPage() {
       {/* FEATURES SECTION */}
       <section id="fitur" className="py-24 bg-slate-50/60 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -462,7 +462,7 @@ export default function LandingPage() {
           </motion.div>
 
           {/* Bento Grid Layout for Features */}
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -470,46 +470,45 @@ export default function LandingPage() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {[
-              { 
-                icon: BrainCircuit, 
-                title: "Business Knowledge AI", 
+              {
+                icon: BrainCircuit,
+                title: "Business Knowledge AI",
                 desc: "AI memahami bisnis Anda melalui knowledge base yang dapat disesuaikan tanpa coding.",
-                featured: true 
+                featured: true
               },
-              { 
-                icon: FileText, 
-                title: "Document Knowledge", 
-                desc: "Upload dokumen bisnis seperti menu, katalog, SOP, atau FAQ untuk langsung dipahami AI." 
+              {
+                icon: FileText,
+                title: "Document Knowledge",
+                desc: "Upload dokumen bisnis seperti menu, katalog, SOP, atau FAQ untuk langsung dipahami AI."
               },
-              { 
-                icon: Users, 
-                title: "Human Fallback System", 
-                desc: "Ketika AI tidak yakin atau pelanggan mulai emosional, percakapan otomatis dialihkan ke admin manusia." 
+              {
+                icon: Users,
+                title: "Human Fallback System",
+                desc: "Ketika AI tidak yakin atau pelanggan mulai emosional, percakapan otomatis dialihkan ke admin manusia."
               },
-              { 
-                icon: BarChart, 
-                title: "Conversation Insight Engine", 
+              {
+                icon: BarChart,
+                title: "Conversation Insight Engine",
                 desc: "Analisis percakapan pelanggan untuk menemukan kekurangan layanan, pola pertanyaan, dan peluang bisnis.",
                 featured: true
               },
-              { 
-                icon: Target, 
-                title: "AI Improvement Recommendation", 
-                desc: "NUSARA membantu bisnis mengetahui bagian knowledge yang perlu diperbaiki berdasarkan percakapan nyata customer." 
+              {
+                icon: Target,
+                title: "AI Improvement Recommendation",
+                desc: "NUSARA membantu bisnis mengetahui bagian knowledge yang perlu diperbaiki berdasarkan percakapan nyata customer."
               },
-              { 
-                icon: Smartphone, 
-                title: "Omnichannel Integration", 
-                desc: "Terhubung mulus dengan WhatsApp, website, dan platform komunikasi bisnis Anda lainnya." 
+              {
+                icon: Smartphone,
+                title: "Omnichannel Integration",
+                desc: "Terhubung mulus dengan WhatsApp, website, dan platform komunikasi bisnis Anda lainnya."
               }
             ].map((feat, i) => (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 variants={fadeInUp}
                 whileHover={{ y: -6 }}
-                className={`group bg-white rounded-3xl p-8 border border-slate-200/80 hover:border-blue-300 shadow-xs hover:shadow-xl hover:shadow-blue-600/5 transition-all duration-300 flex flex-col justify-between ${
-                  feat.featured ? 'md:col-span-2 lg:col-span-1 bg-gradient-to-b from-white to-blue-50/30' : ''
-                }`}
+                className={`group bg-white rounded-3xl p-8 border border-slate-200/80 hover:border-blue-300 shadow-xs hover:shadow-xl hover:shadow-blue-600/5 transition-all duration-300 flex flex-col justify-between ${feat.featured ? 'md:col-span-2 lg:col-span-1 bg-gradient-to-b from-white to-blue-50/30' : ''
+                  }`}
               >
                 <div>
                   <div className="w-13 h-13 bg-blue-50 border border-blue-100 group-hover:border-blue-200 group-hover:bg-blue-600 text-blue-600 group-hover:text-white rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-105 shadow-xs">
@@ -530,7 +529,7 @@ export default function LandingPage() {
       {/* HOW IT WORKS SECTION */}
       <section id="cara-kerja" className="py-24 bg-white border-y border-slate-100 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -548,8 +547,8 @@ export default function LandingPage() {
           <div className="relative">
             {/* Timeline Connector Line */}
             <div className="hidden lg:block absolute top-10 left-12 right-12 h-0.5 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200 -z-0"></div>
-            
-            <motion.div 
+
+            <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -563,8 +562,8 @@ export default function LandingPage() {
                 { step: "04", title: "Analisis Data", desc: "AI menganalisis seluruh percakapan." },
                 { step: "05", title: "Dapatkan Insight", desc: "Terima rekomendasi untuk perbaikan bisnis." }
               ].map((step, i) => (
-                <motion.div 
-                  key={i} 
+                <motion.div
+                  key={i}
                   variants={fadeInUp}
                   whileHover={{ y: -4 }}
                   className="flex flex-col items-center text-center group bg-white p-4 rounded-2xl"
@@ -584,7 +583,7 @@ export default function LandingPage() {
       {/* AI INSIGHT SECTION */}
       <section className="py-24 bg-gradient-to-b from-blue-50/70 to-slate-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -597,7 +596,7 @@ export default function LandingPage() {
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-800 text-xs font-semibold mb-6">
                   <Lightbulb size={15} className="text-amber-600" /> Business Intelligence
                 </div>
-                
+
                 <h2 className={`text-3xl sm:text-4xl font-bold text-slate-900 mb-6 ${exo2.className}`}>
                   Bukan Sekadar Membalas Chat
                 </h2>
@@ -605,7 +604,7 @@ export default function LandingPage() {
                 <p className="text-base sm:text-lg text-slate-600 mb-8 leading-relaxed">
                   NUSARA mengubah setiap percakapan pelanggan menjadi data intelijen bisnis yang berharga. Ketahui apa yang pelanggan Anda benar-benar inginkan.
                 </p>
-                
+
                 <div className="space-y-3.5 mb-8">
                   {[
                     "Pertanyaan yang paling sering muncul",
@@ -622,13 +621,13 @@ export default function LandingPage() {
                     </div>
                   ))}
                 </div>
-                
+
                 <div className="p-4 bg-blue-600 rounded-2xl text-white font-semibold text-sm sm:text-base flex items-center gap-3.5 shadow-md shadow-blue-600/20">
                   <TrendingUp size={22} className="text-blue-200 shrink-0" />
                   <span>"Setiap percakapan membantu bisnis Anda berkembang."</span>
                 </div>
               </div>
-              
+
               {/* Realistic Interactive Dashboard Mockup */}
               <div className="lg:col-span-7">
                 <div className="bg-slate-900 rounded-2xl p-4 sm:p-5 shadow-2xl border border-slate-800 text-white">
@@ -704,7 +703,7 @@ export default function LandingPage() {
       {/* TARGET MARKET SECTION */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -719,11 +718,11 @@ export default function LandingPage() {
 
             <div className="flex flex-wrap justify-center gap-3.5 max-w-4xl mx-auto">
               {[
-                "UMKM", "Online Shop", "Food & Beverage", "Klinik & Salon", 
+                "UMKM", "Online Shop", "Food & Beverage", "Klinik & Salon",
                 "Jasa Profesional", "Startup Kecil", "Bisnis Lokal"
               ].map((market, i) => (
-                <motion.span 
-                  key={i} 
+                <motion.span
+                  key={i}
                   whileHover={{ scale: 1.05, y: -2 }}
                   className="px-6 py-3 bg-slate-50 border border-slate-200/90 text-slate-800 rounded-full text-sm font-semibold shadow-xs hover:border-blue-300 hover:bg-blue-50/50 hover:text-blue-700 transition-all cursor-default"
                 >
@@ -738,7 +737,7 @@ export default function LandingPage() {
       {/* BENEFITS SECTION */}
       <section className="py-24 bg-slate-950 text-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -750,7 +749,7 @@ export default function LandingPage() {
             </h2>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -767,8 +766,8 @@ export default function LandingPage() {
               "AI + Human collaboration",
               "Membantu meningkatkan kepuasan"
             ].map((benefit, i) => (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 variants={fadeInUp}
                 whileHover={{ y: -4 }}
                 className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-500/40 rounded-2xl p-5 flex items-start gap-4 transition-all duration-300 group"
@@ -786,7 +785,7 @@ export default function LandingPage() {
       {/* CTA SECTION */}
       <section className="py-20 sm:py-24 bg-white relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -794,7 +793,7 @@ export default function LandingPage() {
             className="bg-gradient-to-r from-blue-600 via-blue-600 to-blue-700 rounded-3xl p-8 sm:p-14 text-center text-white relative overflow-hidden shadow-2xl shadow-blue-600/30"
           >
             <div className="absolute top-0 right-0 -mt-12 -mr-12 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
-            
+
             <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 text-white ${exo2.className}`}>
               Bangun Customer Service yang Lebih Cerdas
             </h2>
@@ -804,8 +803,8 @@ export default function LandingPage() {
             </p>
 
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} className="inline-block">
-              <Link 
-                href="/register" 
+              <Link
+                href="/register"
                 className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full bg-white text-blue-600 text-base sm:text-lg font-bold hover:bg-blue-50 transition-all shadow-xl hover:shadow-2xl"
               >
                 Mulai dengan NUSARA <ArrowRight size={20} />
@@ -834,7 +833,7 @@ export default function LandingPage() {
                 AI Customer Service untuk Bisnis Indonesia. Mengubah percakapan menjadi pengalaman pelanggan yang luar biasa.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-bold text-slate-900 text-sm mb-4">Platform</h4>
               <ul className="space-y-3 text-xs sm:text-sm text-slate-600">
@@ -844,7 +843,7 @@ export default function LandingPage() {
                 <li><Link href="/pricing" className="hover:text-blue-600 transition-colors">Harga</Link></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-bold text-slate-900 text-sm mb-4">Perusahaan</h4>
               <ul className="space-y-3 text-xs sm:text-sm text-slate-600">
@@ -853,7 +852,7 @@ export default function LandingPage() {
                 <li><Link href="/contact" className="hover:text-blue-600 transition-colors">Hubungi Kami</Link></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-bold text-slate-900 text-sm mb-4">Legal</h4>
               <ul className="space-y-3 text-xs sm:text-sm text-slate-600">
@@ -862,20 +861,20 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-slate-100 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-slate-400 text-xs sm:text-sm">
               &copy; {new Date().getFullYear()} NUSARA. All rights reserved.
             </p>
             <div className="flex gap-3">
               <div className="w-8 h-8 rounded-full bg-slate-100 hover:bg-blue-50 hover:text-blue-600 flex items-center justify-center text-slate-500 font-semibold text-xs cursor-pointer transition-colors">
-                 IG
+                IG
               </div>
               <div className="w-8 h-8 rounded-full bg-slate-100 hover:bg-blue-50 hover:text-blue-600 flex items-center justify-center text-slate-500 font-semibold text-xs cursor-pointer transition-colors">
-                 LI
+                LI
               </div>
               <div className="w-8 h-8 rounded-full bg-slate-100 hover:bg-blue-50 hover:text-blue-600 flex items-center justify-center text-slate-500 font-semibold text-xs cursor-pointer transition-colors">
-                 TW
+                TW
               </div>
             </div>
           </div>

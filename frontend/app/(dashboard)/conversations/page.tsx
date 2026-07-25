@@ -79,10 +79,8 @@ export default function ConversationsPage() {
         
         if (result.status === 'success') {
             setMessages(result.data.messages || []);
-            setIsAgentEnabled(result.data.convStatusAgent); // Sync agent status switch
-            if (conversation.need_human && result.data.fallback) {
-                setFallbackData(result.data.fallback);
-            }
+            setIsAgentEnabled(result.data.convStatusAgent ?? true); // Sync agent status switch
+            setFallbackData(result.data.fallback || null);
         }
     } catch (err) {
         console.error('Error fetching chat details:', err);
