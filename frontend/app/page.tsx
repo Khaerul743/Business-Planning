@@ -9,8 +9,8 @@ import {
   ArrowRight, Bot, Clock, MessageSquare, Zap,
   BarChart, ShieldCheck, Smartphone, Target,
   CheckCircle2, Users, FileText, BrainCircuit,
-  TrendingUp, Layers, PlayCircle, Menu, X,
-  Sparkles, Activity, Check, AlertTriangle, Lightbulb
+  TrendingUp, Layers, Menu, X, Sparkles, Activity,
+  Check, AlertTriangle, Lightbulb, PhoneCall
 } from 'lucide-react';
 
 const exo2 = Exo_2({ subsets: ['latin'], weight: ['400', '600', '700', '800'] });
@@ -45,8 +45,8 @@ export default function LandingPage() {
           <div className="flex justify-between items-center h-16 sm:h-20">
             {/* Brand Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 group-hover:border-blue-300 transition-colors">
-                <Image src="/Logo_NUSARA.png" alt="NUSARA Logo" width={26} height={26} className="object-contain" />
+              <div className="relative flex items-center justify-center w-9 h-9">
+                <Image src="/Logo.png" alt="NUSARA Logo" width={34} height={34} className="object-contain" />
               </div>
               <span className={`text-xl font-bold tracking-tight text-slate-900 ${exo2.className}`}>
                 NUSARA
@@ -67,12 +67,18 @@ export default function LandingPage() {
             </nav>
 
             {/* Desktop Action Buttons */}
-            <div className="hidden md:flex items-center space-x-5">
-              <Link href="/login" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
+            <div className="hidden md:flex items-center space-x-4">
+              <Link
+                href="/login"
+                className="px-5 py-2 rounded-full text-sm font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-all"
+              >
                 Masuk
               </Link>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Link href="/register" className="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all shadow-md shadow-blue-600/20 hover:shadow-lg hover:shadow-blue-600/30">
+                <Link
+                  href="/register"
+                  className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all shadow-md shadow-blue-600/25 hover:shadow-lg hover:shadow-blue-600/35"
+                >
                   Coba Gratis
                 </Link>
               </motion.div>
@@ -126,7 +132,7 @@ export default function LandingPage() {
                   Masuk
                 </Link>
                 <Link href="/register" className="block text-center text-base font-semibold text-white bg-blue-600 py-2.5 rounded-full shadow-sm">
-                  Coba Gratis Sekarang
+                  Coba Gratis
                 </Link>
               </div>
             </motion.div>
@@ -134,107 +140,111 @@ export default function LandingPage() {
         </AnimatePresence>
       </header>
 
-      {/* HERO SECTION */}
-      <section className="relative pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden bg-slate-50/50">
-        {/* Subtle Precision Grid & Glow Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60"></div>
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-blue-400/20 via-sky-300/15 to-transparent rounded-full blur-[110px] pointer-events-none"></div>
+      {/* HERO SECTION (NEW DESIGN FROM MOCKUP) */}
+      <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-28 overflow-hidden bg-gradient-to-br from-white via-sky-50/50 to-blue-100/60">
+        {/* Soft Radial Ambient Glow */}
+        <div className="absolute top-1/4 right-10 w-[550px] h-[550px] bg-gradient-to-tr from-blue-400/20 to-sky-300/30 rounded-full blur-[140px] pointer-events-none"></div>
+        <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs sm:text-sm font-semibold mb-8 shadow-xs hover:border-blue-300 transition-colors"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
-            </span>
-            AI Partner untuk Bisnis Modern Indonesia
-          </motion.div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-12 items-center gap-8 lg:gap-12">
 
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className={`text-4xl sm:text-5xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.12] mb-6 ${exo2.className}`}
-          >
-            AI Customer Service yang <br className="hidden md:block" />
-            <span className="text-blue-600">Memahami Bisnis Anda</span>
-          </motion.h1>
+            {/* Left Column: Hero Text & Actions (6 cols) */}
+            <div className="lg:col-span-6 text-left">
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed font-normal"
-          >
-            NUSARA membantu bisnis melayani pelanggan 24/7 dengan AI yang memahami produk, layanan, dokumen, dan kebutuhan bisnis Anda secara mendalam.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto sm:max-w-none"
-          >
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
-              <Link
-                href="/register"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-blue-600 text-white text-base font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 group"
+              {/* Pill Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/80 text-blue-600 text-xs sm:text-sm font-semibold mb-6 shadow-xs"
               >
-                Mulai Sekarang
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
+                <Sparkles size={15} className="text-blue-600 fill-blue-600 shrink-0" />
+                <span>AI Partner untuk Bisnis Modern Indonesia</span>
+              </motion.div>
 
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
-              <button
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-slate-700 border border-slate-200 text-base font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all shadow-xs flex items-center justify-center gap-2"
+              {/* Main Headline */}
+              <motion.h1
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className={`text-4xl sm:text-5xl lg:text-[52px] font-extrabold text-slate-900 tracking-tight leading-[1.14] mb-6 ${exo2.className}`}
               >
-                <PlayCircle size={18} className="text-slate-500" /> Lihat Demo
-              </button>
-            </motion.div>
-          </motion.div>
+                AI Customer Service yang <br />
+                <span className="text-blue-600">Memahami Bisnis Anda</span>
+              </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-8 text-xs sm:text-sm text-slate-500 font-medium tracking-wide"
-          >
-            Lebih dari chatbot biasa — AI partner untuk bisnis modern Indonesia.
-          </motion.p>
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-base sm:text-lg text-slate-500 max-w-lg leading-relaxed font-normal mb-6"
+              >
+                AI Customer Service yang memahami bisnis Anda, siap melayani pelanggan 24/7 dengan respons cepat, akurat, dan konsisten.
+              </motion.p>
 
-          {/* Micro floating metrics/badges below hero */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="mt-14 max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-8 border-t border-slate-200/60"
-          >
-            <div className="p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 shadow-xs backdrop-blur-sm">
-              <div className="text-blue-600 font-bold text-xl sm:text-2xl">24/7</div>
-              <div className="text-slate-500 text-xs font-medium">Melayani Nonstop</div>
+              {/* Horizontal Line Divider */}
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className="w-full max-w-lg h-px bg-slate-200/90 mb-8 origin-left"
+              />
+
+              {/* Action Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-wrap items-center gap-4"
+              >
+                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                  <Link
+                    href="/register"
+                    className="px-8 py-3.5 rounded-full bg-blue-600 text-white text-base font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/30 flex items-center gap-2 group"
+                  >
+                    Mulai Sekarang
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </motion.div>
+
+                {/* <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                  <Link
+                    href="#solusi"
+                    className="px-7 py-3.5 rounded-full bg-white text-slate-700 border border-slate-200 text-base font-semibold hover:bg-slate-50 transition-all shadow-xs flex items-center gap-2.5"
+                  >
+                    <PhoneCall size={18} className="text-blue-600" /> Konsultasi Gratis
+                  </Link>
+                </motion.div> */}
+              </motion.div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 shadow-xs backdrop-blur-sm">
-              <div className="text-blue-600 font-bold text-xl sm:text-2xl">&lt; 0.5s</div>
-              <div className="text-slate-500 text-xs font-medium">Respon Instan</div>
+
+            {/* Right Column: 3D Mascot Graphic Only (6 cols) */}
+            <div className="lg:col-span-6 relative flex justify-center items-center mt-8 lg:mt-0">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="relative w-full max-w-md lg:max-w-xl aspect-square flex items-center justify-center"
+              >
+                <Image
+                  src="/maskot.png"
+                  alt="NUSARA 3D AI Mascot"
+                  width={500}
+                  height={500}
+                  priority
+                  unoptimized
+                  className="object-contain drop-shadow-2xl hover:scale-102 transition-transform duration-500"
+                />
+              </motion.div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 shadow-xs backdrop-blur-sm">
-              <div className="text-blue-600 font-bold text-xl sm:text-2xl">98.4%</div>
-              <div className="text-slate-500 text-xs font-medium">Akurasi Knowledge</div>
-            </div>
-            <div className="p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 shadow-xs backdrop-blur-sm">
-              <div className="text-blue-600 font-bold text-xl sm:text-2xl">100%</div>
-              <div className="text-slate-500 text-xs font-medium">Bahasa Indonesia</div>
-            </div>
-          </motion.div>
+
+          </div>
         </div>
       </section>
 
-      {/* PROBLEM SECTION */}
+      {/* PROBLEM SECTION (RESTORED ORIGINAL RICH CONTENT) */}
       <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -283,13 +293,13 @@ export default function LandingPage() {
               </div>
             </motion.div>
 
-            {/* Right Side 5 Cards in Grid */}
+            {/* Right Side 5 Cards Grid */}
             <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
                 {
                   icon: Layers,
                   title: "Chat Menumpuk",
-                  desc: "Tim CS kewalahan merespon antrian pesan yang terlalu banyak.",
+                  desc: "Tim CS kewalahan merespon antrian pesan yang terlalu banyak di jam sibuk.",
                   badge: "Beban Kerja"
                 },
                 {
@@ -301,7 +311,7 @@ export default function LandingPage() {
                 {
                   icon: TrendingUp,
                   title: "Biaya Operasional Tinggi",
-                  desc: "Membayar banyak admin customer service menguras profit bisnis Anda.",
+                  desc: "Membayar banyak admin customer service terus menguras profit bisnis Anda.",
                   badge: "Efisiensi"
                 },
                 {
@@ -340,7 +350,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* SOLUTION SECTION */}
+      {/* SOLUTION SECTION (RESTORED ORIGINAL RICH CONTENT) */}
       <section id="solusi" className="py-24 bg-slate-950 text-white relative overflow-hidden">
         {/* Glow Lighting Accents */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none"></div>
@@ -443,7 +453,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FEATURES SECTION */}
+      {/* FEATURES SECTION (RESTORED ORIGINAL RICH BENTO GRID) */}
       <section id="fitur" className="py-24 bg-slate-50/60 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -526,7 +536,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* HOW IT WORKS SECTION */}
+      {/* HOW IT WORKS SECTION (RESTORED ORIGINAL 5-STEP TIMELINE) */}
       <section id="cara-kerja" className="py-24 bg-white border-y border-slate-100 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -580,7 +590,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* AI INSIGHT SECTION */}
+      {/* AI INSIGHT SECTION (RESTORED ORIGINAL REALISTIC DASHBOARD MOCKUP) */}
       <section className="py-24 bg-gradient-to-b from-blue-50/70 to-slate-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -654,7 +664,7 @@ export default function LandingPage() {
                     <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/60">
                       <div className="text-[11px] text-slate-400 font-medium">Respon Rate</div>
                       <div className="text-lg sm:text-xl font-bold text-blue-400 mt-1">98.4%</div>
-                      <div className="text-[10px] text-blue-300 font-semibold mt-0.5">Otoman CS</div>
+                      <div className="text-[10px] text-blue-300 font-semibold mt-0.5">Otomatis AI</div>
                     </div>
                     <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/60">
                       <div className="text-[11px] text-slate-400 font-medium">Knowledge Gap</div>
@@ -700,7 +710,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* TARGET MARKET SECTION */}
+      {/* TARGET MARKET SECTION (RESTORED ORIGINAL RICH CONTENT) */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -734,7 +744,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* BENEFITS SECTION */}
+      {/* BENEFITS SECTION (RESTORED ORIGINAL RICH GRID) */}
       <section className="py-24 bg-slate-950 text-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -782,7 +792,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA SECTION */}
+      {/* CTA SECTION (RESTORED ORIGINAL GRADIENT BANNER) */}
       <section className="py-20 sm:py-24 bg-white relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -818,13 +828,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* FOOTER (RESTORED ORIGINAL DETAILED 4-COLUMN FOOTER) */}
       <footer className="bg-white border-t border-slate-100 pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div className="md:col-span-1">
               <div className="flex items-center gap-2.5 mb-4">
-                <Image src="/Logo_NUSARA.png" alt="NUSARA Logo" width={26} height={26} className="object-contain" />
+                <Image src="/Logo.png" alt="NUSARA Logo" width={26} height={26} className="object-contain" />
                 <span className={`text-xl font-bold tracking-tight text-slate-900 ${exo2.className}`}>
                   NUSARA
                 </span>

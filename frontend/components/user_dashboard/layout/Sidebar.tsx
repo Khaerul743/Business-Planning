@@ -60,7 +60,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
       `}>
         <div className="flex items-center gap-2 font-bold text-xl text-indigo-950">
           <Image 
-            src="/Logo_NUSARA.png" 
+            src="/Logo.png" 
             alt="Nusara Logo" 
             width={32} 
             height={32} 

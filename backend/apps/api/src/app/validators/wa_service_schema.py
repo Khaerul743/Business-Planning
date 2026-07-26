@@ -40,7 +40,7 @@ class WaSendMessageData(BaseModel):
     status: str
     business_id: str
     to: str
-    message_id: str
+    message_id: Optional[str] = None
     
 class WaSendMessageResponse(BaseModel):
     success: bool

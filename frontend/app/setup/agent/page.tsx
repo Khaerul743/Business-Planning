@@ -93,7 +93,7 @@ export default function AgentSetupPage() {
           <div className="relative z-10">
             <div className="flex items-center gap-3 mb-12">
               <div className="bg-white p-2 rounded-xl">
-                <Image src="/Logo_NUSARA.png" alt="Nusara Logo" width={32} height={32} className="object-contain" />
+                <Image src="/Logo.png" alt="Nusara Logo" width={32} height={32} className="object-contain" />
               </div>
               <span className="font-bold text-2xl tracking-wide font-mono">NUSARA</span>
             </div>

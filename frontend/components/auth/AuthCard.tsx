@@ -14,7 +14,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({ children, title, subtitle })
         <div className="flex flex-col items-center">
           <div className="flex items-center justify-center mb-4 transition-transform duration-500 hover:scale-105 cursor-pointer">
              <div className="p-3 bg-indigo-50 rounded-2xl shadow-sm">
-               <Image src="/Logo_NUSARA.png" alt="Nusara Logo" width={64} height={64} className="object-contain" />
+               <Image src="/Logo.png" alt="Nusara Logo" width={64} height={64} className="object-contain" />
              </div>
           </div>
           <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900 tracking-tight">
