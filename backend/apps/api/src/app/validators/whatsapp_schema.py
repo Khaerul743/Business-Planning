@@ -15,6 +15,7 @@ class FilteredPayload(BaseModel):
     from_number: Optional[str] = None
     message_type: Optional[str] = None
     text: Optional[str] = None
+    message_id: Optional[str] = None
     is_from_wa_service: bool = False
 
 class SendMessagePayload(BaseModel):

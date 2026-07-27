@@ -115,24 +115,24 @@ services:
     networks:
       - wa_network
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: wa_frontend
-    ports:
-      - "3000:3000"
-    env_file:
-      - ./frontend/.env
-    environment:
-      - BACKEND_SERVICE_URL=http://backend-api:8000
-      - NEXT_PUBLIC_BACKEND_SERVICE_URL=http://localhost:8000
-      - NEXT_PUBLIC_WS_URL=ws://localhost:8000
-    depends_on:
-      - backend-api
-    restart: unless-stopped
-    networks:
-      - wa_network
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: wa_frontend
+  #   ports:
+  #     - "3000:3000"
+  #   env_file:
+  #     - ./frontend/.env
+  #   environment:
+  #     - BACKEND_SERVICE_URL=http://backend-api:8000
+  #     - NEXT_PUBLIC_BACKEND_SERVICE_URL=http://localhost:8000
+  #     - NEXT_PUBLIC_WS_URL=ws://localhost:8000
+  #   depends_on:
+  #     - backend-api
+  #   restart: unless-stopped
+  #   networks:
+  #     - wa_network
 
 volumes:
   wa_bridge_session:

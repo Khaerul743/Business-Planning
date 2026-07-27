@@ -93,6 +93,7 @@ class WhatsappService(BaseService):
                     # 2. Ekstrak data pesan dari array messages
                     if messages := value.get("messages"):
                         message_data = messages[0]
+                        message_id = message_data.get("id")
                         from_number = message_data.get("from")
                         message_type = message_data.get("type")
 
@@ -120,6 +121,7 @@ class WhatsappService(BaseService):
                             from_number=from_number,
                             message_type=message_type,
                             text=incoming_text,
+                            message_id=message_id,
                             is_from_wa_service=is_from_wa_service,
                         )
 
@@ -131,6 +133,14 @@ class WhatsappService(BaseService):
 
             if filtered_payload is None:
                 raise RuntimeWarning("Filtered payload is None")
+
+            # Deduplication check via Redis
+            if filtered_payload.message_id:
+                dedupe_key = f"msg_dedupe:{filtered_payload.phone_number_id}:{filtered_payload.message_id}"
+                is_new = redis_client.set(dedupe_key, "1", nx=True, ex=86400)
+                if not is_new:
+                    self.logger.warning(f"Duplicate message ignored: {filtered_payload.message_id}")
+                    return {"status": "duplicate_ignored"}
 
             if filtered_payload.is_from_wa_service:
                 agent = await self.agent_repo.get_agent_by_business_id(UUID(filtered_payload.phone_number_id))
